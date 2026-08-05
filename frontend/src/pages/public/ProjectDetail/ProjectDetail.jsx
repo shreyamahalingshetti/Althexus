@@ -1,1 +1,0 @@
-// ProjectDetail Page Placeholder
