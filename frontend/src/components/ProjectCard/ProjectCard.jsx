@@ -1,1 +1,0 @@
-// ProjectCard Component Placeholder
