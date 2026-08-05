@@ -1,16 +1,52 @@
-# React + Vite
+# Althexus — React Version
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is a pixel-for-pixel React (Vite) port of the original static HTML/CSS/JS
+Althexus website. Same look, same animations, same content — just rebuilt as
+reusable React components.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Then open the printed local URL (usually http://localhost:5173).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Build for production
 
-## Expanding the Oxlint configuration
+```bash
+npm run build
+npm run preview
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Project Structure
+
+```
+src/
+  assets/            logo & about images
+  components/        one component per section (Navbar, Hero, Stats, About,
+                      Mission, WhyChooseUs, Services, Technology, Process,
+                      Inquiry, Contact, CTA, Footer, BackToTop)
+  hooks/useReveal.js  IntersectionObserver hook that replaces the old
+                      script.js scroll-reveal logic
+  data.js            all repeated content (stats, services, tech tags,
+                      process steps, contact cards, socials) as arrays,
+                      so components stay declarative
+  App.jsx            assembles all sections
+  App.css            the original style.css, unchanged, plus a small
+                      `.reveal` / `.in-view` addition for the scroll animation
+```
+
+## What changed vs. the original vanilla version
+
+- `script.js` DOM logic (smooth scroll, navbar background on scroll, active
+  nav-link highlighting, animated counters, reveal-on-scroll, back-to-top
+  button, footer year) was rewritten as React hooks/state instead of direct
+  DOM manipulation.
+- Repeated markup (service cards, why-choose-us cards, tech pills, process
+  steps, contact cards, social links) was extracted into `data.js` and
+  rendered with `.map()`.
+- Everything else — class names, layout, colors, fonts, Font Awesome icons,
+  Google Fonts — is identical to the original so the site looks and feels
+  exactly the same.
