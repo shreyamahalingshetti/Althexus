@@ -1,16 +1,51 @@
 import Project from '../models/Project.js';
 
-// @desc    Get all projects
+// @desc    Get all projects (with search, sort, pagination)
 // @route   GET /api/projects
 // @access  Public
 export const getProjects = async (req, res, next) => {
   try {
-    const projects = await Project.find({}).sort({ createdAt: -1 });
-    res.status(200).json(projects);
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.max(1, parseInt(req.query.limit) || 10);
+    const skip = (page - 1) * limit;
+    const sortBy = req.query.sortBy || 'createdAt';
+    const order = req.query.order === 'asc' ? 1 : -1;
+    const search = req.query.search || '';
+
+    const query = {};
+
+    if (search) {
+      const regex = new RegExp(search, 'i');
+      query.$or = [
+        { title: regex },
+        { description: regex },
+        { techStack: regex },
+      ];
+    }
+
+    const [totalDocuments, projects] = await Promise.all([
+      Project.countDocuments(query),
+      Project.find(query)
+        .sort({ [sortBy]: order })
+        .skip(skip)
+        .limit(limit),
+    ]);
+
+    res.status(200).json({
+      success: true,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(totalDocuments / limit),
+        totalDocuments,
+        pageSize: limit,
+      },
+      data: projects,
+    });
   } catch (error) {
     next(error);
   }
 };
+
 
 // @desc    Get single project by ID
 // @route   GET /api/projects/:id

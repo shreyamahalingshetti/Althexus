@@ -7,6 +7,9 @@ import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import serviceRequestRoutes from './routes/serviceRequestRoutes.js';
+import settingsRoutes from './routes/settingsRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
 
 // Initialize Database connection
 connectDB();
@@ -22,6 +25,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/contacts', contactRoutes);
+app.use('/api/service-requests', serviceRequestRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Health Check API
 app.get('/api/health', (req, res) => {
