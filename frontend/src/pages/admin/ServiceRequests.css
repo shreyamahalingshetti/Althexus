@@ -1,0 +1,38 @@
+.service-page {
+  padding: 30px;
+}
+
+.service-page h1 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background: #16213e;
+  color: white;
+  padding: 15px;
+  text-align: left;
+}
+
+td {
+  color: #222;              /* Change text to dark */
+  background: white;        /* White background */
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) td {
+  background: #f8f9fa;
+}
+
+tr:hover td {
+  background: #eaf4ff;
+}
