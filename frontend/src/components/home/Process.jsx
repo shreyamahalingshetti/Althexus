@@ -1,6 +1,5 @@
 import useReveal from "../../hooks/useReveal";
-import { process } from "../../data";
-
+import { process } from "../../data/data";
 export default function Process() {
   const [ref, visible] = useReveal();
 

@@ -1,6 +1,5 @@
 import useReveal from "../../hooks/useReveal";
-import aboutImg from "../assets/about.jpg";
-
+import aboutImg from "../../assets/images/about.jpg";
 export default function About() {
   const [ref, visible] = useReveal();
 

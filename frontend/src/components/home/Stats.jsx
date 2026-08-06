@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useReveal from "../../hooks/useReveal";
-import { stats } from "../../data";
+import { stats } from "../../data/data";
 
 function Counter({ target }) {
   const [current, setCurrent] = useState(0);

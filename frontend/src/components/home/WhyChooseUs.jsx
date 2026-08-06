@@ -1,6 +1,5 @@
 import useReveal from "../../hooks/useReveal";
-import { whyCards } from "../../data";
-
+import { whyCards } from "../../data/data";
 export default function WhyChooseUs() {
   const [ref, visible] = useReveal();
 

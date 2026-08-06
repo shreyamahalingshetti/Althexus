@@ -1,5 +1,5 @@
 import useReveal from "../../hooks/useReveal";
-import { services } from "../../data";
+import { services } from "../../data/data.js";
 
 export default function Services() {
   const [ref, visible] = useReveal();

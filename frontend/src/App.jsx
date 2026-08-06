@@ -1,19 +1,18 @@
 import { useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Stats from "./components/Stats";
-import About from "./components/About";
-import Mission from "./components/Mission";
-import WhyChooseUs from "./components/WhyChooseUs";
-import Services from "./components/Services";
-import Technology from "./components/Technology";
-import Process from "./components/Process";
-import Inquiry from "./components/Inquiry";
-import Contact from "./components/Contact";
-import CTA from "./components/CTA";
-import Footer from "./components/Footer";
-import BackToTop from "./components/BackToTop";
-
+import Navbar from "./components/layout/Navbar";
+import Hero from "./components/home/Hero";
+import Stats from "./components/home/Stats";
+import About from "./components/home/About";
+import Mission from "./components/home/Mission";
+import WhyChooseUs from "./components/home/WhyChooseUs";
+import Services from "./components/home/Services";
+import Technology from "./components/home/Technology";
+import Process from "./components/home/Process";
+import Inquiry from "./components/home/Inquiry";
+import Contact from "./components/home/Contact";
+import CTA from "./components/home/CTA";
+import Footer from "./components/layout/Footer";
+import BackToTop from "./components/common/BackToTop";
 export default function App() {
   useEffect(() => {
     console.log(
