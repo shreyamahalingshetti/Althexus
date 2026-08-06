@@ -6,7 +6,6 @@ import ContactRequests from "./ContactRequests";
 import Careers from "./Careers";
 import Settings from "./Settings";
 
-
 export default function AdminDashboard() {
   const [activePage, setActivePage] = useState("dashboard");
 
@@ -22,7 +21,6 @@ export default function AdminDashboard() {
         return <Settings />;
       default:
         return <DashboardHome />;
-
     }
   };
 
