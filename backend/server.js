@@ -10,6 +10,8 @@ import contactRoutes from './routes/contactRoutes.js';
 import serviceRequestRoutes from './routes/serviceRequestRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import jobOpeningRoutes from './routes/jobOpeningRoutes.js';
+import jobApplicationRoutes from './routes/jobApplicationRoutes.js';
 
 // Initialize Database connection
 connectDB();
@@ -31,6 +33,8 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/service-requests', serviceRequestRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/job-openings', jobOpeningRoutes);
+app.use('/api/job-applications', jobApplicationRoutes);
 
 // Health Check API
 app.get('/api/health', (req, res) => {
