@@ -54,8 +54,8 @@ export default function AdminSidebar({ setActivePage, isOpen }) {
       <button
   className="logout-btn"
   onClick={() => {
-    localStorage.removeItem("adminLoggedIn");
-    navigate("/");
+    localStorage.removeItem("token");
+    navigate("/admin/login");
   }}
 >
   🚪 Logout

@@ -28,7 +28,7 @@ export default function Login() {
 
       if (response.ok && data.token) {
         localStorage.setItem("token", data.token);
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else {
         setError(data.message || "Invalid credentials");
       }

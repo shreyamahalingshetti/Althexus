@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.jpeg";
 
@@ -9,8 +8,7 @@ const links = [
   { href: "#technology", label: "Technology" },
   { href: "#contact", label: "Contact" },
 ];
-  export default function Navbar() {
-  const navigate = useNavigate();
+export default function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
@@ -81,12 +79,6 @@ const links = [
       <a href="#inquiry" className="btn" onClick={(e) => handleClick(e, "#inquiry")}>
         Request a Solution
       </a>
-      <button
-  className="admin-btn"
-  onClick={() => navigate("/login")}
->
-  Admin Login
-</button>
     </nav>
   );
 }
