@@ -15,7 +15,7 @@ export default function Careers() {
   // Modal / Form state for Job Openings (Create / Edit)
   const [showModal, setShowModal] = useState(false);
   const [editingOpening, setEditingOpening] = useState(null); // null for create, object for edit
-  const [formData, setFormData] = useState({ title: "", type: "Job", location: "", description: "" });
+  const [formData, setFormData] = useState({ title: "", type: "Job", category: "IT", location: "", description: "" });
   const [formSubmitting, setFormSubmitting] = useState(false);
 
   // Job Applications State
@@ -105,7 +105,7 @@ export default function Careers() {
   // Open Modal for Create
   const handleOpenCreateModal = () => {
     setEditingOpening(null);
-    setFormData({ title: "", type: "Job", location: "", description: "" });
+    setFormData({ title: "", type: "Job", category: "IT", location: "", description: "" });
     setShowModal(true);
   };
 
@@ -115,6 +115,7 @@ export default function Careers() {
     setFormData({
       title: opening.title,
       type: opening.type || "Job",
+      category: opening.category || "IT",
       location: opening.location || "",
       description: opening.description,
     });
@@ -310,6 +311,7 @@ export default function Careers() {
                   <tr style={{ background: "rgba(255, 255, 255, 0.08)", borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
                     <th style={{ padding: "14px 16px" }}>Title</th>
                     <th style={{ padding: "14px 16px" }}>Type</th>
+                    <th style={{ padding: "14px 16px" }}>Category</th>
                     <th style={{ padding: "14px 16px" }}>Location</th>
                     <th style={{ padding: "14px 16px" }}>Description</th>
                     <th style={{ padding: "14px 16px", textAlign: "right" }}>Actions</th>
@@ -322,6 +324,11 @@ export default function Careers() {
                       <td style={{ padding: "14px 16px" }}>
                         <span style={{ padding: "4px 10px", borderRadius: "20px", fontSize: "12px", fontWeight: "600", background: job.type === "Job" ? "rgba(59, 130, 246, 0.15)" : "rgba(236, 72, 153, 0.15)", color: job.type === "Job" ? "#60a5fa" : "#f472b6" }}>
                           {job.type}
+                        </span>
+                      </td>
+                      <td style={{ padding: "14px 16px" }}>
+                        <span style={{ padding: "4px 10px", borderRadius: "20px", fontSize: "12px", fontWeight: "600", background: (job.category || "IT") === "IT" ? "rgba(16, 185, 129, 0.15)" : "rgba(245, 158, 11, 0.15)", color: (job.category || "IT") === "IT" ? "#34d399" : "#fbbf24" }}>
+                          {job.category || "IT"}
                         </span>
                       </td>
                       <td style={{ padding: "14px 16px", color: "#d1d5db" }}>{job.location || "Remote"}</td>
@@ -484,6 +491,18 @@ export default function Careers() {
                 >
                   <option value="Job">Job</option>
                   <option value="Internship">Internship</option>
+                </select>
+              </div>
+
+              <div style={{ marginBottom: "15px" }}>
+                <label style={{ display: "block", color: "#9ca3af", marginBottom: "5px", fontSize: "14px" }}>Category</label>
+                <select
+                  value={formData.category}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  style={{ width: "100%", padding: "10px", background: "#1e293b", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "6px", color: "#fff", outline: "none", boxSizing: "border-box" }}
+                >
+                  <option value="IT">IT</option>
+                  <option value="Non IT">Non IT</option>
                 </select>
               </div>
 

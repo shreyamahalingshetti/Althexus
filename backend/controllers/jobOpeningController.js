@@ -19,6 +19,8 @@ export const getJobOpenings = async (req, res, next) => {
       query.$or = [
         { title: regex },
         { location: regex },
+        { category: regex },
+        { type: regex },
       ];
     }
 
@@ -66,7 +68,7 @@ export const getJobOpeningById = async (req, res, next) => {
 // @access  Private (Admin only)
 export const createJobOpening = async (req, res, next) => {
   try {
-    const { title, type, location, description } = req.body;
+    const { title, type, category, location, description } = req.body;
 
     if (!title || !type || !description) {
       res.status(400);
@@ -76,6 +78,7 @@ export const createJobOpening = async (req, res, next) => {
     const jobOpening = new JobOpening({
       title,
       type,
+      category: category || 'IT',
       location,
       description,
     });
@@ -92,7 +95,7 @@ export const createJobOpening = async (req, res, next) => {
 // @access  Private (Admin only)
 export const updateJobOpening = async (req, res, next) => {
   try {
-    const { title, type, location, description } = req.body;
+    const { title, type, category, location, description } = req.body;
 
     const jobOpening = await JobOpening.findById(req.params.id);
 
@@ -103,6 +106,7 @@ export const updateJobOpening = async (req, res, next) => {
 
     jobOpening.title = title !== undefined ? title : jobOpening.title;
     jobOpening.type = type !== undefined ? type : jobOpening.type;
+    jobOpening.category = category !== undefined ? category : jobOpening.category;
     jobOpening.location = location !== undefined ? location : jobOpening.location;
     jobOpening.description = description !== undefined ? description : jobOpening.description;
 

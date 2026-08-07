@@ -12,6 +12,12 @@ const jobOpeningSchema = new mongoose.Schema(
       enum: ['Job', 'Internship'],
       required: [true, 'Job type is required'],
     },
+    category: {
+      type: String,
+      enum: ['IT', 'Non IT'],
+      default: 'IT',
+      required: [true, 'Job category (IT or Non IT) is required'],
+    },
     location: {
       type: String,
       trim: true,
