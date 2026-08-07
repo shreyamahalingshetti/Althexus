@@ -1,7 +1,7 @@
 import useReveal from "../hooks/useReveal";
 import aboutImg from "../assets/about.jpg";
 import { Lightbulb, Handshake, ShieldCheck, ArrowRight } from "lucide-react";
-import "./About";
+import "./About.css";
 
 export default function About() {
   const [ref, visible] = useReveal();
