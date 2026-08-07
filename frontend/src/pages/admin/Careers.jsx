@@ -482,28 +482,30 @@ export default function Careers() {
                 />
               </div>
 
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", color: "#9ca3af", marginBottom: "5px", fontSize: "14px" }}>Type</label>
-                <select
-                  value={formData.type}
-                  onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                  style={{ width: "100%", padding: "10px", background: "#1e293b", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "6px", color: "#fff", outline: "none", boxSizing: "border-box" }}
-                >
-                  <option value="Job">Job</option>
-                  <option value="Internship">Internship</option>
-                </select>
-              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", marginBottom: "15px" }}>
+                <div>
+                  <label style={{ display: "block", color: "#9ca3af", marginBottom: "5px", fontSize: "14px" }}>Type</label>
+                  <select
+                    value={formData.type}
+                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                    style={{ width: "100%", padding: "10px", background: "#1e293b", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "6px", color: "#fff", outline: "none", boxSizing: "border-box" }}
+                  >
+                    <option value="Job">Job</option>
+                    <option value="Internship">Internship</option>
+                  </select>
+                </div>
 
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", color: "#9ca3af", marginBottom: "5px", fontSize: "14px" }}>Category</label>
-                <select
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  style={{ width: "100%", padding: "10px", background: "#1e293b", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "6px", color: "#fff", outline: "none", boxSizing: "border-box" }}
-                >
-                  <option value="IT">IT</option>
-                  <option value="Non IT">Non IT</option>
-                </select>
+                <div>
+                  <label style={{ display: "block", color: "#9ca3af", marginBottom: "5px", fontSize: "14px" }}>Category</label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    style={{ width: "100%", padding: "10px", background: "#1e293b", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "6px", color: "#fff", outline: "none", boxSizing: "border-box" }}
+                  >
+                    <option value="IT">IT</option>
+                    <option value="Non IT">Non IT</option>
+                  </select>
+                </div>
               </div>
 
               <div style={{ marginBottom: "15px" }}>
