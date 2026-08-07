@@ -7,40 +7,84 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    if (email === "admin@althexus.com" && password === "admin123") {
-      navigate("/admin");
-    } else {
-      alert("Invalid Email or Password");
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/admin");
+      } else {
+        setError(data.message || "Invalid credentials");
+      }
+    } catch (err) {
+      setError("Unable to connect to server. Please check your network.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-  <div className="login-page">
-    <div className="login-box">
-      <h2>Admin Login</h2>
+    <div className="login-page">
+      <div className="login-box">
+        <h2>Admin Login</h2>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        {error && (
+          <div
+            style={{
+              color: "#ef4444",
+              marginBottom: "15px",
+              textAlign: "center",
+              fontSize: "14px",
+              padding: "10px",
+              background: "rgba(239, 68, 68, 0.1)",
+              borderRadius: "6px",
+              border: "1px solid rgba(239, 68, 68, 0.2)",
+            }}
+          >
+            {error}
+          </div>
+        )}
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={loading}
+          />
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
 }
