@@ -8,6 +8,8 @@ import Settings from "./Settings";
 
 export default function AdminDashboard() {
   const [activePage, setActivePage] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
 
   const renderPage = () => {
     switch (activePage) {
@@ -25,11 +27,24 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <AdminSidebar setActivePage={setActivePage} />
-      <div style={{ flex: 1, padding: "20px" }}>
-        {renderPage()}
-      </div>
+  <div className="admin-dashboard">
+
+    <button
+      className="hamburger-btn"
+      onClick={() => setSidebarOpen(!sidebarOpen)}
+    >
+      ☰
+    </button>
+
+    <AdminSidebar
+      setActivePage={setActivePage}
+      isOpen={sidebarOpen}
+    />
+
+    <div className="admin-content">
+      {renderPage()}
     </div>
-  );
+
+  </div>
+);
 }
