@@ -1,11 +1,17 @@
-export default function AdminSidebar({ setActivePage }) {
+import { useNavigate } from "react-router-dom";
+export default function AdminSidebar({ setActivePage, isOpen }) {
+ const navigate = useNavigate(); 
   return (
     <div
+      className={`admin-sidebar ${isOpen ? "open" : "closed"}`}
       style={{
-        width: "250px",
+        width: isOpen ? "250px" : "0px",
         background: "#111827",
         color: "#fff",
-        padding: "20px",
+        padding: isOpen ? "20px" : "0px",
+        overflow: "hidden",
+        transition: "0.3s ease",
+        flexShrink: 0,
       }}
     >
       <h2>ALTHEXUS</h2>
@@ -44,6 +50,16 @@ export default function AdminSidebar({ setActivePage }) {
       >
         ⚙️ Settings
       </p>
+
+      <button
+  className="logout-btn"
+  onClick={() => {
+    localStorage.removeItem("adminLoggedIn");
+    navigate("/");
+  }}
+>
+  🚪 Logout
+</button>
     </div>
   );
 }
