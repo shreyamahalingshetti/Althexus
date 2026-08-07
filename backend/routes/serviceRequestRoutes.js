@@ -7,11 +7,12 @@ import {
   deleteServiceRequest,
 } from '../controllers/serviceRequestController.js';
 import protect from '../middleware/authMiddleware.js';
+import { publicFormLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
 router.route('/')
-  .post(createServiceRequest)          // Public form submission
+  .post(publicFormLimiter, createServiceRequest)          // Public form submission
   .get(protect, getServiceRequests);    // Protected Admin retrieval
 
 router.route('/:id')

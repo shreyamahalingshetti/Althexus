@@ -9,6 +9,7 @@ export const env = {
   JWT_SECRET: process.env.JWT_SECRET,
   SEED_ADMIN_EMAIL: process.env.SEED_ADMIN_EMAIL,
   SEED_ADMIN_PASSWORD: process.env.SEED_ADMIN_PASSWORD,
+  FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
 };
 
 if (!env.MONGODB_URI) {

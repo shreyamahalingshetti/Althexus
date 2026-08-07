@@ -3,6 +3,9 @@ import cors from 'cors';
 import { env } from './config/env.js';
 import { connectDB } from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import mongoSanitize from 'express-mongo-sanitize';
 import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
@@ -18,9 +21,21 @@ connectDB();
 
 const app = express();
 
-// Core Middlewares
-app.use(cors());
-app.use(express.json());
+// Security & Core Middlewares
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+app.use(
+  cors({
+    origin: env.FRONTEND_URL,
+    credentials: true,
+  })
+);
+app.use(express.json({ limit: '10kb' }));
+app.use(mongoSanitize());
+app.use(hpp());
 
 // Serve uploaded files as static assets
 app.use('/uploads', express.static('uploads'));

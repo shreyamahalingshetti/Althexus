@@ -6,11 +6,12 @@ import {
   deleteContact,
 } from '../controllers/contactController.js';
 import protect from '../middleware/authMiddleware.js';
+import { publicFormLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
 router.route('/')
-  .post(createContact)          // Public form submission
+  .post(publicFormLimiter, createContact)          // Public form submission
   .get(protect, getContacts);    // Protected Admin retrieval
 
 router.route('/:id')
