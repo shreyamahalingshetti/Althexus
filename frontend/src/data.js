@@ -114,11 +114,87 @@ export const services = [
 ];
 
 export const technologies = [
-  "HTML5", "CSS3", "JavaScript", "React", "Node.js", "Python",
-  "Java", "PHP", "MySQL", "MongoDB", "AWS", "Azure",
-  "Docker", "Git", "Firebase", "Flutter",
+  {
+    title: "HTML5",
+    icon: "html",
+    description: "Semantic web markup.",
+  },
+  {
+    title: "CSS3",
+    icon: "css",
+    description: "Modern responsive styling.",
+  },
+  {
+    title: "JavaScript",
+    icon: "javascript",
+    description: "Interactive web applications.",
+  },
+  {
+    title: "React",
+    icon: "react",
+    description: "Modern frontend library.",
+  },
+  {
+    title: "Node.js",
+    icon: "node",
+    description: "Fast backend runtime.",
+  },
+  {
+    title: "Python",
+    icon: "python",
+    description: "AI & backend development.",
+  },
+  {
+    title: "Java",
+    icon: "java",
+    description: "Enterprise applications.",
+  },
+  {
+    title: "PHP",
+    icon: "php",
+    description: "Server-side scripting.",
+  },
+  {
+    title: "MySQL",
+    icon: "mysql",
+    description: "Relational database.",
+  },
+  {
+    title: "MongoDB",
+    icon: "mongodb",
+    description: "NoSQL database.",
+  },
+  {
+    title: "Firebase",
+    icon: "firebase",
+    description: "Backend as a Service.",
+  },
+  {
+    title: "Docker",
+    icon: "docker",
+    description: "Container platform.",
+  },
+  {
+    title: "AWS",
+    icon: "aws",
+    description: "Cloud infrastructure.",
+  },
+  {
+    title: "Azure",
+    icon: "azure",
+    description: "Microsoft Cloud.",
+  },
+  {
+    title: "Git",
+    icon: "git",
+    description: "Version control.",
+  },
+  {
+    title: "Flutter",
+    icon: "flutter",
+    description: "Cross-platform apps.",
+  },
 ];
-
 export const process = [
   {
     number: "01",

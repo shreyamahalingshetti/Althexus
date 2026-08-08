@@ -35,6 +35,25 @@ export default function Contact() {
   ];
 
   return (
+
+    <section
+      id="contact"
+      ref={ref}
+      className={`contact reveal ${visible ? "in-view" : ""}`}
+    >
+      <div className="contact-header">
+        <div className="section-label">CONTACT US</div>
+
+        <h2>Let's Build Something Amazing Together</h2>
+
+        <p>
+          We'd love to hear your ideas and discuss how Althexus can help turn
+          them into reality.
+        </p>
+      </div>
+
+      <div className="contact-cards">
+        {contactCards.map((card, i) => (
     <section id="contact" ref={ref} className={`contact reveal ${visible ? "in-view" : ""}`}>
       <h5>CONTACT US</h5>
       <h2>Let's Build Something Amazing Together</h2>
@@ -44,10 +63,12 @@ export default function Contact() {
       </p>
 
       <div className="contact-grid">
-        {cards.map((card, i) => (
+        {cards.map((card, i) =>
           <div className="contact-card" key={i}>
             <i className={card.icon}></i>
+
             <h3>{card.title}</h3>
+
             {card.html ? (
               <p dangerouslySetInnerHTML={{ __html: card.html }} />
             ) : (

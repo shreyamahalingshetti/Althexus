@@ -7,6 +7,9 @@ const links = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
+  { href: "/technology", label: "Technology" },
+  { href: "/contact", label: "Contact" },
+
   { href: "#technology", label: "Technology" },
   { href: "#contact", label: "Contact" },
   { href: "/careers", label: "Careers", isPage: true },
@@ -42,6 +45,29 @@ export default function Navbar() {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
+const handleClick = (e, href) => {
+  if (href === "/technology" || href === "/contact") {
+    e.preventDefault();
+    navigate(href);
+    return;
+  }
+
+  if (href === "#home") {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
+  const target = document.querySelector(href);
+
+  if (target) {
+    e.preventDefault();
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 
   useEffect(() => {
     const handleScrollSimple = () => {
@@ -107,7 +133,22 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
-
+      <a
+  href="/request-solution"
+  className="btn"
+  onClick={(e) => {
+    e.preventDefault();
+    navigate("/request-solution");
+  }}
+>
+  Request a Solution
+</a>
+      <button
+  className="admin-btn"
+  onClick={() => navigate("/login")}
+>
+  Admin Login
+</button>
       {isHomePage ? (
         <a href="#inquiry" className="btn" onClick={(e) => handleClick(e, "#inquiry")}>
           Request a Solution
@@ -117,6 +158,7 @@ export default function Navbar() {
           Request a Solution
         </Link>
       )}
+
     </nav>
   );
 }
