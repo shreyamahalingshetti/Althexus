@@ -68,18 +68,23 @@ export const getProjectById = async (req, res, next) => {
 // @access  Private (Admin only)
 export const createProject = async (req, res, next) => {
   try {
-    const { title, description, images, techStack, clientName } = req.body;
+    const { title, description, techStack, clientName } = req.body;
 
     if (!title || !description) {
       res.status(400);
       throw new Error('Title and description are required');
     }
 
+    // Build image URL paths from multer-uploaded files
+    const uploadedImages = req.files && req.files.length > 0
+      ? req.files.map((file) => `/uploads/${file.filename}`)
+      : [];
+
     const project = new Project({
       title,
       description,
-      images: images || [],
-      techStack: techStack || [],
+      images: uploadedImages,
+      techStack: techStack ? (Array.isArray(techStack) ? techStack : [techStack]) : [],
       clientName,
     });
 
@@ -95,7 +100,7 @@ export const createProject = async (req, res, next) => {
 // @access  Private (Admin only)
 export const updateProject = async (req, res, next) => {
   try {
-    const { title, description, images, techStack, clientName } = req.body;
+    const { title, description, techStack, clientName } = req.body;
 
     const project = await Project.findById(req.params.id);
 
@@ -106,9 +111,16 @@ export const updateProject = async (req, res, next) => {
 
     project.title = title !== undefined ? title : project.title;
     project.description = description !== undefined ? description : project.description;
-    project.images = images !== undefined ? images : project.images;
-    project.techStack = techStack !== undefined ? techStack : project.techStack;
     project.clientName = clientName !== undefined ? clientName : project.clientName;
+
+    if (techStack !== undefined) {
+      project.techStack = Array.isArray(techStack) ? techStack : [techStack];
+    }
+
+    // New uploads replace the existing images array; no new files = keep existing
+    if (req.files && req.files.length > 0) {
+      project.images = req.files.map((file) => `/uploads/${file.filename}`);
+    }
 
     const updatedProject = await project.save();
     res.status(200).json(updatedProject);

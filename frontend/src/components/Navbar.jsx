@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.jpeg";
+import { useSettings } from "../context/SettingsContext";
 
 const links = [
   { href: "#home", label: "Home" },
@@ -8,15 +9,24 @@ const links = [
   { href: "#services", label: "Services" },
   { href: "/technology", label: "Technology" },
   { href: "/contact", label: "Contact" },
-];
-  export default function Navbar() {
-  const navigate = useNavigate();
 
+  { href: "#technology", label: "Technology" },
+  { href: "#contact", label: "Contact" },
+  { href: "/careers", label: "Careers", isPage: true },
+];
+
+export default function Navbar() {
+  const { settings } = useSettings();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
 
-
   useEffect(() => {
+    if (!isHomePage) {
+      setActive("");
+      return;
+    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
 
@@ -34,8 +44,7 @@ const links = [
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  }, [isHomePage]);
 const handleClick = (e, href) => {
   if (href === "/technology" || href === "/contact") {
     e.preventDefault();
@@ -60,6 +69,33 @@ const handleClick = (e, href) => {
   }
 };
 
+  useEffect(() => {
+    const handleScrollSimple = () => {
+      setScrolled(window.scrollY > 80);
+    };
+    if (!isHomePage) {
+      window.addEventListener("scroll", handleScrollSimple);
+      handleScrollSimple();
+      return () => window.removeEventListener("scroll", handleScrollSimple);
+    }
+  }, [isHomePage]);
+
+  const handleClick = (e, href) => {
+    if (href.startsWith("#")) {
+      if (isHomePage) {
+        e.preventDefault();
+        if (href === "#home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    }
+  };
+
   return (
     <nav
       style={{
@@ -68,9 +104,9 @@ const handleClick = (e, href) => {
       }}
     >
       <div className="logo">
-        <img src={logo} alt="Althexus Logo" />
+        <img src={logo} alt={`${settings.companyName} Logo`} />
         <div>
-          <h2>ALTHEXUS</h2>
+          <h2>{settings.companyName}</h2>
           <span>Innovate • Build • Grow</span>
         </div>
       </div>
@@ -78,17 +114,25 @@ const handleClick = (e, href) => {
       <ul>
         {links.map((link) => (
           <li key={link.href}>
-            <a
-              href={link.href}
-              className={active === link.href.replace("#", "") ? "active" : ""}
-              onClick={(e) => handleClick(e, link.href)}
-            >
-              {link.label}
-            </a>
+            {link.isPage ? (
+              <Link
+                to={link.href}
+                className={location.pathname === link.href ? "active" : ""}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <Link
+                to={isHomePage ? link.href : `/${link.href}`}
+                className={!isHomePage ? "" : active === link.href.replace("#", "") ? "active" : ""}
+                onClick={(e) => handleClick(e, link.href)}
+              >
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
-
       <a
   href="/request-solution"
   className="btn"
@@ -105,6 +149,16 @@ const handleClick = (e, href) => {
 >
   Admin Login
 </button>
+      {isHomePage ? (
+        <a href="#inquiry" className="btn" onClick={(e) => handleClick(e, "#inquiry")}>
+          Request a Solution
+        </a>
+      ) : (
+        <Link to="/#inquiry" className="btn">
+          Request a Solution
+        </Link>
+      )}
+
     </nav>
   );
 }

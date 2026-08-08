@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import DashboardHome from "./DashboardHome";
 import ServiceRequests from "./ServiceRequests";
@@ -7,7 +8,17 @@ import Careers from "./Careers";
 import Settings from "./Settings";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [activePage, setActivePage] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  // Auth guard — redirect to login if no token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/admin/login");
+    }
+  }, [navigate]);
 
   const renderPage = () => {
     switch (activePage) {
@@ -25,11 +36,24 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <AdminSidebar setActivePage={setActivePage} />
-      <div style={{ flex: 1, padding: "20px" }}>
+    <div className="admin-dashboard">
+
+      <button
+        className="hamburger-btn"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        ☰
+      </button>
+
+      <AdminSidebar
+        setActivePage={setActivePage}
+        isOpen={sidebarOpen}
+      />
+
+      <div className="admin-content">
         {renderPage()}
       </div>
+
     </div>
   );
-}
+}

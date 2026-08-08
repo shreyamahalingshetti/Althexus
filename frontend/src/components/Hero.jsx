@@ -1,32 +1,18 @@
-import logo from "../assets/logo.jpeg";
+import { useSettings } from "../context/SettingsContext";
 
 export default function Hero() {
-  return (
-    <section id="home" className="hero">
-      <div className="hero-left">
-        <h5>WELCOME TO</h5>
-        <h1>ALTHEXUS</h1>
-        <h3>Innovative Software Solutions for Modern Businesses</h3>
-        <p>
-          Althexus Pvt. Ltd. helps startups, businesses, and organizations
-          transform ideas into powerful digital products. We specialize in Web
-          Development, Mobile Apps, Artificial Intelligence, Cloud Computing,
-          Business Automation, Digital Marketing, Branding and Custom Software
-          Solutions.
-        </p>
-        <div className="buttons">
-          <a href="#services" className="btn">
-            Explore Services
-          </a>
-          <a href="#contact" className="btn2">
-            Contact Us
-          </a>
-        </div>
-      </div>
+  const { settings } = useSettings();
 
-      <div className="hero-right">
-        <div className="hero-circle">
-          <img src={logo} alt="Althexus" />
+  return (
+    <section className="hero">
+      <div className="wrap hero-inner">
+        <div className="eyebrow on-dark"><span className="dot"></span>WELCOME TO</div>
+        <h1>{settings.companyName}</h1>
+        <h2 className="sub">{settings.tagline}</h2>
+        <p className="lede">{settings.aboutText}</p>
+        <div className="hero-ctas">
+          <a href="#services" className="btn-primary">Explore Services →</a>
+          <a href="#contact" className="btn-ghost">Contact Us</a>
         </div>
       </div>
     </section>

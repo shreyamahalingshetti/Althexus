@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
@@ -15,17 +15,6 @@ import Footer from "../components/Footer";
 import BackToTop from "../components/BackToTop";
 
 export default function Home() {
-  useEffect(() => {
-    console.log(
-      "%c🚀 Welcome to ALTHEXUS",
-      "color:#00BFFF;font-size:22px;font-weight:bold;"
-    );
-    console.log(
-      "%cBuilding Tomorrow's Technology",
-      "color:#ffffff;font-size:14px;"
-    );
-  }, []);
-
   return (
     <>
       <Navbar />

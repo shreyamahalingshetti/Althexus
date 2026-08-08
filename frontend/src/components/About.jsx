@@ -1,41 +1,118 @@
 import useReveal from "../hooks/useReveal";
 import aboutImg from "../assets/about.jpg";
+import { Lightbulb, Handshake, ShieldCheck, ArrowRight } from "lucide-react";
+import { useSettings } from "../context/SettingsContext";
+import "./About.css";
 
 export default function About() {
   const [ref, visible] = useReveal();
+  const { settings } = useSettings();
 
   return (
-    <section id="about" ref={ref} className={`about reveal ${visible ? "in-view" : ""}`}>
-      <div className="about-image">
-        <img src={aboutImg} alt="About Althexus" />
-      </div>
+    <section
+      id="about"
+      ref={ref}
+      className={`about-section reveal ${visible ? "in-view" : ""}`}
+    >
+      <div className="about-container">
 
-      <div className="about-text">
-        <h5>ABOUT US</h5>
-        <h2>Empowering Businesses Through Technology</h2>
-        <p>
-          Althexus Pvt. Ltd. is a modern technology company committed to
-          helping businesses grow through innovative software solutions,
-          digital transformation, and intelligent technologies.
-        </p>
-        <p>
-          Whether you're a startup looking to launch your first product or an
-          established business aiming to improve operations, our team focuses
-          on building secure, scalable, and user-friendly solutions.
-        </p>
+        {/* Left Image */}
+        <div className="about-image-wrapper">
+          <div className="about-image-glow"></div>
+          <img src={aboutImg} alt={`${settings.companyName} workspace`} className="about-image" />
 
-        <div className="about-boxes">
-          <div className="about-card">
-            <i className="fa-solid fa-lightbulb"></i>
-            <h4>Innovation</h4>
-            <p>We believe every great solution starts with a creative idea.</p>
+          <div className="experience-badge">
+            <h3>3+</h3>
+            <p>Years Experience</p>
+          </div>
+        </div>
+
+        {/* Right Content */}
+        <div className="about-content">
+
+          <div className="section-tag">ABOUT US</div>
+
+          <h2 className="about-title">
+            Empowering Businesses <br />
+            Through <span>Technology</span>
+          </h2>
+
+          <p className="about-text">
+            {settings.aboutText}
+          </p>
+
+          <p className="about-text secondary">
+            From web and mobile applications to automation and business
+            platforms, our team combines creativity, strategy, and engineering
+            excellence to deliver real business impact.
+          </p>
+
+          {/* Stats */}
+          <div className="about-stats">
+            <div>
+              <h3>50+</h3>
+              <p>Projects</p>
+            </div>
+            <div>
+              <h3>20+</h3>
+              <p>Clients</p>
+            </div>
+            <div>
+              <h3>99%</h3>
+              <p>Satisfaction</p>
+            </div>
           </div>
 
-          <div className="about-card">
-            <i className="fa-solid fa-handshake"></i>
-            <h4>Partnership</h4>
-            <p>We work closely with our clients to build lasting relationships.</p>
+          {/* Feature Cards */}
+          <div className="about-cards">
+
+            <div className="about-card">
+              <div className="card-icon">
+                <Lightbulb size={28} />
+              </div>
+              <h4>Innovation</h4>
+              <p>
+                Creative ideas transformed into powerful digital products.
+              </p>
+            </div>
+
+            <div className="about-card">
+              <div className="card-icon">
+                <Handshake size={28} />
+              </div>
+              <h4>Partnership</h4>
+              <p>
+                We collaborate closely with clients for long-term success.
+              </p>
+            </div>
+
+            <div className="about-card full">
+              <div className="card-icon">
+                <ShieldCheck size={28} />
+              </div>
+              <div>
+                <h4>Trust & Security</h4>
+                <p>
+                  Reliable, scalable, and secure solutions built with modern
+                  technologies and best practices.
+                </p>
+              </div>
+            </div>
+
           </div>
+
+          {/* CTA */}
+          <div className="about-actions">
+            <a href="#contact" className="primary-btn">
+              Get Started
+              <ArrowRight size={18} />
+            </a>
+
+            <a href="#services" className="secondary-btn">
+              Explore Services
+            </a>
+          </div>
+
         </div>
       </div>
     </section>

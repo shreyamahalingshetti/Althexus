@@ -3,6 +3,9 @@ import cors from 'cors';
 import { env } from './config/env.js';
 import { connectDB } from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import mongoSanitize from 'express-mongo-sanitize';
 import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
@@ -10,15 +13,32 @@ import contactRoutes from './routes/contactRoutes.js';
 import serviceRequestRoutes from './routes/serviceRequestRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import jobOpeningRoutes from './routes/jobOpeningRoutes.js';
+import jobApplicationRoutes from './routes/jobApplicationRoutes.js';
 
 // Initialize Database connection
 connectDB();
 
 const app = express();
 
-// Core Middlewares
-app.use(cors());
-app.use(express.json());
+// Security & Core Middlewares
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+app.use(
+  cors({
+    origin: env.FRONTEND_URL,
+    credentials: true,
+  })
+);
+app.use(express.json({ limit: '10kb' }));
+app.use(mongoSanitize());
+app.use(hpp());
+
+// Serve uploaded files as static assets
+app.use('/uploads', express.static('uploads'));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -28,6 +48,8 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/service-requests', serviceRequestRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/job-openings', jobOpeningRoutes);
+app.use('/api/job-applications', jobApplicationRoutes);
 
 // Health Check API
 app.get('/api/health', (req, res) => {
