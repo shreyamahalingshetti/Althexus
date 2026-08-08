@@ -1,12 +1,17 @@
+import { useSettings } from "../context/SettingsContext";
+
 export default function Footer() {
+  const { settings } = useSettings();
   const year = new Date().getFullYear();
+
+  const addressLines = (settings.address || "Meerut, Uttar Pradesh\nRemote-First Company").split("\n");
 
   return (
     <footer>
       <div className="footer-content">
         <div>
-          <h2>ALTHEXUS</h2>
-          <p>Building Tomorrow's Technology</p>
+          <h2>{settings.companyName}</h2>
+          <p>{settings.tagline}</p>
           <br />
           <p>Empowering businesses with innovative digital solutions.</p>
         </div>
@@ -25,17 +30,18 @@ export default function Footer() {
         <div>
           <h3>Connect</h3>
           <p>Email:</p>
-          <p>althexusofficial@gmail.com</p>
+          <p>{settings.email}</p>
           <br />
-          <p>Meerut, Uttar Pradesh</p>
-          <p>Remote-First Company</p>
+          {addressLines.map((line, idx) => (
+            <p key={idx}>{line}</p>
+          ))}
         </div>
       </div>
 
       <hr />
 
       <p className="copyright">
-        © {year} Althexus Pvt. Ltd. All Rights Reserved.
+        © {year} {settings.companyName} Pvt. Ltd. All Rights Reserved.
       </p>
     </footer>
   );

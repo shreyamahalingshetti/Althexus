@@ -1,10 +1,12 @@
 import useReveal from "../hooks/useReveal";
 import aboutImg from "../assets/about.jpg";
 import { Lightbulb, Handshake, ShieldCheck, ArrowRight } from "lucide-react";
+import { useSettings } from "../context/SettingsContext";
 import "./About.css";
 
 export default function About() {
   const [ref, visible] = useReveal();
+  const { settings } = useSettings();
 
   return (
     <section
@@ -17,7 +19,7 @@ export default function About() {
         {/* Left Image */}
         <div className="about-image-wrapper">
           <div className="about-image-glow"></div>
-          <img src={aboutImg} alt="Althexus workspace" className="about-image" />
+          <img src={aboutImg} alt={`${settings.companyName} workspace`} className="about-image" />
 
           <div className="experience-badge">
             <h3>3+</h3>
@@ -36,10 +38,7 @@ export default function About() {
           </h2>
 
           <p className="about-text">
-            Althexus Pvt. Ltd. is a modern technology company focused on
-            building secure, scalable, and user-friendly digital solutions.
-            We help startups and enterprises accelerate growth through
-            innovative software, cloud services, and intelligent technologies.
+            {settings.aboutText}
           </p>
 
           <p className="about-text secondary">
