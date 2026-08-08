@@ -1306,7 +1306,18 @@ grid-template-columns:1fr;
 /* ==================================================
    CONTACT
 ==================================================*/
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
 
+.contact-card {
+  width: auto;
+}
+.contact-section {
+  padding-top: 132px;
+}
 .contact{
 
     text-align:center;
@@ -1956,4 +1967,7 @@ transform:translateY(0) scale(1);
     color:#d8e3f3;
     font-size:1rem;
     font-weight:500;
+}
+.request-solution-page {
+  padding-top: 132px;
 }

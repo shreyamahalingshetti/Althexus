@@ -6,8 +6,8 @@ const links = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
-  { href: "#technology", label: "Technology" },
-  { href: "#contact", label: "Contact" },
+  { href: "/technology", label: "Technology" },
+  { href: "/contact", label: "Contact" },
 ];
   export default function Navbar() {
   const navigate = useNavigate();
@@ -36,18 +36,29 @@ const links = [
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClick = (e, href) => {
-    if (href === "#home") {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    const target = document.querySelector(href);
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
+const handleClick = (e, href) => {
+  if (href === "/technology" || href === "/contact") {
+    e.preventDefault();
+    navigate(href);
+    return;
+  }
+
+  if (href === "#home") {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
+  const target = document.querySelector(href);
+
+  if (target) {
+    e.preventDefault();
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 
   return (
     <nav
@@ -78,9 +89,16 @@ const links = [
         ))}
       </ul>
 
-      <a href="#inquiry" className="btn" onClick={(e) => handleClick(e, "#inquiry")}>
-        Request a Solution
-      </a>
+      <a
+  href="/request-solution"
+  className="btn"
+  onClick={(e) => {
+    e.preventDefault();
+    navigate("/request-solution");
+  }}
+>
+  Request a Solution
+</a>
       <button
   className="admin-btn"
   onClick={() => navigate("/login")}

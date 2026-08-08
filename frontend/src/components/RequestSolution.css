@@ -1,0 +1,292 @@
+.request-page {
+  min-height: 100vh;
+  background: #071423;
+  padding: 120px 8% 100px;
+  box-sizing: border-box;
+}
+
+/* Main container */
+
+.request-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+
+  background: #0b1b2b;
+  border: 1px solid rgba(64, 158, 255, 0.18);
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(30, 130, 255, 0.04);
+}
+
+/* Header */
+
+.request-header {
+  padding: 65px 50px 50px;
+
+  text-align: center;
+
+  background: #091a2a;
+
+  border-bottom: 1px solid rgba(64, 158, 255, 0.15);
+}
+
+.request-label {
+  display: block;
+
+  margin-bottom: 16px;
+
+  color: #3da9ff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.request-header h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 42px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.request-header p {
+  max-width: 650px;
+
+  margin: 20px auto 0;
+
+  color: #9eafbf;
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Form */
+
+.request-form {
+  padding: 50px;
+}
+
+.form-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 28px;
+}
+
+.form-group {
+  margin-bottom: 28px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 11px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  letter-spacing: 0.4px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid #263b4f;
+
+  border-radius: 8px;
+
+  background: #102438;
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 16px;
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.form-group input,
+.form-group select {
+  height: 58px;
+
+  padding: 0 18px;
+}
+
+.form-group textarea {
+  min-height: 175px;
+
+  padding: 18px;
+
+  resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #718396;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #3da9ff;
+
+  background: #122b43;
+
+  box-shadow:
+    0 0 0 2px rgba(61, 169, 255, 0.08),
+    0 0 18px rgba(61, 169, 255, 0.06);
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+/* Select dropdown */
+
+.form-group select option {
+  background: #102438;
+  color: #ffffff;
+}
+
+/* Bottom section */
+
+.request-footer {
+  margin-top: 8px;
+}
+
+.request-footer p {
+  margin: 0 0 20px;
+
+  color: #7f91a3;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Submit button */
+
+.submit-request {
+  width: 100%;
+
+  min-height: 60px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #168cff;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.submit-request span {
+  margin-left: 8px;
+
+  font-size: 19px;
+}
+
+.submit-request:hover {
+  background: #0878df;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(22, 140, 255, 0.25);
+}
+
+.submit-request:active {
+  transform: translateY(0);
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .request-page {
+    padding: 90px 15px 70px;
+  }
+
+  .request-header {
+    padding: 45px 25px 35px;
+  }
+
+  .request-label {
+    font-size: 12px;
+  }
+
+  .request-header h1 {
+    font-size: 30px;
+  }
+
+  .request-header p {
+    font-size: 15px;
+  }
+
+  .request-form {
+    padding: 30px 25px 35px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .form-group {
+    margin-bottom: 23px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 55px;
+
+    font-size: 15px;
+  }
+
+  .form-group textarea {
+    min-height: 150px;
+
+    font-size: 15px;
+  }
+
+  .submit-request {
+    min-height: 56px;
+
+    font-size: 15px;
+  }
+}
+
