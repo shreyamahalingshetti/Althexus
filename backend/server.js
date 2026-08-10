@@ -1,5 +1,10 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import { env } from './config/env.js';
 import { connectDB } from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
@@ -37,7 +42,7 @@ app.use(mongoSanitize());
 app.use(hpp());
 
 // Serve uploaded files as static assets
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/auth', authRoutes);
