@@ -15,57 +15,50 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-
-        <Route path="/" element={<Home />} />
-
-        <Route
-          path="/technology"
-          element={
-            <>
-              <Navbar />
-              <Technology />
-              <Footer />
-            </>
-          }
-        />
-
-        <Route
-          path="/contact"
-          element={
-            <>
-              <Navbar />
-              <Contact />
-              <Footer />
-            </>
-          }
-        />
-
-        <Route
-  path="/request-solution"
-  element={
-    <>
-      <Navbar />
-      <div className="request-solution-page">
-        <RequestSolution />
-      </div>
-      <Footer />
-    </>
-  }
-/>
-
-        <Route path="/login" element={<Login />} />
-
-        <Route path="/admin" element={<AdminDashboard />} />
-
-      </Routes>
-
       <SettingsProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/careers" element={<Careers />} />
-          <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+          
+          <Route
+            path="/technology"
+            element={
+              <>
+                <Navbar />
+                <Technology />
+                <Footer />
+              </>
+            }
+          />
+          
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Navbar />
+                <Contact />
+                <Footer />
+              </>
+            }
+          />
+          
+          <Route
+            path="/request-solution"
+            element={
+              <>
+                <Navbar />
+                <div className="request-solution-page">
+                  <RequestSolution />
+                </div>
+                <Footer />
+              </>
+            }
+          />
+
+          <Route path="/login" element={<Login />} />
           <Route path="/admin/login" element={<Login />} />
+          
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </SettingsProvider>

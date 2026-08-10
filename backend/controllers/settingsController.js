@@ -8,7 +8,32 @@ export const getSettings = async (req, res, next) => {
     let settings = await Settings.findOne({});
 
     if (!settings) {
-      settings = await Settings.create({});
+      settings = await Settings.create({
+        companyName: "ALTHEXUS",
+        tagline: "Innovative Software Solutions for Modern Businesses",
+        aboutText: "Althexus Pvt. Ltd. is a modern technology company focused on building secure, scalable, and user-friendly digital solutions. We help startups and enterprises accelerate growth through innovative software, cloud services, and intelligent technologies.",
+        email: "althexusofficial@gmail.com",
+        phone: "",
+        address: "Meerut, Uttar Pradesh\nRemote-First Company",
+        socialLinks: [
+          { platform: "LinkedIn", url: "https://www.linkedin.com/company/althexus/" },
+          { platform: "Instagram", url: "https://www.instagram.com/althexusofficial/" },
+          { platform: "WhatsApp", url: "https://wa.me/message/SV64GDK3P6ZKP1" },
+        ],
+      });
+    } else if (settings.companyName === undefined) {
+      settings.companyName = "ALTHEXUS";
+      settings.tagline = "Innovative Software Solutions for Modern Businesses";
+      settings.aboutText = "Althexus Pvt. Ltd. is a modern technology company focused on building secure, scalable, and user-friendly digital solutions. We help startups and enterprises accelerate growth through innovative software, cloud services, and intelligent technologies.";
+      settings.email = "althexusofficial@gmail.com";
+      settings.phone = "";
+      settings.address = "Meerut, Uttar Pradesh\nRemote-First Company";
+      settings.socialLinks = [
+        { platform: "LinkedIn", url: "https://www.linkedin.com/company/althexus/" },
+        { platform: "Instagram", url: "https://www.instagram.com/althexusofficial/" },
+        { platform: "WhatsApp", url: "https://wa.me/message/SV64GDK3P6ZKP1" },
+      ];
+      await settings.save();
     }
 
     res.status(200).json(settings);

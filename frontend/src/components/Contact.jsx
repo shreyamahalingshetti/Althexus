@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useReveal from "../hooks/useReveal";
 import { useSettings } from "../context/SettingsContext";
 
@@ -12,6 +13,8 @@ function getSocialIcon(platform = "") {
   return "fa-solid fa-globe";
 }
 
+const API_BASE_URL = "http://localhost:5000";
+
 export default function Contact() {
   const [ref, visible] = useReveal();
   const { settings } = useSettings();
@@ -25,17 +28,21 @@ export default function Contact() {
     {
       icon: "fa-solid fa-location-dot",
       title: "Location",
-      html: (settings.address || "Meerut, Uttar Pradesh\nRemote-First Company").replace(/\n/g, "<br />"),
+      html: (settings.address || "Meerut, Uttar Pradesh\nRemote-First Company").replace(
+        /\n/g,
+        "<br />"
+      ),
     },
     {
       icon: "fa-solid fa-headset",
       title: "Support",
-      text: settings.phone ? `Phone: ${settings.phone}` : "Available for project discussions and business inquiries.",
+      text: settings.phone
+        ? `Phone: ${settings.phone}`
+        : "Available for project discussions and business inquiries.",
     },
   ];
 
   return (
-
     <section
       id="contact"
       ref={ref}
@@ -43,32 +50,19 @@ export default function Contact() {
     >
       <div className="contact-header">
         <div className="section-label">CONTACT US</div>
-
         <h2>Let's Build Something Amazing Together</h2>
-
         <p>
-          We'd love to hear your ideas and discuss how Althexus can help turn
-          them into reality.
+          We'd love to hear your ideas and discuss how{" "}
+          {settings.companyName} can help turn them into reality.
         </p>
       </div>
 
-      <div className="contact-cards">
-        {contactCards.map((card, i) => (
-    <section id="contact" ref={ref} className={`contact reveal ${visible ? "in-view" : ""}`}>
-      <h5>CONTACT US</h5>
-      <h2>Let's Build Something Amazing Together</h2>
-      <p>
-        We'd love to hear your ideas and discuss how {settings.companyName} can help turn
-        them into reality.
-      </p>
-
+      {/* Info Cards */}
       <div className="contact-grid">
-        {cards.map((card, i) =>
+        {cards.map((card, i) => (
           <div className="contact-card" key={i}>
             <i className={card.icon}></i>
-
             <h3>{card.title}</h3>
-
             {card.html ? (
               <p dangerouslySetInnerHTML={{ __html: card.html }} />
             ) : (
@@ -78,6 +72,9 @@ export default function Contact() {
         ))}
       </div>
 
+
+
+      {/* Social Links */}
       {settings.socialLinks && settings.socialLinks.length > 0 && (
         <div className="socials">
           {settings.socialLinks.map((social, i) => (

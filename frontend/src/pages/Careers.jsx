@@ -72,7 +72,9 @@ export default function Careers() {
       <section className="hero" style={{ padding: "90px 0 76px" }}>
         <div className="wrap hero-inner">
           <div className="eyebrow on-dark"><span className="dot"></span>CAREERS AT ALTHEXUS</div>
-          <h1 style={{ fontSize: "clamp(34px,5vw,52px)" }}>Build real products, not busywork.</h1>
+          <h1 style={{ fontSize: "clamp(34px,5vw,52px)", color: "#ffffff" }}>
+            Build real products, not busywork.
+          </h1>
           <p className="lede">
             We're a small, remote-first team shipping client work that actually goes live. If you
             want ownership over real features from day one, we're hiring.

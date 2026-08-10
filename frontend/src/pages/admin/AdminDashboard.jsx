@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import DashboardHome from "./DashboardHome";
 import ServiceRequests from "./ServiceRequests";
-import ContactRequests from "./ContactRequests";
+
 import Careers from "./Careers";
 import Settings from "./Settings";
 
@@ -24,8 +24,7 @@ export default function AdminDashboard() {
     switch (activePage) {
       case "services":
         return <ServiceRequests />;
-      case "contacts":
-        return <ContactRequests />;
+
       case "careers":
         return <Careers />;
       case "settings":

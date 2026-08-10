@@ -1,6 +1,5 @@
 import Project from '../models/Project.js';
 import Service from '../models/Service.js';
-import Contact from '../models/Contact.js';
 import ServiceRequest from '../models/ServiceRequest.js';
 import JobOpening from '../models/JobOpening.js';
 import JobApplication from '../models/JobApplication.js';
@@ -13,14 +12,12 @@ export const getDashboardStats = async (req, res, next) => {
     const [
       totalProjects,
       totalServices,
-      totalContacts,
       totalServiceRequests,
       totalJobOpenings,
       totalJobApplications,
     ] = await Promise.all([
       Project.countDocuments(),
       Service.countDocuments(),
-      Contact.countDocuments(),
       ServiceRequest.countDocuments(),
       JobOpening.countDocuments(),
       JobApplication.countDocuments(),
@@ -29,7 +26,6 @@ export const getDashboardStats = async (req, res, next) => {
     res.status(200).json({
       totalProjects,
       totalServices,
-      totalContacts,
       totalServiceRequests,
       totalJobOpenings,
       totalJobApplications,

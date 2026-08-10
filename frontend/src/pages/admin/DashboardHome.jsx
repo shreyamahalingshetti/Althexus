@@ -50,7 +50,6 @@ export default function DashboardHome() {
   const cards = [
     { title: "Total Projects", count: stats?.totalProjects ?? 0, icon: "📁", color: "#3b82f6" },
     { title: "Total Services", count: stats?.totalServices ?? 0, icon: "🛠️", color: "#10b981" },
-    { title: "Total Contacts", count: stats?.totalContacts ?? 0, icon: "📩", color: "#f59e0b" },
     { title: "Total Service Requests", count: stats?.totalServiceRequests ?? 0, icon: "📋", color: "#8b5cf6" },
     { title: "Total Job Openings", count: stats?.totalJobOpenings ?? 0, icon: "💼", color: "#ec4899" },
     { title: "Total Job Applications", count: stats?.totalJobApplications ?? 0, icon: "📄", color: "#06b6d4" },

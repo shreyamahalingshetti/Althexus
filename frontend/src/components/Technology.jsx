@@ -20,13 +20,14 @@ import {
   SiMongodb,
   SiFirebase,
   SiFlutter,
+  SiCss3,
 } from "react-icons/si";
 
-import { BsFiletypeCss } from "react-icons/bs";
+
 
 const icons = {
   html: <FaHtml5 />,
-  css: <BsFiletypeCss />,
+  css: <SiCss3 />,
   javascript: <SiJavascript />,
   react: <FaReact />,
   node: <FaNodeJs />,

@@ -30,12 +30,7 @@ export default function AdminSidebar({ setActivePage, isOpen }) {
         📋 Service Requests
       </p>
 
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => setActivePage("contacts")}
-      >
-        📩 Contact Requests
-      </p>
+
 
       <p
         style={{ cursor: "pointer" }}

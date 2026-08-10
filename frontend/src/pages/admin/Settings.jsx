@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSettings } from "../../context/SettingsContext";
 
 export default function Settings() {
   const navigate = useNavigate();
+  const { refreshSettings } = useSettings();
   const [formData, setFormData] = useState({
     companyName: "",
     tagline: "",
@@ -118,9 +120,10 @@ export default function Settings() {
         address: updated.address || "",
         socialLinks: Array.isArray(updated.socialLinks) ? updated.socialLinks : [],
       });
-      setSuccessMessage("Settings saved successfully!");
-
-      setTimeout(() => setSuccessMessage(""), 4000);
+      setSuccessMessage("Settings saved successfully! Changes are now live on the website.");
+      // 🔄 Refresh global settings so ALL components update instantly
+      refreshSettings();
+      setTimeout(() => setSuccessMessage(""), 5000);
     } catch (err) {
       setError(err.message || "Failed to save settings");
     } finally {

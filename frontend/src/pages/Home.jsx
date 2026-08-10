@@ -10,7 +10,6 @@ import Technology from "../components/Technology";
 import Process from "../components/Process";
 import Inquiry from "../components/Inquiry";
 import Contact from "../components/Contact";
-import CTA from "../components/CTA";
 import Footer from "../components/Footer";
 import BackToTop from "../components/BackToTop";
 
@@ -28,9 +27,8 @@ export default function Home() {
       <Process />
       <Inquiry />
       <Contact />
-      <CTA />
       <Footer />
       <BackToTop />
     </>
   );
-}
+}
