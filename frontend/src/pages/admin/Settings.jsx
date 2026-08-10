@@ -20,7 +20,7 @@ export default function Settings() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const API_BASE_URL = "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const fetchSettings = useCallback(async () => {
     setLoading(true);
