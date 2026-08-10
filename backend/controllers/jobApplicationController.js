@@ -17,7 +17,7 @@ export const createJobApplication = async (req, res, next) => {
       throw new Error('Name, email, and jobTitle are required');
     }
 
-    const resumeUrl = `/uploads/${req.file.filename}`;
+    const resumeUrl = req.file.path;
 
     const jobApplication = new JobApplication({
       name,

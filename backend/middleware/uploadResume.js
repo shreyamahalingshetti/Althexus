@@ -1,18 +1,34 @@
 import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import cloudinary from '../config/cloudinary.js';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Disk storage for resume files
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads'));
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
-    cb(null, uniqueName);
+// Cloudinary storage configuration for resumes
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: (req, file) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const isPdf = ext === '.pdf';
+    
+    const baseName = path.basename(file.originalname, ext);
+    const cleanBaseName = baseName.replace(/[^a-zA-Z0-9_-]/g, '_');
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    const publicId = `${cleanBaseName}-${uniqueSuffix}`;
+    
+    if (isPdf) {
+      return {
+        folder: 'althexus/resumes',
+        resource_type: 'image',
+        public_id: publicId,
+        format: 'pdf',
+      };
+    } else {
+      return {
+        folder: 'althexus/resumes',
+        resource_type: 'raw',
+        public_id: `${publicId}${ext}`,
+      };
+    }
   },
 });
 

@@ -409,7 +409,7 @@ export default function Careers() {
                       <td style={{ padding: "14px 16px" }}>
                         {app.resumeUrl ? (
                           <a
-                            href={`${FILE_BASE_URL}${app.resumeUrl}`}
+                            href={app.resumeUrl.startsWith("http") ? app.resumeUrl : `${FILE_BASE_URL}${app.resumeUrl}`}
                             target="_blank"
                             rel="noreferrer"
                             style={{

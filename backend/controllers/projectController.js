@@ -77,7 +77,7 @@ export const createProject = async (req, res, next) => {
 
     // Build image URL paths from multer-uploaded files
     const uploadedImages = req.files && req.files.length > 0
-      ? req.files.map((file) => `/uploads/${file.filename}`)
+      ? req.files.map((file) => file.path)
       : [];
 
     const project = new Project({
@@ -119,7 +119,7 @@ export const updateProject = async (req, res, next) => {
 
     // New uploads replace the existing images array; no new files = keep existing
     if (req.files && req.files.length > 0) {
-      project.images = req.files.map((file) => `/uploads/${file.filename}`);
+      project.images = req.files.map((file) => file.path);
     }
 
     const updatedProject = await project.save();
