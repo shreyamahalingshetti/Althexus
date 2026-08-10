@@ -11,7 +11,7 @@ export default function ServiceRequests() {
   const [error, setError] = useState(null);
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   const fetchRequests = useCallback(
     async (page = 1) => {
@@ -32,7 +32,7 @@ export default function ServiceRequests() {
           status: statusFilter,
         });
 
-        const response = await fetch(`${API_BASE_URL}/api/service-requests?${queryParams}`, {
+        const response = await fetch(`${API_BASE_URL}/service-requests?${queryParams}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -70,7 +70,7 @@ export default function ServiceRequests() {
 
     setActionLoadingId(id);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/service-requests/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/service-requests/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function ServiceRequests() {
 
     setActionLoadingId(id);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/service-requests/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/service-requests/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

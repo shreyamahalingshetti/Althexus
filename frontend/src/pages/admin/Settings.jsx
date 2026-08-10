@@ -20,7 +20,7 @@ export default function Settings() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   const fetchSettings = useCallback(async () => {
     setLoading(true);
@@ -30,7 +30,7 @@ export default function Settings() {
     if (!token) return navigate("/login");
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/settings`, {
+      const response = await fetch(`${API_BASE_URL}/settings`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -94,7 +94,7 @@ export default function Settings() {
     if (!token) return navigate("/login");
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/settings`, {
+      const response = await fetch(`${API_BASE_URL}/settings`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

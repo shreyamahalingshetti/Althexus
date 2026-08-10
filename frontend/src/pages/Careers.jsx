@@ -19,15 +19,15 @@ export default function Careers() {
   const [activeRole, setActiveRole] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   // Fetch job openings from backend
   const fetchOpenings = async () => {
     setLoading(true);
     setError(null);
     try {
-      // GET /api/job-openings is a public endpoint, no token required
-      const response = await fetch(`${API_BASE_URL}/api/job-openings?limit=100`);
+      // GET /job-openings is a public endpoint, no token required
+      const response = await fetch(`${API_BASE_URL}/job-openings?limit=100`);
       if (!response.ok) {
         throw new Error(`Failed to load job openings (Status: ${response.status})`);
       }

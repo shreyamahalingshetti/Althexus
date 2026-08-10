@@ -8,7 +8,7 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   // Reset state when modal opens for a job
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
     formData.append("resume", resume);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/job-applications`, {
+      const response = await fetch(`${API_BASE_URL}/job-applications`, {
         method: "POST",
         body: formData,
       });

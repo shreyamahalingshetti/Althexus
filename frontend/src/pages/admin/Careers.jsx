@@ -27,7 +27,7 @@ export default function Careers() {
 
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   // Fetch Job Openings
   const fetchOpenings = useCallback(
@@ -40,7 +40,7 @@ export default function Careers() {
 
       try {
         const queryParams = new URLSearchParams({ page, limit: 10, search: openingsSearch });
-        const response = await fetch(`${API_BASE_URL}/api/job-openings?${queryParams}`, {
+        const response = await fetch(`${API_BASE_URL}/job-openings?${queryParams}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -74,7 +74,7 @@ export default function Careers() {
 
       try {
         const queryParams = new URLSearchParams({ page, limit: 10, search: appsSearch });
-        const response = await fetch(`${API_BASE_URL}/api/job-applications?${queryParams}`, {
+        const response = await fetch(`${API_BASE_URL}/job-applications?${queryParams}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -131,8 +131,8 @@ export default function Careers() {
     setFormSubmitting(true);
     try {
       const url = editingOpening
-        ? `${API_BASE_URL}/api/job-openings/${editingOpening._id}`
-        : `${API_BASE_URL}/api/job-openings`;
+        ? `${API_BASE_URL}/job-openings/${editingOpening._id}`
+        : `${API_BASE_URL}/job-openings`;
       const method = editingOpening ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -169,7 +169,7 @@ export default function Careers() {
 
     setActionLoadingId(id);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/job-openings/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/job-openings/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -199,7 +199,7 @@ export default function Careers() {
 
     setActionLoadingId(id);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/job-applications/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/job-applications/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

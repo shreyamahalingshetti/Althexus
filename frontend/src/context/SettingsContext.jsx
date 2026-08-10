@@ -1,7 +1,7 @@
 // src/context/SettingsContext.jsx
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const defaultSettings = {
   companyName: "ALTHEXUS",
@@ -25,7 +25,7 @@ export function SettingsProvider({ children }) {
 
   const fetchSettings = useCallback(async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/settings`);
+      const response = await fetch(`${API_BASE_URL}/settings`);
       if (!response.ok) {
         throw new Error(`Failed to fetch settings (Status: ${response.status})`);
       }
