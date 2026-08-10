@@ -28,6 +28,11 @@ export default function Careers() {
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const FILE_BASE_URL = API_BASE_URL.replace(/\/api\/?$/, "");
+
+  console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+  console.log("API_BASE_URL:", API_BASE_URL);
+  console.log("FILE_BASE_URL:", FILE_BASE_URL);
 
   // Fetch Job Openings
   const fetchOpenings = useCallback(
@@ -404,7 +409,7 @@ export default function Careers() {
                       <td style={{ padding: "14px 16px" }}>
                         {app.resumeUrl ? (
                           <a
-                            href={`${API_BASE_URL}${app.resumeUrl}`}
+                            href={`${FILE_BASE_URL}${app.resumeUrl}`}
                             target="_blank"
                             rel="noreferrer"
                             style={{
