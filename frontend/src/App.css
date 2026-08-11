@@ -215,19 +215,8 @@ nav ul li a:hover{
 
 .hero{
 
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    gap:50px;
-
-    padding-top:160px;
-
-    background:
-    radial-gradient(circle at top right,#0d6efd22,transparent 40%),
-    linear-gradient(135deg,#071827,#0b3d91,#071827);
+    position:relative;
+    overflow:hidden;
 
 }
 
@@ -368,15 +357,8 @@ nav ul li a:hover{
 ==================================================*/
 
 .stats{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:30px;
-
-    background:#081f35;
-
+    background:#071827;
+    padding:90px 0;
 }
 
 .stats div{
@@ -1066,7 +1048,7 @@ nav ul li a:hover{
 
 .technology{
     padding: 100px 8%;
-    background: #071423;
+    background: #071827;
 }
 
 .technology h5{
@@ -2000,14 +1982,16 @@ transform:translateY(0) scale(1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 6%;
-  gap: 24px;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 12px 28px;
+  gap: 36px;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 28px;
+  gap: 48px;
   align-items: center;
   flex: 1;
   justify-content: center;
@@ -2209,12 +2193,9 @@ transform:translateY(0) scale(1);
 
   /* Hero */
   .hero {
-    flex-direction: column;
     text-align: center;
     padding-top: 40px;
     padding-bottom: 60px;
-    gap: 40px;
-    min-height: unset;
   }
 
   .hero-left h5 {

@@ -61,11 +61,6 @@ export default function Technology() {
 
       <div className="section-title">
         <span>TECHNOLOGIES </span>
-      <div className="tech-bg">
-    <div className="blob blob1"></div>
-    <div className="blob blob2"></div>
-    <div className="blob blob3"></div>
-</div>
         <h2>Technologies We Master</h2>
 
         <p className="section-text">

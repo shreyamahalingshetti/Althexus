@@ -73,7 +73,7 @@ export default function Navbar() {
           background: scrolled ? "rgba(6,19,33,.97)" : "rgba(8,18,35,.85)",
           boxShadow: scrolled ? "0 10px 30px rgba(0,0,0,.35)" : "none",
           width: "100%", backdropFilter: "blur(14px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           transition: "background 0.35s, box-shadow 0.35s",
         }}
       >
@@ -89,33 +89,41 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <ul className="nav-links">
-            {links.map((link) => (
-              <li key={link.href}>
-                {link.isPage ? (
-                  <Link to={link.href} className={location.pathname === link.href ? "active" : ""}>
-                    {link.label}
-                  </Link>
-                ) : (
-                  <Link
-                    to={isHomePage ? link.href : `/${link.href}`}
-                    className={!isHomePage ? "" : active === link.href.replace("#", "") ? "active" : ""}
-                    onClick={(e) => handleClick(e, link.href)}
-                  >
-                    {link.label}
-                  </Link>
-                )}
-              </li>
-            ))}
+            {links.map((link) => {
+              const isActive = link.isPage 
+                ? location.pathname === link.href 
+                : (isHomePage 
+                    ? (active === link.href.replace("#", "") || (active === "" && link.href === "#home"))
+                    : location.pathname === `/${link.href.replace("#", "")}`
+                  );
+              return (
+                <li key={link.href}>
+                  {link.isPage ? (
+                    <Link to={link.href} className={isActive ? "active" : ""}>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <Link
+                      to={isHomePage ? link.href : `/${link.href}`}
+                      className={isActive ? "active" : ""}
+                      onClick={(e) => handleClick(e, link.href)}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           {/* Desktop CTA */}
           <div className="nav-cta">
             {isHomePage ? (
-              <a href="#inquiry" className="btn" onClick={(e) => handleClick(e, "#inquiry")}>
+              <a href="#inquiry" className="btn-primary" onClick={(e) => handleClick(e, "#inquiry")}>
                 Request a Solution
               </a>
             ) : (
-              <Link to="/#inquiry" className="btn">Request a Solution</Link>
+              <Link to="/#inquiry" className="btn-primary">Request a Solution</Link>
             )}
           </div>
 

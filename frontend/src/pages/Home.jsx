@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
@@ -14,6 +14,18 @@ import Footer from "../components/Footer";
 import BackToTop from "../components/BackToTop";
 
 export default function Home() {
+  useEffect(() => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const id = window.location.hash.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <>
       <Navbar />

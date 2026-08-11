@@ -8,41 +8,39 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="footer-content">
-        <div>
+      <div className="foot-grid">
+        <div className="foot-brand">
           <h2>{settings.companyName}</h2>
           <p>{settings.tagline}</p>
-          <br />
-          <p>Empowering businesses with innovative digital solutions.</p>
+          <p style={{ marginTop: "16px", color: "var(--text-dim)" }}>
+            Empowering businesses with innovative digital solutions.
+          </p>
         </div>
 
-        <div>
-          <h3>Quick Links</h3>
-          <a href="#home">Home</a>
-          <br />
-          <a href="#about">About</a>
-          <br />
-          <a href="#services">Services</a>
-          <br />
-          <a href="#contact">Contact</a>
+        <div className="foot-col">
+          <h4>Quick Links</h4>
+          <a href="/#home">Home</a>
+          <a href="/#about">About</a>
+          <a href="/#services">Services</a>
+          <a href="/#contact">Contact</a>
+          <a href="/careers">Careers</a>
         </div>
 
-        <div>
-          <h3>Connect</h3>
+        <div className="foot-col">
+          <h4>Connect</h4>
           <p>Email:</p>
           <p>{settings.email}</p>
-          <br />
           {addressLines.map((line, idx) => (
             <p key={idx}>{line}</p>
           ))}
         </div>
       </div>
 
-      <hr />
-
-      <p className="copyright">
-        © {year} {settings.companyName} Pvt. Ltd. All Rights Reserved.
-      </p>
+      <div className="foot-bottom">
+        <p className="copyright">
+          © {year} {settings.companyName} Pvt. Ltd. All Rights Reserved.
+        </p>
+      </div>
     </footer>
   );
 }
