@@ -1,58 +1,57 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
+import Topbar from "./Topbar";
 import DashboardHome from "./DashboardHome";
 import ServiceRequests from "./ServiceRequests";
-
+import ContactRequests from "./ContactRequests";
 import Careers from "./Careers";
 import Settings from "./Settings";
+import "./AdminDashboard.css";
+
+const PAGE_META = {
+  dashboard: { title: "Dashboard", subtitle: "Welcome back, Admin! Here's what's happening today." },
+  services: { title: "Service Requests", subtitle: "Track and manage incoming service requests." },
+  contacts: { title: "Contact Requests", subtitle: "Messages submitted through your contact form." },
+  careers: { title: "Careers", subtitle: "Review applications and update hiring status." },
+  settings: { title: "Settings", subtitle: "Manage your company profile and account." },
+};
 
 export default function AdminDashboard() {
-  const navigate = useNavigate();
   const [activePage, setActivePage] = useState("dashboard");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  // Auth guard — redirect to login if no token
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/admin/login");
-    }
-  }, [navigate]);
 
   const renderPage = () => {
     switch (activePage) {
       case "services":
         return <ServiceRequests />;
 
+      case "contacts":
+        return <ContactRequests />;
+
       case "careers":
         return <Careers />;
+
       case "settings":
         return <Settings />;
+
       default:
-        return <DashboardHome />;
+        return <DashboardHome setActivePage={setActivePage} />;
     }
   };
 
+  const meta = PAGE_META[activePage] || PAGE_META.dashboard;
+
   return (
-    <div className="admin-dashboard">
+    <div className="admin-layout">
 
-      <button
-        className="hamburger-btn"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        ☰
-      </button>
+      <AdminSidebar activePage={activePage} setActivePage={setActivePage} />
 
-      <AdminSidebar
-        setActivePage={setActivePage}
-        isOpen={sidebarOpen}
-      />
-
-      <div className="admin-content">
-        {renderPage()}
-      </div>
+      <main className="admin-content">
+        <Topbar title={meta.title} subtitle={meta.subtitle} />
+        <div className="admin-page-body">
+          {renderPage()}
+        </div>
+      </main>
 
     </div>
   );
-}
+}

@@ -1,144 +1,84 @@
-import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import "./DashboardHome.css";
 
-export default function DashboardHome() {
-  const navigate = useNavigate();
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const CARDS = [
+  { icon: "📋", label: "Service Requests", value: 0, color: "blue" },
+  { icon: "📩", label: "Contact Requests", value: 0, color: "pink" },
+  { icon: "💼", label: "Careers", value: 0, color: "amber" },
+  { icon: "👥", label: "Total Visitors", value: 0, color: "green" },
+];
 
-  const fetchStats = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    const token = localStorage.getItem("token");
+const QUICK_ACTIONS = [
+  { icon: "📋", label: "Service Requests", page: "services" },
+  { icon: "📩", label: "Contact Requests", page: "contacts" },
+  { icon: "💼", label: "Careers", page: "careers" },
+  { icon: "⚙️", label: "Settings", page: "settings" },
+];
 
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/dashboard`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.status === 401) {
-        localStorage.removeItem("token");
-        navigate("/login");
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error(`Failed to load dashboard statistics (Status: ${response.status})`);
-      }
-
-      const data = await response.json();
-      setStats(data);
-    } catch (err) {
-      setError(err.message || "Failed to fetch dashboard data");
-    } finally {
-      setLoading(false);
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    fetchStats();
-  }, [fetchStats]);
-
-  const cards = [
-    { title: "Total Projects", count: stats?.totalProjects ?? 0, icon: "📁", color: "#3b82f6" },
-    { title: "Total Services", count: stats?.totalServices ?? 0, icon: "🛠️", color: "#10b981" },
-    { title: "Total Service Requests", count: stats?.totalServiceRequests ?? 0, icon: "📋", color: "#8b5cf6" },
-    { title: "Total Job Openings", count: stats?.totalJobOpenings ?? 0, icon: "💼", color: "#ec4899" },
-    { title: "Total Job Applications", count: stats?.totalJobApplications ?? 0, icon: "📄", color: "#06b6d4" },
-  ];
-
+export default function DashboardHome({ setActivePage }) {
   return (
-    <div style={{ padding: "10px" }}>
-      <h1 style={{ color: "#ffffff", marginBottom: "25px", fontSize: "28px" }}>Dashboard</h1>
+    <div className="dashboard-home">
 
-      {loading ? (
-        <div style={{ color: "#9ca3af", padding: "40px 0", fontSize: "16px" }}>
-          Loading dashboard statistics...
-        </div>
-      ) : error ? (
-        <div
-          style={{
-            background: "rgba(239, 68, 68, 0.1)",
-            border: "1px solid rgba(239, 68, 68, 0.3)",
-            borderRadius: "10px",
-            padding: "20px",
-            color: "#ef4444",
-            maxWidth: "500px",
-          }}
-        >
-          <p style={{ margin: "0 0 15px 0", fontWeight: "600" }}>{error}</p>
-          <button
-            onClick={fetchStats}
-            style={{
-              padding: "8px 16px",
-              background: "#ef4444",
-              color: "#fff",
-              border: "none",
-              borderRadius: "6px",
-              cursor: "pointer",
-              fontWeight: "600",
-            }}
-          >
-            Retry
-          </button>
-        </div>
-      ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              style={{
-                background: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "14px",
-                padding: "24px",
-                display: "flex",
-                alignItems: "center",
-                gap: "18px",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
-              }}
+      <div className="dashboard-cards">
+        {CARDS.map((c) => (
+          <div className="kpi-card" key={c.label}>
+            <div className={`kpi-icon kpi-${c.color}`}>{c.icon}</div>
+            <div className="kpi-value">{c.value}</div>
+            <div className="kpi-label">{c.label}</div>
+            <div className={`kpi-bar kpi-bar-${c.color}`} />
+          </div>
+        ))}
+      </div>
+
+      <div className="quick-actions">
+        <h2>⚡ Quick Actions</h2>
+
+        <div className="quick-actions-grid">
+          {QUICK_ACTIONS.map((a) => (
+            <button
+              key={a.page}
+              className="quick-action-tile"
+              onClick={() => setActivePage && setActivePage(a.page)}
             >
-              <div
-                style={{
-                  fontSize: "28px",
-                  background: `${card.color}22`,
-                  width: "56px",
-                  height: "56px",
-                  borderRadius: "12px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                {card.icon}
-              </div>
-              <div>
-                <h3 style={{ margin: 0, fontSize: "14px", color: "#9ca3af", fontWeight: "500" }}>
-                  {card.title}
-                </h3>
-                <p style={{ margin: "6px 0 0 0", fontSize: "28px", fontWeight: "700", color: "#ffffff" }}>
-                  {card.count}
-                </p>
-              </div>
-            </div>
+              <span className="quick-action-icon">{a.icon}</span>
+              <span>{a.label}</span>
+            </button>
           ))}
         </div>
-      )}
+      </div>
+
+      <div className="recent-section">
+        <h2>Recent Activity</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Request</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Rahul</td>
+              <td>Web Development</td>
+              <td><span className="status-pill status-pending">Pending</span></td>
+            </tr>
+
+            <tr>
+              <td>John</td>
+              <td>AI Chatbot</td>
+              <td><span className="status-pill status-completed">Completed</span></td>
+            </tr>
+
+            <tr>
+              <td>David</td>
+              <td>Mobile App</td>
+              <td><span className="status-pill status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

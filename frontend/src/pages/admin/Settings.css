@@ -1,50 +1,103 @@
 .settings-page {
-  padding: 30px;
-}
-
-.settings-page h1 {
-  color: white;
-  margin-bottom: 20px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .settings-card {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+
   background: white;
-  max-width: 600px;
-  padding: 30px;
-  border-radius: 12px;
+
+  padding: 28px;
+
+  border-radius: 14px;
+
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
 }
 
+
 .settings-card h2 {
-  margin-bottom: 20px;
-  color: #16213e;
+  margin: 0 0 20px;
+
+  font-size: 15.5px;
+
+  color: #1e293b;
 }
+
 
 .settings-card label {
   display: block;
+
   margin-top: 15px;
   margin-bottom: 8px;
-  color: #333;
+
+  color: #475569;
+
+  font-size: 13px;
+
   font-weight: 600;
 }
 
+
 .settings-card input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
+
+  padding: 11px 12px;
+
+  border: 1px solid #e2e8f0;
+
   border-radius: 8px;
-  font-size: 15px;
+
+  font-size: 13.5px;
+
+  color: #334155;
+
+  box-sizing: border-box;
 }
 
+
+.settings-card input:focus {
+  outline: none;
+
+  border-color: #a78bfa;
+}
+
+
 .settings-card button {
-  margin-top: 25px;
-  padding: 12px 25px;
+  margin-top: 22px;
+
+  padding: 11px 22px;
+
   border: none;
-  background: #2563eb;
+
+  background: #6848d8;
+
   color: white;
+
   border-radius: 8px;
+
+  font-size: 13.5px;
+
+  font-weight: 600;
+
   cursor: pointer;
 }
 
+
 .settings-card button:hover {
-  background: #1d4ed8;
+  background: #5636c4;
+}
+
+
+/* ============================= */
+/* Responsive */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .settings-card {
+    padding: 20px;
+  }
 }
