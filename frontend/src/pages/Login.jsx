@@ -8,40 +8,27 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    const adminEmail = "admin@althexus.com";
+    const adminPassword = "admin123";
 
-      const data = await response.json();
+    if (email === adminEmail && password === adminPassword) {
+      localStorage.setItem("adminLoggedIn", "true");
 
-      if (response.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        navigate("/admin/dashboard");
-      } else {
-        setError(data.message || "Invalid credentials");
-      }
-    } catch (err) {
-      setError("Unable to connect to server. Please check your network.");
-    } finally {
-      setLoading(false);
+      navigate("/admin/dashboard");
+    } else {
+      setError("Invalid email or password");
     }
   };
 
   return (
     <div className="login-page">
       <div className="login-box">
+
         <h2>Admin Login</h2>
 
         {error && (
@@ -62,13 +49,13 @@ export default function Login() {
         )}
 
         <form onSubmit={handleLogin}>
+
           <input
             type="email"
             placeholder="Enter Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            disabled={loading}
           />
 
           <input
@@ -77,12 +64,12 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            disabled={loading}
           />
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button type="submit">
+            Login
           </button>
+
         </form>
       </div>
     </div>

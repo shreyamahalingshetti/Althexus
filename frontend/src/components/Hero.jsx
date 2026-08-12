@@ -1,5 +1,6 @@
 import logo from "../assets/logo.jpeg";
 import { useSettings } from "../context/SettingsContext";
+import "./Hero.css";
 
 export default function Hero() {
   const { settings } = useSettings();

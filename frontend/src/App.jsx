@@ -12,14 +12,36 @@ import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+
+/* ================================
+   ADMIN PROTECTED ROUTE
+================================ */
+
+function AdminProtectedRoute() {
+  const isAdminLoggedIn = localStorage.getItem("adminLoggedIn");
+
+  if (isAdminLoggedIn !== "true") {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  return <AdminDashboard />;
+}
+
+
 export default function App() {
   return (
     <BrowserRouter>
       <SettingsProvider>
         <Routes>
+
+          {/* ================================
+              MAIN WEBSITE
+          ================================= */}
+
           <Route path="/" element={<Home />} />
+
           <Route path="/careers" element={<Careers />} />
-          
+
           <Route
             path="/technology"
             element={
@@ -30,7 +52,7 @@ export default function App() {
               </>
             }
           />
-          
+
           <Route
             path="/contact"
             element={
@@ -41,7 +63,7 @@ export default function App() {
               </>
             }
           />
-          
+
           <Route
             path="/request-solution"
             element={
@@ -55,11 +77,38 @@ export default function App() {
             }
           />
 
+
+          {/* ================================
+              NORMAL LOGIN
+          ================================= */}
+
           <Route path="/login" element={<Login />} />
-          <Route path="/admin/login" element={<Login />} />
-          
-          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+
+          {/* ================================
+              ADMIN LOGIN
+          ================================= */}
+
+          <Route
+            path="/admin"
+            element={<Navigate to="/admin/login" replace />}
+          />
+
+          <Route
+            path="/admin/login"
+            element={<Login />}
+          />
+
+
+          {/* ================================
+              ADMIN DASHBOARD
+          ================================= */}
+
+          <Route
+            path="/admin/dashboard"
+            element={<AdminProtectedRoute />}
+          />
+
         </Routes>
       </SettingsProvider>
     </BrowserRouter>

@@ -1,60 +1,68 @@
 import { useNavigate } from "react-router-dom";
-export default function AdminSidebar({ setActivePage, isOpen }) {
- const navigate = useNavigate(); 
+import "./AdminSidebar.css";
+
+const MENU_ITEMS = [
+  { key: "dashboard", icon: "📊", label: "Dashboard" },
+  { key: "services", icon: "📋", label: "Service Requests" },
+  { key: "contacts", icon: "📩", label: "Contact Requests" },
+  { key: "careers", icon: "💼", label: "Careers" },
+  { key: "settings", icon: "⚙️", label: "Settings" },
+];
+
+export default function AdminSidebar({ activePage, setActivePage }) {
+  const navigate = useNavigate();
+
   return (
-    <div
-      className={`admin-sidebar ${isOpen ? "open" : "closed"}`}
-      style={{
-        width: isOpen ? "250px" : "0px",
-        background: "#111827",
-        color: "#fff",
-        padding: isOpen ? "20px" : "0px",
-        overflow: "hidden",
-        transition: "0.3s ease",
-        flexShrink: 0,
-      }}
-    >
-      <h2>ALTHEXUS</h2>
+    <aside className="admin-sidebar">
 
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => setActivePage("dashboard")}
-      >
-        📊 Dashboard
-      </p>
+      {/* Logo */}
+      <div className="sidebar-logo">
+        <span className="logo-symbol">🔴</span> ALTHEXUS
+      </div>
 
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => setActivePage("services")}
-      >
-        📋 Service Requests
-      </p>
+      {/* Search */}
+      <div className="sidebar-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Search..." />
+      </div>
 
+      {/* Menu */}
+      <nav className="sidebar-nav">
+        {MENU_ITEMS.map((item) => (
+          <button
+            key={item.key}
+            className={`sidebar-link ${activePage === item.key ? "active" : ""}`}
+            onClick={() => setActivePage(item.key)}
+          >
+            <span>{item.icon}</span>
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </nav>
 
+      {/* Bottom Profile */}
+      <div className="sidebar-footer">
 
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => setActivePage("careers")}
-      >
-        💼 Careers
-      </p>
+        <div className="admin-user">
+          <div className="admin-avatar">A</div>
+          <div>
+            <div className="admin-name">admin</div>
+            <div className="admin-role">admin</div>
+          </div>
+        </div>
 
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => setActivePage("settings")}
-      >
-        ⚙️ Settings
-      </p>
+        <button
+          className="sidebar-logout"
+          onClick={() => {
+            localStorage.removeItem("adminLoggedIn");
+            navigate("/");
+          }}
+        >
+          🚪 Logout
+        </button>
 
-      <button
-  className="logout-btn"
-  onClick={() => {
-    localStorage.removeItem("token");
-    navigate("/admin/login");
-  }}
->
-  🚪 Logout
-</button>
-    </div>
+      </div>
+
+    </aside>
   );
 }

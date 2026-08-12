@@ -1,44 +1,276 @@
-.admin-dashboard {
-  display: flex;
-  min-height: 100vh;
-}
+/* =================================
+   SIDEBAR
+================================= */
 
-.admin-content {
-  flex: 1;
-  padding: 20px;
-}
-
-.hamburger-btn {
+.admin-sidebar {
   position: fixed;
-  top: 15px;
-  left: 15px;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 220px;
+
+  background: #ffffff;
+
+  border-right: 1px solid #e5e7eb;
+
+  padding: 18px 12px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
   z-index: 1000;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 8px;
-  background: #111827;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
 }
 
-.hamburger-btn:hover {
-  background: #2563eb;
+
+/* =================================
+   LOGO
+================================= */
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  height: 38px;
+
+  padding-left: 5px;
+
+  margin-bottom: 12px;
+
+  color: #1f2937;
+
+  font-size: 16px;
+
+  font-weight: 700;
 }
 
-.logout-btn {
+.logo-symbol {
+  font-size: 16px;
+}
+
+
+/* =================================
+   SEARCH
+================================= */
+
+.sidebar-search {
   width: 100%;
-  margin-top: 30px;
-  padding: 12px;
-  border: none;
+  height: 36px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  border: 2px solid #a78bfa;
+
   border-radius: 8px;
-  background: #dc2626;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
+
+  padding: 0 10px;
+
+  margin-bottom: 16px;
+
+  background: #ffffff;
 }
 
-.logout-btn:hover {
-  background: #b91c1c;
+.sidebar-search span {
+  font-size: 12px;
+}
+
+.sidebar-search input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  font-size: 12.5px;
+
+  color: #334155;
+
+  background: transparent;
+}
+
+.sidebar-search input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* =================================
+   NAVIGATION
+================================= */
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+/* Every menu item */
+
+.sidebar-link {
+  width: 100%;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #64748b;
+
+  font-size: 13.5px;
+
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  /* Prevent menu text from wrapping */
+  white-space: nowrap;
+}
+
+.sidebar-link span:first-child {
+  width: 18px;
+  min-width: 18px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  flex-shrink: 0;
+}
+
+
+/* Hover */
+
+.sidebar-link:hover {
+  background: #f4f0ff;
+
+  color: #6848d8;
+}
+
+
+/* Active */
+
+.sidebar-link.active {
+  background: #eee7ff;
+
+  color: #6848d8;
+
+  font-weight: 600;
+}
+
+
+/* =================================
+   FOOTER
+================================= */
+
+.sidebar-footer {
+  margin-top: auto;
+
+  padding-top: 14px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+
+/* =================================
+   ADMIN PROFILE
+================================= */
+
+.admin-user {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 6px 14px;
+}
+
+.admin-avatar {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #7652df;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.admin-name {
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #1e293b;
+}
+
+.admin-role {
+  font-size: 11px;
+
+  color: #94a3b8;
+
+  margin-top: 2px;
+}
+
+
+/* =================================
+   LOGOUT
+================================= */
+
+.sidebar-logout {
+  width: 100%;
+
+  height: 36px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #475569;
+
+  font-size: 12.5px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.sidebar-logout:hover {
+  background: #f5f3ff;
+
+  border-color: #c4b5fd;
+
+  color: #6848d8;
 }
