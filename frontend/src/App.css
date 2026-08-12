@@ -1128,11 +1128,15 @@ nav ul li a:hover{
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
 
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    mask:
+  linear-gradient(#fff 0 0) content-box,
+  linear-gradient(#fff 0 0);
 
-    opacity: 0;
-    transition: .4s;
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+
+opacity: 0;
+transition: 0.4s;
 }
 
 .technology-card:hover::before{
@@ -2451,4 +2455,4 @@ transform:translateY(0) scale(1);
     padding: 12px 5%;
   }
 }
-
+

@@ -1,0 +1,311 @@
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero {
+  min-height: calc(100vh - 84px);
+  display: flex;
+  align-items: center;
+  padding: 50px 0;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   DARK IMAGE OVERLAY
+========================================= */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.72) 45%,
+      rgba(0, 0, 0, 0.42) 100%
+    );
+
+  z-index: 1;
+}
+
+
+/* =========================================
+   HERO CONTAINER
+========================================= */
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 45px 40px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.hero-content {
+  max-width: 850px;
+}
+
+
+/* =========================================
+   BADGE
+========================================= */
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 22px;
+
+  margin-bottom: 30px;
+
+  border: 1px solid rgba(0, 210, 150, 0.5);
+  border-radius: 30px;
+
+  background: rgba(0, 180, 130, 0.12);
+
+  color: #00d49a;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.hero-content h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(52px, 6vw, 82px);
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+
+/* Green highlighted heading */
+
+.hero-content h1 span {
+  color: #00c98b;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.hero-content p {
+  max-width: 780px;
+
+  margin: 35px 0 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 18px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 40px;
+}
+
+
+/* Primary */
+
+.hero-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 210px;
+
+  padding: 17px 28px;
+
+  border-radius: 8px;
+
+  background: #00b982;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  transition: all 0.25s ease;
+}
+
+
+.hero-primary-btn:hover {
+  background: #00a875;
+
+  transform: translateY(-2px);
+}
+
+
+/* Secondary */
+
+.hero-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  min-width: 210px;
+
+  padding: 16px 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  border-radius: 8px;
+
+  background: rgba(0, 0, 0, 0.15);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+
+.hero-secondary-btn span {
+  font-size: 22px;
+}
+
+
+.hero-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+
+  border-color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+    min-height: 650px;
+  }
+
+  .hero-container {
+    padding: 80px 30px;
+  }
+
+  .hero-content h1 {
+    font-size: 58px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .hero {
+    min-height: 650px;
+
+    background-position: center;
+  }
+
+  .hero-container {
+    padding: 70px 22px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    font-size: 10px;
+
+    padding: 8px 14px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 22px;
+  }
+
+  .hero-content h1 {
+    font-size: 44px;
+
+    line-height: 1.08;
+
+    letter-spacing: -1px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-top: 25px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+
+    margin-top: 30px;
+  }
+
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+}
+/* Adjust hero content position */
+.hero .wrap hero-inner {
+  transform: translateY(-30px);
+}
