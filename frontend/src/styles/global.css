@@ -31,11 +31,15 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .careers-page {
@@ -52,7 +56,7 @@ body {
 .careers-page section .wrap {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 28px;
 }
 
 a {
@@ -675,6 +679,10 @@ nav {
   border: 1px solid var(--line-light);
   border-radius: 10px;
   overflow: hidden;
+}
+
+.careers-values-grid {
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .icon-card {
@@ -1320,6 +1328,10 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .careers-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .svc-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1366,6 +1378,10 @@ footer {
   }
 
   .perks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .careers-values-grid {
     grid-template-columns: 1fr;
   }
 }

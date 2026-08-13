@@ -33,3 +33,14 @@ body,
 .admin-page-body {
   padding: 26px 30px 40px;
 }
+
+@media (max-width: 768px) {
+  .admin-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .admin-page-body {
+    padding: 16px 15px 30px;
+  }
+}

@@ -91,7 +91,7 @@ export default function Careers() {
             <h2>What it's actually like here</h2>
             <p>No filler values-poster language — this is what we mean day to day.</p>
           </div>
-          <div className="icon-card-grid" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
+          <div className="icon-card-grid careers-values-grid">
             <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>01</span><h3>Real ownership</h3><p>Interns and juniors ship features that go to production, not sandbox tasks.</p></div>
             <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>02</span><h3>Direct feedback</h3><p>Small team, short feedback loops. You'll know exactly where you stand.</p></div>
             <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>03</span><h3>Remote-first</h3><p>Work from anywhere — we coordinate async and keep meetings minimal.</p></div>

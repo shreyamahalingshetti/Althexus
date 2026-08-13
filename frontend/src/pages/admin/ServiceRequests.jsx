@@ -58,6 +58,27 @@ export default function ServiceRequests() {
     }
   };
 
+  const handleDeleteRequest = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this service request?")) return;
+    try {
+      const response = await fetch(`${API_BASE_URL}/service-requests/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete service request");
+      }
+
+      // Update state
+      setRequests((prev) => prev.filter((req) => req._id !== id));
+    } catch (err) {
+      alert(err.message || "Error deleting service request");
+    }
+  };
+
   return (
     <div className="service-page">
       <div className="page-card">
@@ -85,6 +106,7 @@ export default function ServiceRequests() {
                 <th>Service Required</th>
                 <th>Project Description</th>
                 <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
 
@@ -109,6 +131,14 @@ export default function ServiceRequests() {
                       <option value="New">New</option>
                       <option value="Completed">Completed</option>
                     </select>
+                  </td>
+                  <td>
+                    <button
+                      className="delete-role-btn"
+                      onClick={() => handleDeleteRequest(req._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

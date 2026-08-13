@@ -8,61 +8,71 @@ const MENU_ITEMS = [
   { key: "settings", icon: "⚙️", label: "Settings" },
 ];
 
-export default function AdminSidebar({ activePage, setActivePage }) {
+export default function AdminSidebar({ activePage, setActivePage, sidebarOpen, setSidebarOpen }) {
   const navigate = useNavigate();
 
   return (
-    <aside className="admin-sidebar">
+    <>
+      {sidebarOpen && (
+        <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />
+      )}
 
-      {/* Logo */}
-      <div className="sidebar-logo">
-        <span className="logo-symbol">🔴</span> ALTHEXUS
-      </div>
+      <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
 
-      {/* Search */}
-      <div className="sidebar-search">
-        <span>🔍</span>
-        <input type="text" placeholder="Search..." />
-      </div>
-
-      {/* Menu */}
-      <nav className="sidebar-nav">
-        {MENU_ITEMS.map((item) => (
-          <button
-            key={item.key}
-            className={`sidebar-link ${activePage === item.key ? "active" : ""}`}
-            onClick={() => setActivePage(item.key)}
-          >
-            <span>{item.icon}</span>
-            <span>{item.label}</span>
-          </button>
-        ))}
-      </nav>
-
-      {/* Bottom Profile */}
-      <div className="sidebar-footer">
-
-        <div className="admin-user">
-          <div className="admin-avatar">A</div>
-          <div>
-            <div className="admin-name">admin</div>
-            <div className="admin-role">admin</div>
-          </div>
+        {/* Logo */}
+        <div className="sidebar-logo">
+          <span className="logo-symbol">🔴</span> ALTHEXUS
         </div>
 
-        <button
-          className="sidebar-logout"
-          onClick={() => {
-            localStorage.removeItem("adminLoggedIn");
-            localStorage.removeItem("adminToken");
-            navigate("/");
-          }}
-        >
-          🚪 Logout
-        </button>
+        {/* Search */}
+        <div className="sidebar-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search..." />
+        </div>
 
-      </div>
+        {/* Menu */}
+        <nav className="sidebar-nav">
+          {MENU_ITEMS.map((item) => (
+            <button
+              key={item.key}
+              className={`sidebar-link ${activePage === item.key ? "active" : ""}`}
+              onClick={() => {
+                setActivePage(item.key);
+                setSidebarOpen(false);
+              }}
+            >
+              <span>{item.icon}</span>
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
 
-    </aside>
+        {/* Bottom Profile */}
+        <div className="sidebar-footer">
+
+          <div className="admin-user">
+            <div className="admin-avatar">A</div>
+            <div>
+              <div className="admin-name">admin</div>
+              <div className="admin-role">admin</div>
+            </div>
+          </div>
+
+          <button
+            className="sidebar-logout"
+            onClick={() => {
+              localStorage.removeItem("adminLoggedIn");
+              localStorage.removeItem("adminToken");
+              navigate("/");
+              setSidebarOpen(false);
+            }}
+          >
+            🚪 Logout
+          </button>
+
+        </div>
+
+      </aside>
+    </>
   );
 }

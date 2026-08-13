@@ -16,6 +16,7 @@ export default function Careers() {
 
   // State for Add Role Form
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingRoleId, setEditingRoleId] = useState(null);
   const [newRole, setNewRole] = useState({
     title: "",
     type: "Job",
@@ -105,6 +106,39 @@ export default function Careers() {
     }
   };
 
+  const handleDeleteApplication = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this job application?")) return;
+    try {
+      const response = await fetch(`${API_BASE_URL}/job-applications/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete job application");
+      }
+
+      // Update state
+      setApplications((prev) => prev.filter((app) => app._id !== id));
+    } catch (err) {
+      alert(err.message || "Error deleting application");
+    }
+  };
+
+  const handleEditRoleClick = (role) => {
+    setEditingRoleId(role._id);
+    setNewRole({
+      title: role.title,
+      type: role.type,
+      category: role.category,
+      location: role.location || "",
+      description: role.description,
+    });
+    setShowAddForm(true);
+  };
+
   const handleCreateRoleSubmit = async (e) => {
     e.preventDefault();
     if (!newRole.title || !newRole.description) {
@@ -113,21 +147,34 @@ export default function Careers() {
     }
     setFormSubmitting(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/job-openings`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newRole),
-      });
+      let response;
+      if (editingRoleId) {
+        response = await fetch(`${API_BASE_URL}/job-openings/${editingRoleId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newRole),
+        });
+      } else {
+        response = await fetch(`${API_BASE_URL}/job-openings`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newRole),
+        });
+      }
 
       if (!response.ok) {
-        throw new Error("Failed to create job role");
+        throw new Error(editingRoleId ? "Failed to update job role" : "Failed to create job role");
       }
 
       await fetchRoles();
       setShowAddForm(false);
+      setEditingRoleId(null);
       setNewRole({
         title: "",
         type: "Job",
@@ -136,7 +183,7 @@ export default function Careers() {
         description: "",
       });
     } catch (err) {
-      alert(err.message || "Error creating job role");
+      alert(err.message || "Error saving job role");
     } finally {
       setFormSubmitting(false);
     }
@@ -177,6 +224,7 @@ export default function Careers() {
                   <th>Position</th>
                   <th>Resume</th>
                   <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
 
@@ -212,6 +260,14 @@ export default function Careers() {
                         <option value="Rejected">Rejected</option>
                       </select>
                     </td>
+                    <td>
+                      <button
+                        className="delete-role-btn"
+                        onClick={() => handleDeleteApplication(app._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -223,7 +279,17 @@ export default function Careers() {
           <div className="roles-header">
             <button
               className="add-role-btn"
-              onClick={() => setShowAddForm(!showAddForm)}
+              onClick={() => {
+                setEditingRoleId(null);
+                setNewRole({
+                  title: "",
+                  type: "Job",
+                  category: "IT",
+                  location: "",
+                  description: "",
+                });
+                setShowAddForm(!showAddForm);
+              }}
             >
               {showAddForm ? "Cancel" : "+ Add Open Role"}
             </button>
@@ -231,7 +297,7 @@ export default function Careers() {
 
           {showAddForm && (
             <div className="admin-add-role-form-card">
-              <h3>Create New Job Role</h3>
+              <h3>{editingRoleId ? "Edit Job Role" : "Create New Job Role"}</h3>
               <form onSubmit={handleCreateRoleSubmit}>
                 <div className="admin-form-group">
                   <label>Job Title *</label>
@@ -290,7 +356,7 @@ export default function Careers() {
                 </div>
 
                 <button type="submit" className="admin-submit-btn" disabled={formSubmitting}>
-                  {formSubmitting ? "Saving..." : "Create Role"}
+                  {formSubmitting ? "Saving..." : (editingRoleId ? "Save Changes" : "Create Role")}
                 </button>
               </form>
             </div>
@@ -312,6 +378,7 @@ export default function Careers() {
                     <th>Type</th>
                     <th>Category</th>
                     <th>Location</th>
+                    <th>Description</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -324,7 +391,17 @@ export default function Careers() {
                       <td>{role.type}</td>
                       <td>{role.category}</td>
                       <td>{role.location || "N/A"}</td>
+                      <td style={{ maxWidth: "250px", whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: "1.4" }}>
+                        {role.description}
+                      </td>
                       <td>
+                        <button
+                          className="resume-btn"
+                          style={{ padding: "6px 12px", marginRight: "8px", fontSize: "12.5px" }}
+                          onClick={() => handleEditRoleClick(role)}
+                        >
+                          Edit
+                        </button>
                         <button
                           className="delete-role-btn"
                           onClick={() => handleDeleteRole(role._id)}

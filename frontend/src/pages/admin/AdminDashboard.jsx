@@ -16,6 +16,7 @@ const PAGE_META = {
 
 export default function AdminDashboard() {
   const [activePage, setActivePage] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const renderPage = () => {
     switch (activePage) {
@@ -38,10 +39,19 @@ export default function AdminDashboard() {
   return (
     <div className="admin-layout">
 
-      <AdminSidebar activePage={activePage} setActivePage={setActivePage} />
+      <AdminSidebar 
+        activePage={activePage} 
+        setActivePage={setActivePage} 
+        sidebarOpen={sidebarOpen} 
+        setSidebarOpen={setSidebarOpen} 
+      />
 
       <main className="admin-content">
-        <Topbar title={meta.title} subtitle={meta.subtitle} />
+        <Topbar 
+          title={meta.title} 
+          subtitle={meta.subtitle} 
+          setSidebarOpen={setSidebarOpen} 
+        />
         <div className="admin-page-body">
           {renderPage()}
         </div>

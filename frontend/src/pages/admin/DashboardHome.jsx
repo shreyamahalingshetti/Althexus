@@ -10,6 +10,7 @@ export default function DashboardHome({ setActivePage }) {
     totalJobApplications: 0,
   });
   const [recentActivity, setRecentActivity] = useState([]);
+  const [selectedRequest, setSelectedRequest] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -34,7 +35,7 @@ export default function DashboardHome({ setActivePage }) {
         setStats(statsData);
 
         // Fetch recent service requests
-        const requestsRes = await fetch(`${API_BASE_URL}/service-requests?limit=5`, {
+        const requestsRes = await fetch(`${API_BASE_URL}/service-requests?limit=100`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +44,19 @@ export default function DashboardHome({ setActivePage }) {
           throw new Error("Failed to load recent activity");
         }
         const requestsData = await requestsRes.json();
-        setRecentActivity(requestsData.data || []);
+        
+        // Filter requests created today
+        const isToday = (dateString) => {
+          const date = new Date(dateString);
+          const today = new Date();
+          return (
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear()
+          );
+        };
+        const todayRequests = (requestsData.data || []).filter((req) => isToday(req.createdAt));
+        setRecentActivity(todayRequests);
       } catch (err) {
         setError(err.message || "Failed to load data");
       } finally {
@@ -57,7 +70,6 @@ export default function DashboardHome({ setActivePage }) {
   const cards = [
     { icon: "📋", label: "Service Requests", value: stats.totalServiceRequests, color: "blue" },
     { icon: "💼", label: "Careers", value: stats.totalJobApplications, color: "amber" },
-    { icon: "👥", label: "Total Visitors", value: 342, color: "green" },
   ];
 
   const quickActions = [
@@ -113,6 +125,7 @@ export default function DashboardHome({ setActivePage }) {
                 <th>Name</th>
                 <th>Request</th>
                 <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
 
@@ -126,12 +139,84 @@ export default function DashboardHome({ setActivePage }) {
                       {act.status}
                     </span>
                   </td>
+                  <td>
+                    <button
+                      className="resume-btn"
+                      style={{ padding: "5px 10px", fontSize: "12px" }}
+                      onClick={() => setSelectedRequest(act)}
+                    >
+                      View
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </div>
+
+      {/* Modal for viewing complete request details */}
+      {selectedRequest && (
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setSelectedRequest(null); }}>
+          <div className="modal" style={{ maxWidth: "600px" }}>
+            <button className="modal-close" onClick={() => setSelectedRequest(null)}>✕</button>
+            
+            <span className="tag-id">Request ID: {selectedRequest._id}</span>
+            <h3>Service Request Details</h3>
+            <p className="sub">Received on {new Date(selectedRequest.createdAt).toLocaleDateString()}</p>
+
+            <div style={{ marginTop: "24px" }}>
+              <div className="modal-row" style={{ marginBottom: "16px" }}>
+                <div>
+                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Full Name</strong>
+                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.name}</span>
+                </div>
+                <div>
+                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Email Address</strong>
+                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.email}</span>
+                </div>
+              </div>
+
+              <div className="modal-row" style={{ marginBottom: "16px" }}>
+                <div>
+                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Company Name</strong>
+                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.companyName || "N/A"}</span>
+                </div>
+                <div>
+                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Phone Number</strong>
+                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.phone || "N/A"}</span>
+                </div>
+              </div>
+
+              <div className="modal-row" style={{ marginBottom: "16px" }}>
+                <div>
+                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Service Required</strong>
+                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.serviceRequired}</span>
+                </div>
+                <div>
+                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Status</strong>
+                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.status}</span>
+                </div>
+              </div>
+
+              <div style={{ marginBottom: "20px" }}>
+                <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Project Description</strong>
+                <p style={{ fontSize: "14px", color: "var(--paper)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line-light)", margin: 0, lineHeight: 1.5 }}>
+                  {selectedRequest.projectDescription}
+                </p>
+              </div>
+            </div>
+
+            <button 
+              className="btn-primary" 
+              style={{ width: "100%", justifyContent: "center", marginTop: "12px" }}
+              onClick={() => setSelectedRequest(null)}
+            >
+              Close Details
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

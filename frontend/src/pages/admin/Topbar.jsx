@@ -8,10 +8,17 @@ function formatToday() {
   });
 }
 
-export default function Topbar({ title, subtitle }) {
+export default function Topbar({ title, subtitle, setSidebarOpen }) {
   return (
     <header className="admin-topbar">
       <div className="topbar-left">
+        <button 
+          className="sidebar-toggle-btn" 
+          onClick={() => setSidebarOpen((prev) => !prev)}
+          aria-label="Toggle Sidebar"
+        >
+          ☰
+        </button>
         <div className="topbar-icon">◆</div>
         <div>
           <h1>{title}</h1>

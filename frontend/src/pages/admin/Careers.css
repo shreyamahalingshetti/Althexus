@@ -165,3 +165,14 @@
 .delete-role-btn:hover {
   background: #dc2626;
 }
+
+@media (max-width: 768px) {
+  .admin-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .careers-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
