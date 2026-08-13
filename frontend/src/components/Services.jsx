@@ -115,7 +115,7 @@ export default function Services() {
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.description || service.text}</p>
-                <a href="#contact" className="service-btn">
+                <a href="#inquiry" className="service-btn">
                   {service.btn || "Learn More"}
                   <ArrowRight size={18} />
                 </a>

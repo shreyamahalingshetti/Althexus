@@ -69,7 +69,7 @@ export default function Careers() {
       <Navbar active="careers" searchItems={searchItems} />
 
       {/* ---------- HERO ---------- */}
-      <section className="hero" style={{ padding: "90px 0 76px" }}>
+      <section className="hero" style={{ padding: "90px 7% 76px" }}>
         <div className="wrap hero-inner">
           <div className="eyebrow on-dark"><span className="dot"></span>CAREERS AT ALTHEXUS</div>
           <h1 style={{ fontSize: "clamp(34px,5vw,52px)", color: "#ffffff" }}>
@@ -92,10 +92,10 @@ export default function Careers() {
             <p>No filler values-poster language — this is what we mean day to day.</p>
           </div>
           <div className="icon-card-grid" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
-            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12 }}>[OWN-01]</span><h3>Real ownership</h3><p>Interns and juniors ship features that go to production, not sandbox tasks.</p></div>
-            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12 }}>[OWN-02]</span><h3>Direct feedback</h3><p>Small team, short feedback loops. You'll know exactly where you stand.</p></div>
-            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12 }}>[OWN-03]</span><h3>Remote-first</h3><p>Work from anywhere — we coordinate async and keep meetings minimal.</p></div>
-            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12 }}>[OWN-04]</span><h3>Learn by shipping</h3><p>You'll touch client work across stacks, not one narrow slice forever.</p></div>
+            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>01</span><h3>Real ownership</h3><p>Interns and juniors ship features that go to production, not sandbox tasks.</p></div>
+            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>02</span><h3>Direct feedback</h3><p>Small team, short feedback loops. You'll know exactly where you stand.</p></div>
+            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>03</span><h3>Remote-first</h3><p>Work from anywhere — we coordinate async and keep meetings minimal.</p></div>
+            <div className="icon-card"><span className="eyebrow" style={{ marginBottom: 12, color: "var(--accent)" }}>04</span><h3>Learn by shipping</h3><p>You'll touch client work across stacks, not one narrow slice forever.</p></div>
           </div>
         </div>
       </section>

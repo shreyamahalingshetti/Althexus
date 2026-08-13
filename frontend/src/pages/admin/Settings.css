@@ -8,89 +8,94 @@
   width: 100%;
   max-width: none;
   box-sizing: border-box;
-
   background: white;
-
   padding: 28px;
-
   border-radius: 14px;
-
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
 }
 
-
 .settings-card h2 {
   margin: 0 0 20px;
-
-  font-size: 15.5px;
-
+  font-size: 16px;
   color: #1e293b;
+  font-weight: 700;
 }
 
+.settings-section-title {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #eef2f6;
+  padding-bottom: 6px;
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.settings-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
 
 .settings-card label {
   display: block;
-
   margin-top: 15px;
   margin-bottom: 8px;
-
   color: #475569;
-
   font-size: 13px;
-
   font-weight: 600;
 }
 
-
-.settings-card input {
+.settings-card input,
+.settings-card textarea {
   width: 100%;
-
   padding: 11px 12px;
-
   border: 1px solid #e2e8f0;
-
   border-radius: 8px;
-
   font-size: 13.5px;
-
   color: #334155;
-
   box-sizing: border-box;
+  background: white;
+  transition: border-color 0.2s ease;
 }
 
+.settings-card textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+  line-height: 1.4;
+}
 
-.settings-card input:focus {
+.settings-card input:focus,
+.settings-card textarea:focus {
   outline: none;
-
   border-color: #a78bfa;
 }
 
-
 .settings-card button {
-  margin-top: 22px;
-
-  padding: 11px 22px;
-
+  margin-top: 30px;
+  padding: 12px 24px;
   border: none;
-
   background: #6848d8;
-
   color: white;
-
   border-radius: 8px;
-
   font-size: 13.5px;
-
   font-weight: 600;
-
   cursor: pointer;
+  transition: background 0.2s ease;
 }
-
 
 .settings-card button:hover {
   background: #5636c4;
 }
-
 
 /* ============================= */
 /* Responsive */
@@ -99,5 +104,10 @@
 @media (max-width: 768px) {
   .settings-card {
     padding: 20px;
+  }
+  .settings-row,
+  .settings-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 }

@@ -19,8 +19,9 @@ import Footer from "./components/Footer";
 
 function AdminProtectedRoute() {
   const isAdminLoggedIn = localStorage.getItem("adminLoggedIn");
+  const adminToken = localStorage.getItem("adminToken");
 
-  if (isAdminLoggedIn !== "true") {
+  if (isAdminLoggedIn !== "true" || !adminToken) {
     return <Navigate to="/admin/login" replace />;
   }
 

@@ -75,6 +75,8 @@ export default function Navbar() {
           width: "100%", backdropFilter: "blur(14px)",
           borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           transition: "background 0.35s, box-shadow 0.35s",
+          padding: "0 7%",
+          boxSizing: "border-box",
         }}
       >
         <nav className="navbar-inner">

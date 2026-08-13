@@ -10,7 +10,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
+  align-items: start;
   gap: 60px;
 }
 
@@ -18,11 +18,28 @@
 .about-image-wrapper {
   position: relative;
   width: 100%;
+  position: sticky;
+  top: 110px;
+  height: fit-content;
+  z-index: 10;
+}
+
+.about-image-glow {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .about-image {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  height: auto;
+  height: 580px;
   display: block;
   border-radius: 28px;
   object-fit: cover;
@@ -31,19 +48,20 @@
 }
 
 .about-image:hover {
-  transform: translateY(-8px) scale(1.01);
+  transform: translateY(-8px) scale(1.015);
 }
 
 .experience-badge {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(7, 18, 32, 0.75);
-  backdrop-filter: blur(12px);
+  bottom: 24px;
+  left: 24px;
+  background: rgba(7, 18, 32, 0.8);
+  backdrop-filter: blur(16px);
   border: 1px solid rgba(255,255,255,0.12);
   padding: 16px 20px;
   border-radius: 18px;
   color: white;
+  z-index: 3;
 }
 
 .experience-badge h3 {
@@ -225,6 +243,18 @@
   .about-container {
     grid-template-columns: 1fr;
     gap: 48px;
+    align-items: center;
+  }
+
+  .about-image-wrapper {
+    position: relative;
+    top: 0;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  .about-image {
+    height: 440px;
   }
 
   .about-content {
@@ -239,6 +269,10 @@
 @media (max-width: 640px) {
   .about-section {
     padding: 80px 5%;
+  }
+
+  .about-image {
+    height: 300px;
   }
 
   .about-stats,

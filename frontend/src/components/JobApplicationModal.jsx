@@ -118,51 +118,55 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
               </div>
             )}
 
-            <div className="field">
-              <label htmlFor="app-name">Full name *</label>
-              <input
-                id="app-name"
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="Jane Smith"
-              />
+            <div className="modal-row">
+              <div className="field">
+                <label htmlFor="app-name">Full name *</label>
+                <input
+                  id="app-name"
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="Jane Smith"
+                />
+              </div>
+
+              <div className="field">
+                <label htmlFor="app-email">Email address *</label>
+                <input
+                  id="app-email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  placeholder="jane@company.com"
+                />
+              </div>
             </div>
 
-            <div className="field">
-              <label htmlFor="app-email">Email address *</label>
-              <input
-                id="app-email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder="jane@company.com"
-              />
-            </div>
+            <div className="modal-row">
+              <div className="field">
+                <label htmlFor="app-phone">Phone number</label>
+                <input
+                  id="app-phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  placeholder="+1 (555) 000-0000"
+                />
+              </div>
 
-            <div className="field">
-              <label htmlFor="app-phone">Phone number</label>
-              <input
-                id="app-phone"
-                type="tel"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                placeholder="+1 (555) 000-0000"
-              />
-            </div>
-
-            <div className="field">
-              <label htmlFor="app-resume">Resume (PDF, DOC, DOCX) *</label>
-              <input
-                id="app-resume"
-                type="file"
-                required
-                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                onChange={(e) => setResume(e.target.files[0])}
-                style={{ padding: "8px 0" }}
-              />
+              <div className="field">
+                <label htmlFor="app-resume">Resume (PDF, DOC, DOCX) *</label>
+                <input
+                  id="app-resume"
+                  type="file"
+                  required
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  onChange={(e) => setResume(e.target.files[0])}
+                  style={{ padding: "8px 0" }}
+                />
+              </div>
             </div>
 
             <div className="field">

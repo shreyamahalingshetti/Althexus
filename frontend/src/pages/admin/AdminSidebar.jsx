@@ -4,7 +4,6 @@ import "./AdminSidebar.css";
 const MENU_ITEMS = [
   { key: "dashboard", icon: "📊", label: "Dashboard" },
   { key: "services", icon: "📋", label: "Service Requests" },
-  { key: "contacts", icon: "📩", label: "Contact Requests" },
   { key: "careers", icon: "💼", label: "Careers" },
   { key: "settings", icon: "⚙️", label: "Settings" },
 ];
@@ -55,6 +54,7 @@ export default function AdminSidebar({ activePage, setActivePage }) {
           className="sidebar-logout"
           onClick={() => {
             localStorage.removeItem("adminLoggedIn");
+            localStorage.removeItem("adminToken");
             navigate("/");
           }}
         >

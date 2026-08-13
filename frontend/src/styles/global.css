@@ -26,6 +26,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 html {
@@ -42,6 +43,16 @@ body {
   background: var(--ink);
   color: var(--paper);
   min-height: 100vh;
+}
+
+.careers-page section {
+  padding: 90px 7%;
+}
+
+.careers-page section .wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 a {
@@ -188,8 +199,8 @@ nav {
   align-items: center;
   justify-content: space-between;
   gap: 36px;
-  padding: 14px 28px;
-  max-width: var(--max);
+  padding: 14px 0;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -337,7 +348,7 @@ nav {
 .hero {
   background: var(--ink);
   color: var(--paper);
-  padding: 100px 0 90px;
+  padding: 100px 7% 90px;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--line-dark);
@@ -355,8 +366,11 @@ nav {
   opacity: 0.5;
 }
 
-.hero-inner {
+.hero .hero-inner {
   position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .hero .eyebrow {
@@ -407,39 +421,59 @@ nav {
 .hero-right-col {
   flex-shrink: 0;
   position: relative;
-  width: 340px;
-  height: 340px;
+  width: 480px;
+  height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Spin animation for the outer dashed orbit */
+@keyframes rotateOrbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Outer dashed orbital ring */
+.hero-right-col::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border: 1.5px dashed rgba(56, 189, 248, 0.15);
+  border-radius: 50%;
+  animation: rotateOrbit 40s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Outer glow ring */
 .hero-glow-ring {
-  width: 280px;
-  height: 280px;
+  width: 360px;
+  height: 360px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, rgba(56,189,248,0.18), rgba(7,24,39,0.0));
   border: 1.5px solid rgba(56,189,248,0.35);
   box-shadow:
-    0 0 40px rgba(56,189,248,0.20),
-    0 0 80px rgba(56,189,248,0.10),
-    inset 0 0 40px rgba(56,189,248,0.06);
+    0 0 50px rgba(56,189,248,0.22),
+    0 0 100px rgba(56,189,248,0.12),
+    inset 0 0 50px rgba(56,189,248,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   animation: heroRingFloat 5s ease-in-out infinite;
   position: relative;
+  z-index: 2;
 }
 
 /* Inner circle */
 .hero-glow-ring-inner {
-  width: 160px;
-  height: 160px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   background: rgba(56,189,248,0.08);
   border: 1.5px solid rgba(56,189,248,0.5);
-  box-shadow: 0 0 24px rgba(56,189,248,0.3);
+  box-shadow: 0 0 30px rgba(56,189,248,0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -447,8 +481,8 @@ nav {
 }
 
 .hero-logo-img {
-  width: 120px;
-  height: 120px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -456,32 +490,33 @@ nav {
 /* Orbiting dots */
 .orbit-dot {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 10px var(--accent), 0 0 20px rgba(56,189,248,0.5);
+  box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(56,189,248,0.6);
+  z-index: 3;
 }
 
 .od1 {
-  top: 10px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
   animation: orbitDot1 6s linear infinite;
 }
 
 .od2 {
-  bottom: 30px;
-  left: 20px;
+  bottom: 80px;
+  left: 60px;
   animation: orbitDot2 7s linear infinite;
 }
 
 .od3 {
-  bottom: 40px;
-  right: 15px;
+  bottom: 90px;
+  right: 50px;
   animation: orbitDot3 8s linear infinite;
   background: #60a5fa;
-  box-shadow: 0 0 10px #60a5fa;
+  box-shadow: 0 0 12px #60a5fa;
 }
 
 @keyframes heroRingFloat {
@@ -507,19 +542,19 @@ nav {
   100% { transform: translate(0,0) scale(1.2); opacity: 0.7; }
 }
 
-/* ---------- Stats ---------- */
 .stats {
   background: var(--ink);
   border-bottom: 1px solid var(--line-dark);
+  padding: 90px 7%;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
-  max-width: var(--max);
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0;
 }
 
 .stat {
@@ -952,13 +987,26 @@ footer {
 .modal {
   background: var(--ink-soft);
   border-radius: 12px;
-  max-width: 460px;
+  max-width: 650px;
   width: 100%;
   padding: 32px;
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
   border: 1px solid var(--line-light);
+}
+
+.modal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 580px) {
+  .modal-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }
 
 .modal-close {

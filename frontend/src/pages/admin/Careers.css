@@ -1,88 +1,167 @@
 @import "./PageTable.css";
 
-.careers-page {
+.admin-careers-page {
   padding: 0;
 }
-/* ============================= */
-/* Careers Footer */
-/* ============================= */
 
-.admin-careers-footer {
-  width: 100%;
-  margin-top: 80px;
-  background: #071b2d;
-  color: #ffffff;
+/* Careers Tab System */
+.careers-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eef0f4;
+  padding-bottom: 12px;
 }
 
-.footer-content {
-  padding: 70px 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.footer-brand {
-  max-width: 700px;
-}
-
-.footer-brand h2 {
-  margin: 0 0 32px;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.footer-brand h4 {
-  margin: 0 0 28px;
-  font-size: 18px;
+.tab-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
   font-weight: 600;
+  color: #64748b;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
-.footer-brand p {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+.tab-btn:hover {
+  color: #334155;
+  background: #f1f5f9;
 }
 
-.footer-bottom {
-  padding: 18px 60px;
+.tab-btn.active {
+  color: #6848d8;
+  background: #f0ecfc;
 }
 
-.footer-bottom p {
-  margin: 0;
+/* Status and error messages */
+.status-message {
+  color: #64748b;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 14.5px;
+}
+
+.error-message {
+  color: #ef4444;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 14.5px;
+}
+
+/* Roles section header */
+.roles-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.add-role-btn {
+  background: #6848d8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-role-btn:hover {
+  background: #5636c4;
+}
+
+/* Add role form card */
+.admin-add-role-form-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  padding: 24px;
+  margin: 0 auto 24px;
+  max-width: 800px;
+}
+
+.admin-add-role-form-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.admin-form-group label {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+  color: #475569;
 }
 
+.admin-form-group input,
+.admin-form-group select,
+.admin-form-group textarea {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #334155;
+  background: white;
+  transition: border-color 0.2s ease;
+}
 
-/* ============================= */
-/* Responsive */
-/* ============================= */
+.admin-form-group input:focus,
+.admin-form-group select:focus,
+.admin-form-group textarea:focus {
+  outline: none;
+  border-color: #6848d8;
+}
 
-@media (max-width: 768px) {
-  .admin-careers-footer {
-    margin-top: 50px;
-  }
+.admin-submit-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 
-  .footer-content {
-    padding: 50px 25px;
-  }
+.admin-submit-btn:hover {
+  background: #059669;
+}
 
-  .footer-brand h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
-  }
+.admin-submit-btn:disabled {
+  background: #a7f3d0;
+  cursor: not-allowed;
+}
 
-  .footer-brand h4 {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
+/* Delete button */
+.delete-role-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 
-  .footer-brand p {
-    font-size: 14px;
-  }
-
-  .footer-bottom {
-    padding: 18px 25px;
-  }
+.delete-role-btn:hover {
+  background: #dc2626;
 }

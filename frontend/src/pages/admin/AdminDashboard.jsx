@@ -11,7 +11,6 @@ import "./AdminDashboard.css";
 const PAGE_META = {
   dashboard: { title: "Dashboard", subtitle: "Welcome back, Admin! Here's what's happening today." },
   services: { title: "Service Requests", subtitle: "Track and manage incoming service requests." },
-  contacts: { title: "Contact Requests", subtitle: "Messages submitted through your contact form." },
   careers: { title: "Careers", subtitle: "Review applications and update hiring status." },
   settings: { title: "Settings", subtitle: "Manage your company profile and account." },
 };
@@ -23,9 +22,6 @@ export default function AdminDashboard() {
     switch (activePage) {
       case "services":
         return <ServiceRequests />;
-
-      case "contacts":
-        return <ContactRequests />;
 
       case "careers":
         return <Careers />;

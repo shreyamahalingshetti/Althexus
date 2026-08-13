@@ -103,7 +103,7 @@ export default function About() {
 
           {/* CTA */}
           <div className="about-actions">
-            <a href="#contact" className="primary-btn">
+            <a href="#inquiry" className="primary-btn">
               Get Started
               <ArrowRight size={18} />
             </a>

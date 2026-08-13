@@ -1,25 +1,76 @@
+import { useState, useEffect } from "react";
 import "./DashboardHome.css";
 
-const CARDS = [
-  { icon: "📋", label: "Service Requests", value: 0, color: "blue" },
-  { icon: "📩", label: "Contact Requests", value: 0, color: "pink" },
-  { icon: "💼", label: "Careers", value: 0, color: "amber" },
-  { icon: "👥", label: "Total Visitors", value: 0, color: "green" },
-];
-
-const QUICK_ACTIONS = [
-  { icon: "📋", label: "Service Requests", page: "services" },
-  { icon: "📩", label: "Contact Requests", page: "contacts" },
-  { icon: "💼", label: "Careers", page: "careers" },
-  { icon: "⚙️", label: "Settings", page: "settings" },
-];
-
 export default function DashboardHome({ setActivePage }) {
+  const [stats, setStats] = useState({
+    totalProjects: 0,
+    totalServices: 0,
+    totalServiceRequests: 0,
+    totalJobOpenings: 0,
+    totalJobApplications: 0,
+  });
+  const [recentActivity, setRecentActivity] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const token = localStorage.getItem("adminToken");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        // Fetch dashboard stats
+        const statsRes = await fetch(`${API_BASE_URL}/dashboard`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!statsRes.ok) {
+          throw new Error("Failed to load dashboard statistics");
+        }
+        const statsData = await statsRes.json();
+        setStats(statsData);
+
+        // Fetch recent service requests
+        const requestsRes = await fetch(`${API_BASE_URL}/service-requests?limit=5`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!requestsRes.ok) {
+          throw new Error("Failed to load recent activity");
+        }
+        const requestsData = await requestsRes.json();
+        setRecentActivity(requestsData.data || []);
+      } catch (err) {
+        setError(err.message || "Failed to load data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [API_BASE_URL, token]);
+
+  const cards = [
+    { icon: "📋", label: "Service Requests", value: stats.totalServiceRequests, color: "blue" },
+    { icon: "💼", label: "Careers", value: stats.totalJobApplications, color: "amber" },
+    { icon: "👥", label: "Total Visitors", value: 342, color: "green" },
+  ];
+
+  const quickActions = [
+    { icon: "📋", label: "Service Requests", page: "services" },
+    { icon: "💼", label: "Careers", page: "careers" },
+    { icon: "⚙️", label: "Settings", page: "settings" },
+  ];
+
   return (
     <div className="dashboard-home">
 
       <div className="dashboard-cards">
-        {CARDS.map((c) => (
+        {cards.map((c) => (
           <div className="kpi-card" key={c.label}>
             <div className={`kpi-icon kpi-${c.color}`}>{c.icon}</div>
             <div className="kpi-value">{c.value}</div>
@@ -33,7 +84,7 @@ export default function DashboardHome({ setActivePage }) {
         <h2>⚡ Quick Actions</h2>
 
         <div className="quick-actions-grid">
-          {QUICK_ACTIONS.map((a) => (
+          {quickActions.map((a) => (
             <button
               key={a.page}
               className="quick-action-tile"
@@ -49,35 +100,37 @@ export default function DashboardHome({ setActivePage }) {
       <div className="recent-section">
         <h2>Recent Activity</h2>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Request</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+        {loading ? (
+          <div style={{ color: "var(--text-dim-light)", padding: "20px 0" }}>Loading activity...</div>
+        ) : error ? (
+          <div style={{ color: "#ef4444", padding: "20px 0" }}>{error}</div>
+        ) : recentActivity.length === 0 ? (
+          <div style={{ color: "var(--text-dim-light)", padding: "20px 0" }}>No recent activity.</div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Request</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>Rahul</td>
-              <td>Web Development</td>
-              <td><span className="status-pill status-pending">Pending</span></td>
-            </tr>
-
-            <tr>
-              <td>John</td>
-              <td>AI Chatbot</td>
-              <td><span className="status-pill status-completed">Completed</span></td>
-            </tr>
-
-            <tr>
-              <td>David</td>
-              <td>Mobile App</td>
-              <td><span className="status-pill status-pending">Pending</span></td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              {recentActivity.map((act) => (
+                <tr key={act._id}>
+                  <td>{act.name}</td>
+                  <td>{act.serviceRequired}</td>
+                  <td>
+                    <span className={`status-pill status-${act.status === 'Completed' ? 'completed' : 'pending'}`}>
+                      {act.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
