@@ -1961,8 +1961,13 @@ transform:translateY(0) scale(1);
   .cf-row {
     grid-template-columns: 1fr;
   }
+  .contact-form-wrapper {
+    padding: 0 10px;
+    margin-top: 30px;
+  }
   .contact-form {
-    padding: 32px 22px;
+    padding: 24px 16px;
+    border-radius: 16px;
   }
 }
 
@@ -2226,6 +2231,10 @@ transform:translateY(0) scale(1);
 
   /* Stats */
   .stats {
+    padding: 60px 24px;
+  }
+
+  .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }

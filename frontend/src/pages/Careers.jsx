@@ -69,7 +69,7 @@ export default function Careers() {
       <Navbar active="careers" searchItems={searchItems} />
 
       {/* ---------- HERO ---------- */}
-      <section className="hero" style={{ padding: "90px 7% 76px" }}>
+      <section className="hero" style={{ padding: "160px 7% 76px" }}>
         <div className="wrap hero-inner">
           <div className="eyebrow on-dark"><span className="dot"></span>CAREERS AT ALTHEXUS</div>
           <h1 style={{ fontSize: "clamp(34px,5vw,52px)", color: "#ffffff" }}>

@@ -83,115 +83,121 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
       <div className="modal" role="dialog" aria-modal="true" aria-label={`Apply for ${jobOpening.title}`}>
         <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
 
-        {submitted ? (
-          <div className="success-msg">
-            <div className="dot-big">✓</div>
-            <h3>Application Submitted</h3>
-            <p style={{ marginTop: 10, fontSize: 14, color: "var(--text-dim-light)" }}>
-              Thanks for applying! We review every application and will follow up within 3–5 business days.
-            </p>
-            <button
-              className="btn-primary"
-              style={{ marginTop: 24, width: "100%", justifyContent: "center" }}
-              onClick={onClose}
-            >
-              Close
-            </button>
+        {!submitted && (
+          <div className="modal-header" style={{ marginBottom: "20px", paddingRight: "40px" }}>
+            <span className="tag-id" style={{ margin: 0 }}>[{jobOpening.category || "Job"}]</span>
+            <h3 style={{ margin: "4px 0", fontSize: "20px" }}>Apply for {jobOpening.title}</h3>
+            <p className="sub" style={{ margin: 0, fontSize: "13.5px", color: "var(--text-dim-light)" }}>{jobOpening.location || "Remote"} · {jobOpening.type}</p>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <span className="tag-id">[{jobOpening.category || "Job"}]</span>
-            <h3>Apply for {jobOpening.title}</h3>
-            <p className="sub">{jobOpening.location || "Remote"} · {jobOpening.type}</p>
-
-            {error && (
-              <div style={{
-                background: "rgba(239, 68, 68, 0.1)",
-                border: "1px solid rgba(239, 68, 68, 0.3)",
-                color: "#ef4444",
-                padding: "10px",
-                borderRadius: "6px",
-                marginBottom: "15px",
-                fontSize: "13px"
-              }}>
-                {error}
-              </div>
-            )}
-
-            <div className="modal-row">
-              <div className="field">
-                <label htmlFor="app-name">Full name *</label>
-                <input
-                  id="app-name"
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Jane Smith"
-                />
-              </div>
-
-              <div className="field">
-                <label htmlFor="app-email">Email address *</label>
-                <input
-                  id="app-email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="jane@company.com"
-                />
-              </div>
-            </div>
-
-            <div className="modal-row">
-              <div className="field">
-                <label htmlFor="app-phone">Phone number</label>
-                <input
-                  id="app-phone"
-                  type="tel"
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  placeholder="+1 (555) 000-0000"
-                />
-              </div>
-
-              <div className="field">
-                <label htmlFor="app-resume">Resume (PDF, DOC, DOCX) *</label>
-                <input
-                  id="app-resume"
-                  type="file"
-                  required
-                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                  onChange={(e) => setResume(e.target.files[0])}
-                  style={{ padding: "8px 0" }}
-                />
-              </div>
-            </div>
-
-            <div className="field">
-              <label htmlFor="app-message">Why this role?</label>
-              <textarea
-                id="app-message"
-                rows={3}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                placeholder="Briefly explain your interest and fit for this position..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn-primary"
-              disabled={loading}
-              style={{ opacity: loading ? 0.7 : 1, cursor: loading ? "not-allowed" : "pointer" }}
-            >
-              {loading ? "Submitting…" : "Submit Application"}
-            </button>
-
-            <p className="form-note">Reply within 3–5 business days</p>
-          </form>
         )}
+
+        <div className="modal-body">
+          {submitted ? (
+            <div className="success-msg">
+              <div className="dot-big">✓</div>
+              <h3>Application Submitted</h3>
+              <p style={{ marginTop: 10, fontSize: 14, color: "var(--text-dim-light)" }}>
+                Thanks for applying! We review every application and will follow up within 3–5 business days.
+              </p>
+              <button
+                className="btn-primary"
+                style={{ marginTop: 24, width: "100%", justifyContent: "center" }}
+                onClick={onClose}
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              {error && (
+                <div style={{
+                  background: "rgba(239, 68, 68, 0.1)",
+                  border: "1px solid rgba(239, 68, 68, 0.3)",
+                  color: "#ef4444",
+                  padding: "10px",
+                  borderRadius: "6px",
+                  marginBottom: "15px",
+                  fontSize: "13px"
+                }}>
+                  {error}
+                </div>
+              )}
+
+              <div className="modal-row">
+                <div className="field">
+                  <label htmlFor="app-name">Full name *</label>
+                  <input
+                    id="app-name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Jane Smith"
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="app-email">Email address *</label>
+                  <input
+                    id="app-email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="jane@company.com"
+                  />
+                </div>
+              </div>
+
+              <div className="modal-row">
+                <div className="field">
+                  <label htmlFor="app-phone">Phone number</label>
+                  <input
+                    id="app-phone"
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    placeholder="+1 (555) 000-0000"
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="app-resume">Resume (PDF, DOC, DOCX) *</label>
+                  <input
+                    id="app-resume"
+                    type="file"
+                    required
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    onChange={(e) => setResume(e.target.files[0])}
+                    style={{ padding: "8px 0" }}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label htmlFor="app-message">Why this role?</label>
+                <textarea
+                  id="app-message"
+                  rows={3}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="Briefly explain your interest and fit for this position..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="btn-primary"
+                disabled={loading}
+                style={{ opacity: loading ? 0.7 : 1, cursor: loading ? "not-allowed" : "pointer" }}
+              >
+                {loading ? "Submitting…" : "Submit Application"}
+              </button>
+
+              <p className="form-note">Reply within 3–5 business days</p>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );
