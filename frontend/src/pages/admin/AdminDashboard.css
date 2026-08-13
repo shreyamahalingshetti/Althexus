@@ -25,6 +25,7 @@ body,
 .admin-content {
   margin-left: 220px;
   width: calc(100% - 220px);
+  min-width: 0;
   min-height: 100vh;
   background: #f7f6fc;
   overflow-x: hidden;
@@ -38,6 +39,7 @@ body,
   .admin-content {
     margin-left: 0;
     width: 100%;
+    min-width: 0;
   }
 
   .admin-page-body {

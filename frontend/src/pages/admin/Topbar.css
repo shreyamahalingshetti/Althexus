@@ -100,4 +100,17 @@
   .sidebar-toggle-btn {
     display: flex;
   }
+
+  .admin-topbar {
+    padding: 0 16px;
+    height: 64px;
+  }
+
+  .topbar-date {
+    display: none;
+  }
+
+  .topbar-icon {
+    display: none;
+  }
 }

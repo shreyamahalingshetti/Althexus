@@ -69,7 +69,7 @@ export default function Navbar() {
 
       <header
         style={{
-          position: "sticky", top: 0, zIndex: 999,
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 999,
           background: scrolled ? "rgba(6,19,33,.97)" : "rgba(8,18,35,.85)",
           boxShadow: scrolled ? "0 10px 30px rgba(0,0,0,.35)" : "none",
           width: "100%", backdropFilter: "blur(14px)",
