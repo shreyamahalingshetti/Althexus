@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import compression from 'compression';
 import { env } from './config/env.js';
 import { connectDB } from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
@@ -24,6 +25,8 @@ import jobApplicationRoutes from './routes/jobApplicationRoutes.js';
 connectDB();
 
 const app = express();
+
+app.use(compression());
 
 // Security & Core Middlewares
 app.use(

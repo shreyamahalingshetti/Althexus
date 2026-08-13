@@ -3,7 +3,6 @@ import AdminSidebar from "./AdminSidebar";
 import Topbar from "./Topbar";
 import DashboardHome from "./DashboardHome";
 import ServiceRequests from "./ServiceRequests";
-import ContactRequests from "./ContactRequests";
 import Careers from "./Careers";
 import Settings from "./Settings";
 import "./AdminDashboard.css";
