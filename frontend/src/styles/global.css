@@ -1403,4 +1403,67 @@ footer {
   .stats-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Compact Modal overrides for mobile */
+  .modal-overlay {
+    align-items: flex-start;
+    padding: 12px;
+    overflow-y: auto;
+  }
+
+  .modal {
+    padding: 24px 16px 16px;
+    max-height: none;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .modal-header {
+    margin-bottom: 12px !important;
+  }
+
+  .modal-header .tag-id {
+    margin-bottom: 4px !important;
+  }
+
+  .modal-header h3 {
+    font-size: 18px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .modal-header .sub {
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    font-size: 18px;
+  }
+
+  .field {
+    margin-bottom: 10px;
+  }
+
+  .field label {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .field input,
+  .field textarea {
+    padding: 8px 10px;
+    font-size: 13.5px;
+  }
+
+  .field textarea {
+    min-height: 60px;
+  }
+
+  .btn-primary {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
 }
