@@ -804,6 +804,992 @@ nav ul li a:hover{
     color:#0d6efd;
 }
 
+/* =========================================================
+   CORE SERVICES HEADER - CENTERED
+========================================================= */
+
+.core-services-header {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.core-services-header .section-tag {
+  display: inline-block;
+  text-align: center;
+}
+
+.core-services-header h2 {
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.core-services-header p {
+  max-width: 680px;
+  margin: 16px auto 0;
+  text-align: center;
+}
+
+
+/* =========================================================
+   CORE SERVICES GRID
+   4 CARDS FIRST ROW
+   3 CARDS CENTERED SECOND ROW
+========================================================= */
+
+.core-services-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+
+  column-gap: 36px;
+  row-gap: 28px;
+
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   FLIP CARD
+========================================================= */
+
+.flip-card {
+  width: 100%;
+  height: 510px;
+
+  perspective: 1400px;
+
+  position: relative;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FIRST ROW
+   CARDS 01 - 04
+========================================================= */
+
+.flip-card:nth-child(1) {
+  grid-column: 1 / 4;
+}
+
+.flip-card:nth-child(2) {
+  grid-column: 4 / 7;
+}
+
+.flip-card:nth-child(3) {
+  grid-column: 7 / 10;
+}
+
+.flip-card:nth-child(4) {
+  grid-column: 10 / 13;
+}
+
+
+/* =========================================================
+   SECOND ROW
+   CARDS 05 - 07
+
+   Equal centered spacing
+========================================================= */
+
+.flip-card:nth-child(5) {
+  grid-column: 2 / 5;
+}
+
+.flip-card:nth-child(6) {
+  grid-column: 5 / 8;
+}
+
+.flip-card:nth-child(7) {
+  grid-column: 8 / 11;
+}
+
+
+/* =========================================================
+   FLIP CARD INNER
+========================================================= */
+
+.flip-card-inner {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+
+/* =========================================================
+   FLIP ON HOVER
+========================================================= */
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+
+/* =========================================================
+   COMMON CARD SIDE
+========================================================= */
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+
+  box-sizing: border-box;
+
+  padding: 32px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #102238 0%,
+      #0d1c2e 48%,
+      #0a1828 100%
+    );
+
+  border: 1px solid rgba(104, 166, 218, 0.28);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   SUBTLE CARD INNER GLOW
+========================================================= */
+
+.flip-card-front::before,
+.flip-card-back::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 24px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(38, 146, 230, 0.08),
+      transparent 32%
+    );
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   SHINING BORDER
+========================================================= */
+
+.flip-card-front::after,
+.flip-card-back::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 24px;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(78, 183, 255, 0.20),
+      transparent 25%,
+      transparent 72%,
+      rgba(60, 160, 230, 0.10)
+    );
+
+  opacity: 0.7;
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   HOVER BORDER GLOW
+========================================================= */
+
+.flip-card:hover .flip-card-front,
+.flip-card:hover .flip-card-back {
+  border-color: rgba(44, 174, 244, 0.70);
+
+  box-shadow:
+    0 0 12px rgba(40, 160, 235, 0.12),
+    0 0 30px rgba(40, 160, 235, 0.08),
+    inset 0 0 30px rgba(40, 160, 235, 0.025);
+}
+
+
+/* =========================================================
+   FRONT
+========================================================= */
+
+.flip-card-front {
+  transform: rotateY(0deg);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  position: absolute;
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.service-number {
+  position: absolute;
+
+  top: 30px;
+  right: 30px;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  color: #71839a;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   LARGE ICON BOX
+========================================================= */
+
+.core-service-icon {
+  position: relative;
+
+  width: 80px;
+  height: 80px;
+
+  margin-top: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  border: 1px solid rgba(50, 151, 218, 0.30);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(21, 66, 103, 0.90),
+      rgba(15, 48, 78, 0.75)
+    );
+
+  color: #35b9ff;
+
+  z-index: 2;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.core-service-icon svg {
+  width: 42px;
+  height: 42px;
+
+  stroke-width: 1.65;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+
+/* =========================================================
+   ICON HOVER
+========================================================= */
+
+.flip-card:hover .core-service-icon {
+  transform: translateY(-4px);
+
+  border-color: rgba(51, 181, 255, 0.65);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(23, 76, 117, 0.95),
+      rgba(15, 52, 84, 0.90)
+    );
+
+  box-shadow:
+    0 0 18px rgba(41, 170, 245, 0.12);
+}
+
+.flip-card:hover .core-service-icon svg {
+  transform: scale(1.05);
+
+  filter:
+    drop-shadow(0 0 6px rgba(40, 180, 255, 0.20));
+}
+
+
+/* =========================================================
+   FRONT TITLE
+========================================================= */
+
+.flip-card-front h3 {
+  position: relative;
+
+  margin: auto 0 13px;
+
+  max-width: 94%;
+
+  font-size: 27px;
+
+  line-height: 1.15;
+
+  font-weight: 750;
+
+  letter-spacing: -0.3px;
+
+  color: #f5f8fc;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   FRONT DESCRIPTION
+========================================================= */
+
+.flip-card-front p {
+  position: relative;
+
+  margin: 0;
+
+  max-width: 96%;
+
+  font-size: 16px;
+
+  line-height: 1.65;
+
+  color: #aebdcd;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HOVER TO EXPLORE
+   Kept only for spacing.
+   Learn More button is intentionally ignored.
+========================================================= */
+
+.flip-hint {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: auto;
+
+  padding-top: 22px;
+
+  color: #75b8ed;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  z-index: 2;
+
+  transition: gap 0.3s ease;
+}
+
+.flip-card:hover .flip-hint {
+  gap: 15px;
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.flip-card-back {
+  transform: rotateY(180deg);
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+}
+
+
+/* =========================================================
+   BACK TITLE
+========================================================= */
+
+.flip-card-back h3 {
+  position: relative;
+
+  margin: 70px 0 16px;
+
+  font-size: 25px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #f4f8fc;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   BACK DESCRIPTION
+========================================================= */
+
+.flip-card-back p {
+  position: relative;
+
+  margin: 0 0 24px;
+
+  font-size: 15px;
+
+  line-height: 1.65;
+
+  color: #adbdce;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   BACK LIST
+========================================================= */
+
+.flip-card-back ul {
+  position: relative;
+
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   BACK LIST ITEM
+========================================================= */
+
+.flip-card-back li {
+  position: relative;
+
+  margin-bottom: 14px;
+
+  padding-left: 28px;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  color: #d4dee8;
+}
+
+
+/* =========================================================
+   CHECK ICON
+========================================================= */
+
+.flip-card-back li::before {
+  content: "✓";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(69, 167, 230, 0.35);
+
+  background: rgba(32, 115, 169, 0.08);
+
+  color: #59b9ef;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.services-cta {
+  max-width: 800px;
+
+  margin: 75px auto 0;
+
+  padding: 24px 28px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(100, 166, 215, 0.24);
+
+  background:
+    rgba(10, 26, 41, 0.70);
+
+  box-shadow:
+    0 0 20px rgba(100, 170, 255, 0.035);
+}
+
+
+/* =========================================================
+   CTA TITLE
+========================================================= */
+
+.services-cta h3 {
+  margin: 0;
+
+  font-size: 17px;
+
+  color: #eef3f8;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px 20px;
+
+  border-radius: 8px;
+
+  background: #1674f5;
+
+  border: 1px solid rgba(151, 194, 245, 0.25);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+
+  background: #2582ff;
+
+  box-shadow:
+    0 0 20px rgba(40, 150, 255, 0.18);
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(30px);
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .core-services-grid {
+    column-gap: 38px;
+    row-gap: 28px;
+  }
+
+  .flip-card {
+    height: 510px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 34px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .services-container {
+    width: min(940px, 92%);
+  }
+
+
+  /* Existing six services */
+
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  /* Core services */
+
+  .core-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 24px;
+
+    row-gap: 24px;
+  }
+
+
+  /* Reset desktop positioning */
+
+  .flip-card:nth-child(1),
+  .flip-card:nth-child(2),
+  .flip-card:nth-child(3),
+  .flip-card:nth-child(4),
+  .flip-card:nth-child(5),
+  .flip-card:nth-child(6),
+  .flip-card:nth-child(7) {
+    grid-column: auto;
+
+    margin-left: 0;
+  }
+
+
+  /* Final card centered */
+
+  .flip-card:nth-child(7) {
+    grid-column: 1 / 3;
+
+    width: calc(50% - 12px);
+
+    justify-self: center;
+  }
+
+
+  .flip-card {
+    height: 500px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .core-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+  }
+
+  .flip-card {
+    height: 470px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 28px;
+  }
+
+  .core-service-icon {
+    width: 76px;
+    height: 76px;
+  }
+
+  .core-service-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .flip-card-front h3 {
+    font-size: 24px;
+  }
+
+  .flip-card-front p {
+    font-size: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .services-section {
+    padding: 75px 0 80px;
+  }
+
+
+  .services-container {
+    width: 90%;
+  }
+
+
+  .services-header {
+    margin-bottom: 35px;
+  }
+
+
+  .services-header h2,
+  .core-services-header h2 {
+    font-size: 31px;
+  }
+
+
+  .services-header p,
+  .core-services-header p {
+    font-size: 14px;
+  }
+
+
+  /* Existing services */
+
+  .service-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    margin-bottom: 55px;
+  }
+
+
+  .service-card {
+    min-height: 200px;
+  }
+
+
+  /* Core services */
+
+  .core-services-section {
+    padding-top: 55px;
+  }
+
+
+  .core-services-header {
+    margin-bottom: 35px;
+  }
+
+
+  .core-services-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+
+  .flip-card {
+    height: 430px;
+  }
+
+
+  /* Reset all positioning */
+
+  .flip-card:nth-child(1),
+  .flip-card:nth-child(2),
+  .flip-card:nth-child(3),
+  .flip-card:nth-child(4),
+  .flip-card:nth-child(5),
+  .flip-card:nth-child(6),
+  .flip-card:nth-child(7) {
+    grid-column: auto;
+
+    width: 100%;
+
+    margin-left: 0;
+
+    justify-self: stretch;
+  }
+
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 26px;
+  }
+
+
+  .core-service-icon {
+    width: 78px;
+    height: 78px;
+
+    margin-top: 0;
+  }
+
+
+  .core-service-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .flip-card-front h3 {
+    font-size: 23px;
+  }
+
+
+  .flip-card-front p {
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  .service-number {
+    top: 25px;
+    right: 25px;
+  }
+
+
+  .services-cta {
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 25px 20px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .flip-card {
+    height: 410px;
+  }
+
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 23px;
+  }
+
+
+  .core-service-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+
+  .core-service-icon svg {
+    width: 37px;
+    height: 37px;
+  }
+
+
+  .flip-card-front h3 {
+    font-size: 21px;
+  }
+
+
+  .flip-card-front p {
+    font-size: 14px;
+  }
+
+
+  .service-number {
+    top: 22px;
+    right: 22px;
+
+    font-size: 15px;
+  }
+
+}
 
 
 /* ==================================================
@@ -2433,4 +3419,4 @@ transform:translateY(0) scale(1);
     padding: 12px 5%;
   }
 }
-
+
