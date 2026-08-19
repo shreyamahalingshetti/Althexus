@@ -931,7 +931,12 @@ nav ul li a:hover{
    FLIP ON HOVER
 ========================================================= */
 
-.flip-card:hover .flip-card-inner,
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
 .flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
@@ -1036,8 +1041,18 @@ nav ul li a:hover{
    HOVER BORDER GLOW
 ========================================================= */
 
-.flip-card:hover .flip-card-front,
-.flip-card:hover .flip-card-back,
+@media (hover: hover) {
+  .flip-card:hover .flip-card-front,
+  .flip-card:hover .flip-card-back {
+    border-color: rgba(44, 174, 244, 0.70);
+
+    box-shadow:
+      0 0 12px rgba(40, 160, 235, 0.12),
+      0 0 30px rgba(40, 160, 235, 0.08),
+      inset 0 0 30px rgba(40, 160, 235, 0.025);
+  }
+}
+
 .flip-card.flipped .flip-card-front,
 .flip-card.flipped .flip-card-back {
   border-color: rgba(44, 174, 244, 0.70);
@@ -1145,7 +1160,31 @@ nav ul li a:hover{
    ICON HOVER
 ========================================================= */
 
-.flip-card:hover .core-service-icon,
+@media (hover: hover) {
+  .flip-card:hover .core-service-icon {
+    transform: translateY(-4px);
+
+    border-color: rgba(51, 181, 255, 0.65);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(23, 76, 117, 0.95),
+        rgba(15, 52, 84, 0.90)
+      );
+
+    box-shadow:
+      0 0 18px rgba(41, 170, 245, 0.12);
+  }
+
+  .flip-card:hover .core-service-icon svg {
+    transform: scale(1.05);
+
+    filter:
+      drop-shadow(0 0 6px rgba(40, 180, 255, 0.20));
+  }
+}
+
 .flip-card.flipped .core-service-icon {
   transform: translateY(-4px);
 
@@ -1162,7 +1201,6 @@ nav ul li a:hover{
     0 0 18px rgba(41, 170, 245, 0.12);
 }
 
-.flip-card:hover .core-service-icon svg,
 .flip-card.flipped .core-service-icon svg {
   transform: scale(1.05);
 
@@ -1246,7 +1284,12 @@ nav ul li a:hover{
   transition: gap 0.3s ease;
 }
 
-.flip-card:hover .flip-hint,
+@media (hover: hover) {
+  .flip-card:hover .flip-hint {
+    gap: 15px;
+  }
+}
+
 .flip-card.flipped .flip-hint {
   gap: 15px;
 }
