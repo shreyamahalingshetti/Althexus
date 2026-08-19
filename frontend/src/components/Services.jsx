@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useReveal from "../hooks/useReveal";
 import {
   Globe,
@@ -185,6 +186,18 @@ const coreServices = [
 export default function Services() {
   const [ref, visible] = useReveal();
   const serviceList = staticServices;
+  const [flippedCardId, setFlippedCardId] = useState(null);
+
+  const handleCardClick = (id) => {
+    // Only toggle flip state on mobile/tablet screen sizes (e.g., width <= 1024px)
+    // or touch-enabled devices
+    const isTouchOrMobile =
+      window.innerWidth <= 1024 ||
+      window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchOrMobile) {
+      setFlippedCardId((prevId) => (prevId === id ? null : id));
+    }
+  };
 
   return (
     <section
@@ -205,48 +218,12 @@ export default function Services() {
             Technology Solutions <span>We Offer</span>
           </h2>
 
-          <p>
-            We provide end-to-end digital solutions that help startups,
-            businesses, and enterprises grow through innovation, automation,
-            and scalable technology.
-          </p>
         </div>
 
         {/* ==========================================
             EXISTING SERVICE GRID
         ========================================== */}
 
-        <div className="service-grid">
-          {serviceList.map((service, i) => {
-            const iconKey = (
-              service.icon ||
-              service.type ||
-              ""
-            ).toLowerCase();
-
-            const Icon = iconMap[iconKey] || Globe;
-
-            return (
-              <div
-                className={`service-card ${i === 0 ? "featured" : ""}`}
-                key={service.id || i}
-              >
-                <div className="service-icon">
-                  <Icon size={30} />
-                </div>
-
-                <h3>{service.title}</h3>
-
-                <p>{service.description || service.text}</p>
-
-                <a href="#inquiry" className="service-btn">
-                  {service.btn || "Learn More"}
-                  <ArrowRight size={18} />
-                </a>
-              </div>
-            );
-          })}
-        </div>
 
         {/* ==========================================
             7 CORE SERVICES
@@ -257,7 +234,6 @@ export default function Services() {
           {/* Core Services Header */}
 
           <div className="core-services-header">
-            <span className="section-tag">OUR CORE SERVICES</span>
 
             <h2>
               Seven Services. <span>One Digital Partner.</span>
@@ -277,10 +253,11 @@ export default function Services() {
 
               return (
                 <div
-                  className="flip-card"
+                  className={`flip-card ${flippedCardId === service.id ? "flipped" : ""}`}
                   key={service.id}
                   tabIndex="0"
                   aria-label={`${service.title} service details`}
+                  onClick={() => handleCardClick(service.id)}
                 >
                   <div className="flip-card-inner">
 

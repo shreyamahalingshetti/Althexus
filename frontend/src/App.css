@@ -931,7 +931,8 @@ nav ul li a:hover{
    FLIP ON HOVER
 ========================================================= */
 
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -1036,7 +1037,9 @@ nav ul li a:hover{
 ========================================================= */
 
 .flip-card:hover .flip-card-front,
-.flip-card:hover .flip-card-back {
+.flip-card:hover .flip-card-back,
+.flip-card.flipped .flip-card-front,
+.flip-card.flipped .flip-card-back {
   border-color: rgba(44, 174, 244, 0.70);
 
   box-shadow:
@@ -1142,7 +1145,8 @@ nav ul li a:hover{
    ICON HOVER
 ========================================================= */
 
-.flip-card:hover .core-service-icon {
+.flip-card:hover .core-service-icon,
+.flip-card.flipped .core-service-icon {
   transform: translateY(-4px);
 
   border-color: rgba(51, 181, 255, 0.65);
@@ -1158,7 +1162,8 @@ nav ul li a:hover{
     0 0 18px rgba(41, 170, 245, 0.12);
 }
 
-.flip-card:hover .core-service-icon svg {
+.flip-card:hover .core-service-icon svg,
+.flip-card.flipped .core-service-icon svg {
   transform: scale(1.05);
 
   filter:
@@ -1241,7 +1246,8 @@ nav ul li a:hover{
   transition: gap 0.3s ease;
 }
 
-.flip-card:hover .flip-hint {
+.flip-card:hover .flip-hint,
+.flip-card.flipped .flip-hint {
   gap: 15px;
 }
 
