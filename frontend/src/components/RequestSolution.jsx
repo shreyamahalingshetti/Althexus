@@ -127,24 +127,13 @@ const RequestSolution = () => {
                 required
               >
                 <option value="">Select a service</option>
-                <option value="Website Development">
-                  Website Development
-                </option>
-                <option value="Mobile App Development">
-                  Mobile App Development
-                </option>
-                <option value="AI Solutions">
-                  AI Solutions
-                </option>
-                <option value="Cloud Services">
-                  Cloud Services
-                </option>
-                <option value="Cyber Security">
-                  Cyber Security
-                </option>
-                <option value="Business Consultation">
-                  Business Consultation
-                </option>
+                <option value="Web Development">Web Development</option>
+                <option value="Application Development">Application Development</option>
+                <option value="SEO & Ranking">SEO & Ranking</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Design & Branding">Design & Branding</option>
+                <option value="CV & Career Services">CV & Career Services</option>
+                <option value="Maintenance & Support">Maintenance & Support</option>
                 <option value="Other">Other</option>
               </select>
             </div>

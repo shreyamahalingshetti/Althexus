@@ -119,12 +119,13 @@ export default function Inquiry() {
               }}
             >
               <option value="" style={{ color: "#000" }}>Select a service</option>
-              <option value="Website Development" style={{ color: "#000" }}>Website Development</option>
-              <option value="Mobile App Development" style={{ color: "#000" }}>Mobile App Development</option>
-              <option value="AI Solutions" style={{ color: "#000" }}>AI Solutions</option>
-              <option value="Cloud Services" style={{ color: "#000" }}>Cloud Services</option>
-              <option value="Cyber Security" style={{ color: "#000" }}>Cyber Security</option>
-              <option value="Business Consultation" style={{ color: "#000" }}>Business Consultation</option>
+              <option value="Web Development" style={{ color: "#000" }}>Web Development</option>
+              <option value="Application Development" style={{ color: "#000" }}>Application Development</option>
+              <option value="SEO & Ranking" style={{ color: "#000" }}>SEO & Ranking</option>
+              <option value="Digital Marketing" style={{ color: "#000" }}>Digital Marketing</option>
+              <option value="Design & Branding" style={{ color: "#000" }}>Design & Branding</option>
+              <option value="CV & Career Services" style={{ color: "#000" }}>CV & Career Services</option>
+              <option value="Maintenance & Support" style={{ color: "#000" }}>Maintenance & Support</option>
               <option value="Other" style={{ color: "#000" }}>Other</option>
             </select>
           </div>
