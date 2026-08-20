@@ -68,19 +68,18 @@ export const getJobOpeningById = async (req, res, next) => {
 // @access  Private (Admin only)
 export const createJobOpening = async (req, res, next) => {
   try {
-    const { title, type, category, location, description } = req.body;
+    const { title, type, category, location } = req.body;
 
-    if (!title || !type || !description) {
+    if (!title || !type) {
       res.status(400);
-      throw new Error('Title, type, and description are required');
+      throw new Error('Title and type are required');
     }
 
     const jobOpening = new JobOpening({
       title,
       type,
-      category: category || 'IT',
+      category: category || 'Software & IT Development',
       location,
-      description,
     });
 
     const savedJobOpening = await jobOpening.save();
@@ -95,7 +94,7 @@ export const createJobOpening = async (req, res, next) => {
 // @access  Private (Admin only)
 export const updateJobOpening = async (req, res, next) => {
   try {
-    const { title, type, category, location, description } = req.body;
+    const { title, type, category, location } = req.body;
 
     const jobOpening = await JobOpening.findById(req.params.id);
 
@@ -108,7 +107,6 @@ export const updateJobOpening = async (req, res, next) => {
     jobOpening.type = type !== undefined ? type : jobOpening.type;
     jobOpening.category = category !== undefined ? category : jobOpening.category;
     jobOpening.location = location !== undefined ? location : jobOpening.location;
-    jobOpening.description = description !== undefined ? description : jobOpening.description;
 
     const updatedJobOpening = await jobOpening.save();
     res.status(200).json(updatedJobOpening);

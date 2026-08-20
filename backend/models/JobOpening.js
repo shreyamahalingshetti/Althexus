@@ -14,17 +14,21 @@ const jobOpeningSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ['IT', 'Non IT'],
-      default: 'IT',
-      required: [true, 'Job category (IT or Non IT) is required'],
+      enum: [
+        'Marketing & Business Development',
+        'HR & Administration',
+        'Design, Content & Media',
+        'Software & IT Development',
+        'AI, Data, Cybersecurity & Cloud',
+        'Project & Business Operations',
+        'Student & Community'
+      ],
+      default: 'Software & IT Development',
+      required: [true, 'Job category is required'],
     },
     location: {
       type: String,
       trim: true,
-    },
-    description: {
-      type: String,
-      required: [true, 'Job description is required'],
     },
   },
   {

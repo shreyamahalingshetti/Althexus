@@ -20,9 +20,8 @@ export default function Careers() {
   const [newRole, setNewRole] = useState({
     title: "",
     type: "Job",
-    category: "IT",
+    category: "Software & IT Development",
     location: "",
-    description: "",
   });
   const [formSubmitting, setFormSubmitting] = useState(false);
 
@@ -134,15 +133,14 @@ export default function Careers() {
       type: role.type,
       category: role.category,
       location: role.location || "",
-      description: role.description,
     });
     setShowAddForm(true);
   };
 
   const handleCreateRoleSubmit = async (e) => {
     e.preventDefault();
-    if (!newRole.title || !newRole.description) {
-      alert("Title and description are required.");
+    if (!newRole.title) {
+      alert("Title is required.");
       return;
     }
     setFormSubmitting(true);
@@ -178,9 +176,8 @@ export default function Careers() {
       setNewRole({
         title: "",
         type: "Job",
-        category: "IT",
+        category: "Software & IT Development",
         location: "",
-        description: "",
       });
     } catch (err) {
       alert(err.message || "Error saving job role");
@@ -284,9 +281,8 @@ export default function Careers() {
                 setNewRole({
                   title: "",
                   type: "Job",
-                  category: "IT",
+                  category: "Software & IT Development",
                   location: "",
-                  description: "",
                 });
                 setShowAddForm(!showAddForm);
               }}
@@ -328,8 +324,13 @@ export default function Careers() {
                       value={newRole.category}
                       onChange={(e) => setNewRole({ ...newRole, category: e.target.value })}
                     >
-                      <option value="IT">IT</option>
-                      <option value="Non IT">Non IT</option>
+                      <option value="Marketing & Business Development">Marketing & Business Development</option>
+                      <option value="HR & Administration">HR & Administration</option>
+                      <option value="Design, Content & Media">Design, Content & Media</option>
+                      <option value="Software & IT Development">Software & IT Development</option>
+                      <option value="AI, Data, Cybersecurity & Cloud">AI, Data, Cybersecurity & Cloud</option>
+                      <option value="Project & Business Operations">Project & Business Operations</option>
+                      <option value="Student & Community">Student & Community</option>
                     </select>
                   </div>
                 </div>
@@ -344,16 +345,6 @@ export default function Careers() {
                   />
                 </div>
 
-                <div className="admin-form-group">
-                  <label>Job Description *</label>
-                  <textarea
-                    required
-                    rows="6"
-                    value={newRole.description}
-                    onChange={(e) => setNewRole({ ...newRole, description: e.target.value })}
-                    placeholder="Provide full description, requirements, and tech stack..."
-                  ></textarea>
-                </div>
 
                 <button type="submit" className="admin-submit-btn" disabled={formSubmitting}>
                   {formSubmitting ? "Saving..." : (editingRoleId ? "Save Changes" : "Create Role")}
@@ -378,7 +369,6 @@ export default function Careers() {
                     <th>Type</th>
                     <th>Category</th>
                     <th>Location</th>
-                    <th>Description</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -391,9 +381,6 @@ export default function Careers() {
                       <td>{role.type}</td>
                       <td>{role.category}</td>
                       <td>{role.location || "N/A"}</td>
-                      <td style={{ maxWidth: "250px", whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: "1.4" }}>
-                        {role.description}
-                      </td>
                       <td>
                         <button
                           className="resume-btn"

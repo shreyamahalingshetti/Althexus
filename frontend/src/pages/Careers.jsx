@@ -46,7 +46,7 @@ export default function Careers() {
 
   // Compute dynamic categories/departments from fetched data
   const categories = useMemo(() => {
-    const list = openings.map((o) => o.category || "IT");
+    const list = openings.map((o) => o.category || "Software & IT Development");
     return ["All", ...new Set(list)];
   }, [openings]);
 
@@ -54,7 +54,7 @@ export default function Careers() {
   const visibleRoles = useMemo(() => {
     const filtered = activeCategory === "All"
       ? openings
-      : openings.filter((o) => (o.category || "IT") === activeCategory);
+      : openings.filter((o) => (o.category || "Software & IT Development") === activeCategory);
     return filtered;
   }, [openings, activeCategory]);
 
@@ -164,7 +164,6 @@ export default function Careers() {
                 ) : (
                   visibleRoles.map((role) => {
                     const isClosed = (role.status || "OPEN") === "CLOSED";
-                    const roleCode = role.code || `JOB-${role._id.substring(role._id.length - 4).toUpperCase()}`;
 
                     return (
                       <div
@@ -176,7 +175,7 @@ export default function Careers() {
                         <div className="role-left">
                           <div className="role-id">
                             {!isClosed && <span className="live"></span>}
-                            [{roleCode}] · {role.category || "IT"} · {isClosed ? "CLOSED" : "OPEN"}
+                            {role.category || "Software & IT Development"} · {isClosed ? "CLOSED" : "OPEN"}
                           </div>
                           <h3>{role.title}</h3>
                           <div className="role-meta">
