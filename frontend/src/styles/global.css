@@ -1293,8 +1293,8 @@ footer {
   #perks .wrap,
   .careers-page .roles .wrap,
   .careers-page .values .wrap {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 28px;
+    padding-right: 28px;
   }
 
   .careers-page .process .section-head {
