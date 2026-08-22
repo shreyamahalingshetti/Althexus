@@ -15,7 +15,18 @@ export default function DashboardHome({ setActivePage }) {
   const [error, setError] = useState(null);
 
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const BACKEND_URL = "http://localhost:5000";
   const token = localStorage.getItem("adminToken");
+
+  const handleViewResume = (resumeUrl) => {
+    if (!resumeUrl) return;
+    if (resumeUrl.startsWith("http://") || resumeUrl.startsWith("https://")) {
+      window.open(resumeUrl, "_blank");
+    } else {
+      const cleanPath = resumeUrl.replace(/\\/g, "/");
+      window.open(`${BACKEND_URL}/${cleanPath}`, "_blank");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,18 +45,28 @@ export default function DashboardHome({ setActivePage }) {
         const statsData = await statsRes.json();
         setStats(statsData);
 
-        // Fetch recent service requests
-        const requestsRes = await fetch(`${API_BASE_URL}/service-requests?limit=100`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!requestsRes.ok) {
+        // Fetch recent service requests and job applications
+        const [requestsRes, applicationsRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/service-requests?limit=100`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          fetch(`${API_BASE_URL}/job-applications?limit=100`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
+
+        if (!requestsRes.ok || !applicationsRes.ok) {
           throw new Error("Failed to load recent activity");
         }
+
         const requestsData = await requestsRes.json();
+        const applicationsData = await applicationsRes.json();
         
-        // Filter requests created today
+        // Filter requests and applications created today
         const isToday = (dateString) => {
           const date = new Date(dateString);
           const today = new Date();
@@ -55,8 +76,20 @@ export default function DashboardHome({ setActivePage }) {
             date.getFullYear() === today.getFullYear()
           );
         };
-        const todayRequests = (requestsData.data || []).filter((req) => isToday(req.createdAt));
-        setRecentActivity(todayRequests);
+        const todayRequests = (requestsData.data || [])
+          .filter((req) => isToday(req.createdAt))
+          .map((req) => ({ ...req, activityType: "service-request" }));
+
+        const todayApplications = (applicationsData.data || [])
+          .filter((app) => isToday(app.createdAt))
+          .map((app) => ({ ...app, activityType: "job-application" }));
+
+        // Combine and sort by createdAt descending
+        const combined = [...todayRequests, ...todayApplications].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        setRecentActivity(combined);
       } catch (err) {
         setError(err.message || "Failed to load data");
       } finally {
@@ -133,11 +166,21 @@ export default function DashboardHome({ setActivePage }) {
               {recentActivity.map((act) => (
                 <tr key={act._id}>
                   <td>{act.name}</td>
-                  <td>{act.serviceRequired}</td>
                   <td>
-                    <span className={`status-pill status-${act.status === 'Completed' ? 'completed' : 'pending'}`}>
-                      {act.status}
-                    </span>
+                    {act.activityType === "job-application"
+                      ? `Job Application: ${act.jobTitle}`
+                      : act.serviceRequired}
+                  </td>
+                  <td>
+                    {act.activityType === "job-application" ? (
+                      <span className="status-pill status-pending">
+                        {act.status || "Pending"}
+                      </span>
+                    ) : (
+                      <span className={`status-pill status-${act.status === "Completed" ? "completed" : "pending"}`}>
+                        {act.status}
+                      </span>
+                    )}
                   </td>
                   <td>
                     <button
@@ -155,14 +198,18 @@ export default function DashboardHome({ setActivePage }) {
         )}
       </div>
 
-      {/* Modal for viewing complete request details */}
+      {/* Modal for viewing complete request/application details */}
       {selectedRequest && (
         <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setSelectedRequest(null); }}>
           <div className="modal" style={{ maxWidth: "600px" }}>
             <button className="modal-close" onClick={() => setSelectedRequest(null)}>✕</button>
             
-            <span className="tag-id">Request ID: {selectedRequest._id}</span>
-            <h3>Service Request Details</h3>
+            <span className="tag-id">
+              {selectedRequest.activityType === 'job-application' ? 'Application ID' : 'Request ID'}: {selectedRequest._id}
+            </span>
+            <h3>
+              {selectedRequest.activityType === 'job-application' ? 'Job Application Details' : 'Service Request Details'}
+            </h3>
             <p className="sub">Received on {new Date(selectedRequest.createdAt).toLocaleDateString()}</p>
 
             <div style={{ marginTop: "24px" }}>
@@ -177,34 +224,77 @@ export default function DashboardHome({ setActivePage }) {
                 </div>
               </div>
 
-              <div className="modal-row" style={{ marginBottom: "16px" }}>
-                <div>
-                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Company Name</strong>
-                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.companyName || "N/A"}</span>
-                </div>
-                <div>
-                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Phone Number</strong>
-                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.phone || "N/A"}</span>
-                </div>
-              </div>
+              {selectedRequest.activityType === 'job-application' ? (
+                <>
+                  <div className="modal-row" style={{ marginBottom: "16px" }}>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Position Applied</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.jobTitle}</span>
+                    </div>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Phone Number</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.phone || "N/A"}</span>
+                    </div>
+                  </div>
 
-              <div className="modal-row" style={{ marginBottom: "16px" }}>
-                <div>
-                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Service Required</strong>
-                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.serviceRequired}</span>
-                </div>
-                <div>
-                  <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Status</strong>
-                  <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.status}</span>
-                </div>
-              </div>
+                  <div className="modal-row" style={{ marginBottom: "16px" }}>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Status</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.status || "Pending"}</span>
+                    </div>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Resume</strong>
+                      <button
+                        className="resume-btn"
+                        style={{ padding: "6px 12px", fontSize: "12px" }}
+                        onClick={() => handleViewResume(selectedRequest.resumeUrl)}
+                      >
+                        View Resume
+                      </button>
+                    </div>
+                  </div>
 
-              <div style={{ marginBottom: "20px" }}>
-                <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Project Description</strong>
-                <p style={{ fontSize: "14px", color: "var(--paper)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line-light)", margin: 0, lineHeight: 1.5 }}>
-                  {selectedRequest.projectDescription}
-                </p>
-              </div>
+                  {selectedRequest.message && (
+                    <div style={{ marginBottom: "20px" }}>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Cover Message</strong>
+                      <p style={{ fontSize: "14px", color: "var(--paper)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line-light)", margin: 0, lineHeight: 1.5 }}>
+                        {selectedRequest.message}
+                      </p>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="modal-row" style={{ marginBottom: "16px" }}>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Company Name</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.companyName || "N/A"}</span>
+                    </div>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Phone Number</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.phone || "N/A"}</span>
+                    </div>
+                  </div>
+
+                  <div className="modal-row" style={{ marginBottom: "16px" }}>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Service Required</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.serviceRequired}</span>
+                    </div>
+                    <div>
+                      <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Status</strong>
+                      <span style={{ fontSize: "14.5px", color: "var(--paper)" }}>{selectedRequest.status}</span>
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: "20px" }}>
+                    <strong style={{ display: "block", fontSize: "12px", color: "var(--text-dim-light)", textTransform: "uppercase", marginBottom: "4px" }}>Project Description</strong>
+                    <p style={{ fontSize: "14px", color: "var(--paper)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line-light)", margin: 0, lineHeight: 1.5 }}>
+                      {selectedRequest.projectDescription}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
 
             <button 
