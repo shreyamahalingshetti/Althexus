@@ -84,7 +84,7 @@ export default function Careers() {
       </section>
 
       {/* ---------- VALUES ---------- */}
-      <section>
+      <section className="values">
         <div className="wrap">
           <div className="section-head">
             <div className="eyebrow"><span className="dot"></span>How we work</div>

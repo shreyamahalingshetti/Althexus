@@ -16,9 +16,13 @@ export const getSettings = async (req, res, next) => {
         phone: "",
         address: "Meerut, Uttar Pradesh\nRemote-First Company",
         socialLinks: [
+          { platform: "Website", url: "https://althexus.com/" },
           { platform: "LinkedIn", url: "https://www.linkedin.com/company/althexus/" },
-          { platform: "Instagram", url: "https://www.instagram.com/althexusofficial/" },
-          { platform: "WhatsApp", url: "https://wa.me/message/SV64GDK3P6ZKP1" },
+          { platform: "Instagram", url: "https://www.instagram.com/althexusofficial" },
+          { platform: "Facebook", url: "https://www.facebook.com/share/1EgYt1N6gj/" },
+          { platform: "X (Twitter)", url: "https://x.com/Althexus" },
+          { platform: "YouTube", url: "https://youtube.com/@althexus?si=zNrxkR3BGHtVy6XT" },
+          { platform: "WhatsApp", url: "https://api.whatsapp.com/message/SV64GDK3P6ZKP" },
         ],
       });
     } else if (settings.companyName === undefined) {
@@ -29,9 +33,13 @@ export const getSettings = async (req, res, next) => {
       settings.phone = "";
       settings.address = "Meerut, Uttar Pradesh\nRemote-First Company";
       settings.socialLinks = [
+        { platform: "Website", url: "https://althexus.com/" },
         { platform: "LinkedIn", url: "https://www.linkedin.com/company/althexus/" },
-        { platform: "Instagram", url: "https://www.instagram.com/althexusofficial/" },
-        { platform: "WhatsApp", url: "https://wa.me/message/SV64GDK3P6ZKP1" },
+        { platform: "Instagram", url: "https://www.instagram.com/althexusofficial" },
+        { platform: "Facebook", url: "https://www.facebook.com/share/1EgYt1N6gj/" },
+        { platform: "X (Twitter)", url: "https://x.com/Althexus" },
+        { platform: "YouTube", url: "https://youtube.com/@althexus?si=zNrxkR3BGHtVy6XT" },
+        { platform: "WhatsApp", url: "https://api.whatsapp.com/message/SV64GDK3P6ZKP" },
       ];
       await settings.save();
     }

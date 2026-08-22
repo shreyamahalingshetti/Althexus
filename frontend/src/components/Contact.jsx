@@ -9,7 +9,9 @@ function getSocialIcon(platform = "") {
   if (p.includes("whatsapp")) return "fab fa-whatsapp";
   if (p.includes("twitter") || p.includes("x")) return "fab fa-x-twitter";
   if (p.includes("facebook")) return "fab fa-facebook";
+  if (p.includes("youtube")) return "fab fa-youtube";
   if (p.includes("github")) return "fab fa-github";
+  if (p.includes("website") || p.includes("globe")) return "fa-solid fa-globe";
   return "fa-solid fa-globe";
 }
 
@@ -63,7 +65,13 @@ export default function Contact() {
           <div className="contact-card" key={i}>
             <i className={card.icon}></i>
             <h3>{card.title}</h3>
-            {card.html ? (
+            {card.title === "Email" ? (
+              <p>
+                <a href={`mailto:${card.text}`} style={{ color: "inherit", textDecoration: "none" }}>
+                  {card.text}
+                </a>
+              </p>
+            ) : card.html ? (
               <p dangerouslySetInnerHTML={{ __html: card.html }} />
             ) : (
               <p>{card.text}</p>
@@ -75,9 +83,9 @@ export default function Contact() {
 
 
       {/* Social Links */}
-      {settings.socialLinks && settings.socialLinks.length > 0 && (
+      {settings.socialLinks && settings.socialLinks.filter(social => social.url && social.url.trim() !== "").length > 0 && (
         <div className="socials">
-          {settings.socialLinks.map((social, i) => (
+          {settings.socialLinks.filter(social => social.url && social.url.trim() !== "").map((social, i) => (
             <a
               key={i}
               href={social.url}

@@ -50,7 +50,7 @@ body {
 }
 
 .careers-page section {
-  padding: 90px 7%;
+  padding: 60px 7%;
 }
 
 .careers-page section .wrap {
@@ -75,11 +75,17 @@ button {
 }
 
 .wrap,
-.careers-page .wrap,
 .hero .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 28px;
+}
+
+.careers-page .wrap,
+.careers-page .hero .wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 :focus-visible {
@@ -801,6 +807,14 @@ nav {
   color: var(--paper);
 }
 
+.careers-page .process {
+  text-align: left;
+}
+
+.careers-page .process .section-head {
+  padding-left: 24px;
+}
+
 .process .section-head p {
   color: var(--text-dim);
 }
@@ -814,7 +828,7 @@ nav {
 
 .proc-card {
   background: var(--ink);
-  padding: 0 24px 0 0;
+  padding: 0 24px;
 }
 
 .proc-card .idx {
@@ -1245,6 +1259,14 @@ footer {
 .perk-card {
   border-top: 2px solid var(--accent);
   padding-top: 14px;
+}
+
+#perks .wrap,
+.careers-page .roles .wrap,
+.careers-page .values .wrap,
+.careers-page .hero .wrap {
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .perk-card h4 {

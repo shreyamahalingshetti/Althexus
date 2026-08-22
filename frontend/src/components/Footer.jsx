@@ -28,8 +28,7 @@ export default function Footer() {
 
         <div className="foot-col">
           <h4>Connect</h4>
-          <p>Email:</p>
-          <p>{settings.email}</p>
+          <p>Email: {settings.email}</p>
           {addressLines.map((line, idx) => (
             <p key={idx}>{line}</p>
           ))}

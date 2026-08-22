@@ -10,8 +10,12 @@ export default function Settings() {
   const [address, setAddress] = useState("");
 
   // Social Links
+  const [websiteUrl, setWebsiteUrl] = useState("");
   const [linkedinUrl, setLinkedinUrl] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
+  const [facebookUrl, setFacebookUrl] = useState("");
+  const [twitterUrl, setTwitterUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [whatsappUrl, setWhatsappUrl] = useState("");
 
   const [loading, setLoading] = useState(true);
@@ -40,12 +44,20 @@ export default function Settings() {
 
         // Find individual URLs from socialLinks array
         const links = data.socialLinks || [];
-        const linkedIn = links.find((l) => l.platform === "LinkedIn")?.url || "";
-        const instagram = links.find((l) => l.platform === "Instagram")?.url || "";
-        const whatsapp = links.find((l) => l.platform === "WhatsApp")?.url || "";
+        const website = links.find((l) => l.platform?.toLowerCase() === "website")?.url || "";
+        const linkedIn = links.find((l) => l.platform?.toLowerCase() === "linkedin")?.url || "";
+        const instagram = links.find((l) => l.platform?.toLowerCase() === "instagram")?.url || "";
+        const facebook = links.find((l) => l.platform?.toLowerCase() === "facebook")?.url || "";
+        const twitter = links.find((l) => l.platform?.toLowerCase() === "x (twitter)" || l.platform?.toLowerCase() === "twitter" || l.platform?.toLowerCase() === "x")?.url || "";
+        const youtube = links.find((l) => l.platform?.toLowerCase() === "youtube")?.url || "";
+        const whatsapp = links.find((l) => l.platform?.toLowerCase() === "whatsapp")?.url || "";
 
+        setWebsiteUrl(website);
         setLinkedinUrl(linkedIn);
         setInstagramUrl(instagram);
+        setFacebookUrl(facebook);
+        setTwitterUrl(twitter);
+        setYoutubeUrl(youtube);
         setWhatsappUrl(whatsapp);
       } catch (err) {
         setError(err.message || "Failed to load settings");
@@ -70,10 +82,14 @@ export default function Settings() {
         phone,
         address,
         socialLinks: [
+          { platform: "Website", url: websiteUrl },
           { platform: "LinkedIn", url: linkedinUrl },
           { platform: "Instagram", url: instagramUrl },
+          { platform: "Facebook", url: facebookUrl },
+          { platform: "X (Twitter)", url: twitterUrl },
+          { platform: "YouTube", url: youtubeUrl },
           { platform: "WhatsApp", url: whatsappUrl },
-        ],
+        ].filter(link => link.url && link.url.trim() !== ""),
       };
 
       const response = await fetch(`${API_BASE_URL}/settings`, {
@@ -178,6 +194,15 @@ export default function Settings() {
             <div className="settings-section-title">Social Links</div>
             <div className="settings-grid-3">
               <div>
+                <label>Website URL</label>
+                <input
+                  type="url"
+                  placeholder="https://althexus.com"
+                  value={websiteUrl}
+                  onChange={(e) => setWebsiteUrl(e.target.value)}
+                />
+              </div>
+              <div>
                 <label>LinkedIn URL</label>
                 <input
                   type="url"
@@ -195,6 +220,39 @@ export default function Settings() {
                   onChange={(e) => setInstagramUrl(e.target.value)}
                 />
               </div>
+            </div>
+
+            <div className="settings-grid-3">
+              <div>
+                <label>Facebook URL</label>
+                <input
+                  type="url"
+                  placeholder="https://facebook.com/..."
+                  value={facebookUrl}
+                  onChange={(e) => setFacebookUrl(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>X (Twitter) URL</label>
+                <input
+                  type="url"
+                  placeholder="https://x.com/..."
+                  value={twitterUrl}
+                  onChange={(e) => setTwitterUrl(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>YouTube URL</label>
+                <input
+                  type="url"
+                  placeholder="https://youtube.com/..."
+                  value={youtubeUrl}
+                  onChange={(e) => setYoutubeUrl(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="settings-grid-3">
               <div>
                 <label>WhatsApp URL</label>
                 <input
@@ -204,6 +262,8 @@ export default function Settings() {
                   onChange={(e) => setWhatsappUrl(e.target.value)}
                 />
               </div>
+              <div></div>
+              <div></div>
             </div>
 
             <button type="submit">Save Changes</button>
