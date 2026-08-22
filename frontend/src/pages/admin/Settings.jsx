@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { CheckCircle, AlertCircle, X } from "lucide-react";
+import { useSettings } from "../../context/SettingsContext";
 import "./Settings.css";
 
 export default function Settings() {
@@ -21,6 +23,23 @@ export default function Settings() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
+
+  const { refreshSettings } = useSettings();
+
+  // Auto-hide toast after 4 seconds
+  useEffect(() => {
+    if (toast.show) {
+      const timer = setTimeout(() => {
+        setToast({ show: false, message: "", type: "" });
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast.show]);
+
+  const showToast = (message, type = "success") => {
+    setToast({ show: true, message, type });
+  };
 
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
   const token = localStorage.getItem("adminToken");
@@ -105,9 +124,12 @@ export default function Settings() {
         throw new Error("Failed to save changes");
       }
 
+      await refreshSettings();
       setSuccess("Settings updated successfully!");
+      showToast("Changes saved successfully!", "success");
     } catch (err) {
       setError(err.message || "Failed to save settings");
+      showToast(err.message || "Failed to save settings", "error");
     }
   };
 
@@ -270,6 +292,22 @@ export default function Settings() {
           </form>
         )}
       </div>
+
+      {toast.show && (
+        <div className={`settings-toast ${toast.type}`}>
+          <div className="settings-toast-icon">
+            {toast.type === "success" ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
+          </div>
+          <div className="settings-toast-message">{toast.message}</div>
+          <button 
+            type="button"
+            className="settings-toast-close" 
+            onClick={() => setToast({ show: false, message: "", type: "" })}
+          >
+            <X size={14} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
