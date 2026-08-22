@@ -36,5 +36,7 @@ const jobOpeningSchema = new mongoose.Schema(
   }
 );
 
+jobOpeningSchema.index({ createdAt: -1 });
+
 const JobOpening = mongoose.model('JobOpening', jobOpeningSchema);
 export default JobOpening;

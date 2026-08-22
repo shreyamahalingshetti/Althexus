@@ -27,9 +27,11 @@ export const getJobOpenings = async (req, res, next) => {
     const [totalDocuments, jobOpenings] = await Promise.all([
       JobOpening.countDocuments(query),
       JobOpening.find(query)
+        .select('title type category location createdAt')
         .sort({ [sortBy]: order })
         .skip(skip)
-        .limit(limit),
+        .limit(limit)
+        .lean(),
     ]);
 
     res.status(200).json({
