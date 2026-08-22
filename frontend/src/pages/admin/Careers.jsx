@@ -8,6 +8,7 @@ export default function Careers() {
   const [applications, setApplications] = useState([]);
   const [appsLoading, setAppsLoading] = useState(true);
   const [appsError, setAppsError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   // State for Open Roles
   const [roles, setRoles] = useState([]);
@@ -73,6 +74,18 @@ export default function Careers() {
     fetchApplications();
     fetchRoles();
   }, [API_BASE_URL, token]);
+
+  const getAppCategory = (jobTitle) => {
+    const matchedRole = roles.find(
+      (r) => r.title.toLowerCase().trim() === jobTitle.toLowerCase().trim()
+    );
+    return matchedRole ? matchedRole.category : "Uncategorized";
+  };
+
+  const filteredApplications = applications.filter((app) => {
+    if (selectedCategory === "All") return true;
+    return getAppCategory(app.jobTitle) === selectedCategory;
+  });
 
   const handleViewResume = (resumeUrl) => {
     if (!resumeUrl) return;
@@ -204,30 +217,59 @@ export default function Careers() {
       </div>
 
       {activeTab === "applications" ? (
-        <div className="page-card">
-          {appsLoading ? (
-            <div className="status-message">Loading applications...</div>
-          ) : appsError ? (
-            <div className="error-message">{appsError}</div>
-          ) : applications.length === 0 ? (
-            <div className="status-message">No job applications found.</div>
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Applicant</th>
-                  <th>Email</th>
-                  <th>Position</th>
-                  <th>Resume</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
+        <>
+          <div className="applications-filter-container" style={{ marginBottom: "20px", display: "flex", gap: "12px", alignItems: "center" }}>
+            <label style={{ fontSize: "14px", fontWeight: "600", color: "#475569" }}>Filter by Category:</label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              style={{
+                padding: "8px 12px",
+                border: "1px solid #cbd5e1",
+                borderRadius: "8px",
+                fontSize: "14.5px",
+                color: "#334155",
+                background: "white",
+                outline: "none",
+                minWidth: "240px",
+                cursor: "pointer"
+              }}
+            >
+              <option value="All">All Categories</option>
+              <option value="Marketing & Business Development">Marketing & Business Development</option>
+              <option value="HR & Administration">HR & Administration</option>
+              <option value="Design, Content & Media">Design, Content & Media</option>
+              <option value="Software & IT Development">Software & IT Development</option>
+              <option value="AI, Data, Cybersecurity & Cloud">AI, Data, Cybersecurity & Cloud</option>
+              <option value="Project & Business Operations">Project & Business Operations</option>
+              <option value="Student & Community">Student & Community</option>
+            </select>
+          </div>
 
-              <tbody>
-                {applications.map((app, i) => (
-                  <tr key={app._id}>
+          <div className="page-card">
+            {appsLoading ? (
+              <div className="status-message">Loading applications...</div>
+            ) : appsError ? (
+              <div className="error-message">{appsError}</div>
+            ) : filteredApplications.length === 0 ? (
+              <div className="status-message">No job applications found matching this category.</div>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Applicant</th>
+                    <th>Email</th>
+                    <th>Position</th>
+                    <th>Resume</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {filteredApplications.map((app, i) => (
+                    <tr key={app._id}>
                     <td>{i + 1}</td>
                     <td>{app.name}</td>
                     <td>{app.email}</td>
@@ -271,7 +313,8 @@ export default function Careers() {
             </table>
           )}
         </div>
-      ) : (
+      </>
+    ) : (
         <div className="roles-section">
           <div className="roles-header">
             <button
