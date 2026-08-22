@@ -1282,6 +1282,25 @@ footer {
 
 /* ---------- Responsive ---------- */
 @media (max-width:900px) {
+  /* Mobile alignment overrides for Careers page */
+  .careers-page section {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+  .careers-page .wrap,
+  .careers-page .hero .wrap,
+  #perks .wrap,
+  .careers-page .roles .wrap,
+  .careers-page .values .wrap {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .careers-page .process .section-head {
+    padding-left: 0;
+  }
+
   .hide-mobile {
     display: none;
   }
@@ -1379,7 +1398,7 @@ footer {
 
   .proc-card {
     border-top: 1px solid var(--line-dark);
-    padding-top: 20px;
+    padding: 20px 0 0 0;
   }
 
   .foot-grid {
@@ -1485,5 +1504,13 @@ footer {
   .btn-primary {
     padding: 10px 18px;
     font-size: 14px;
+  }
+}
+
+/* Align Careers sections on very small mobile screens to match footer padding */
+@media (max-width: 480px) {
+  .careers-page section {
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }
