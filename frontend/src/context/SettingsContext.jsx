@@ -13,6 +13,18 @@ const defaultSettings = {
   socialLinks: [],
 };
 
+const getCachedSettings = () => {
+  try {
+    const cached = localStorage.getItem("althexus_settings");
+    if (cached) {
+      return JSON.parse(cached);
+    }
+  } catch (e) {
+    console.error("Error reading settings from cache:", e);
+  }
+  return defaultSettings;
+};
+
 const SettingsContext = createContext({
   settings: defaultSettings,
   loading: true,
@@ -20,7 +32,7 @@ const SettingsContext = createContext({
 });
 
 export function SettingsProvider({ children }) {
-  const [settings, setSettings] = useState(defaultSettings);
+  const [settings, setSettings] = useState(getCachedSettings);
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = useCallback(async () => {
@@ -31,7 +43,7 @@ export function SettingsProvider({ children }) {
       }
       const data = await response.json();
       // Merge with defaultSettings in case backend has missing fields
-      setSettings({
+      const mergedSettings = {
         companyName: data.companyName || defaultSettings.companyName,
         tagline: data.tagline || defaultSettings.tagline,
         aboutText: data.aboutText || defaultSettings.aboutText,
@@ -39,7 +51,13 @@ export function SettingsProvider({ children }) {
         phone: data.phone || "",
         address: data.address || defaultSettings.address,
         socialLinks: Array.isArray(data.socialLinks) ? data.socialLinks : [],
-      });
+      };
+      setSettings(mergedSettings);
+      try {
+        localStorage.setItem("althexus_settings", JSON.stringify(mergedSettings));
+      } catch (e) {
+        console.error("Error caching settings:", e);
+      }
     } catch (err) {
       console.error("Settings fetch error, falling back to defaults:", err);
     } finally {

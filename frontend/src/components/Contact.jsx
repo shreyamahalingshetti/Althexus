@@ -21,6 +21,10 @@ export default function Contact() {
   const [ref, visible] = useReveal();
   const { settings } = useSettings();
 
+  const whatsappChannel = settings.socialLinks?.find(
+    (l) => l.platform?.toLowerCase() === "whatsapp channel"
+  );
+
   const cards = [
     {
       icon: "fa-solid fa-envelope",
@@ -43,6 +47,15 @@ export default function Contact() {
         : "Available for project discussions and business inquiries.",
     },
   ];
+
+  if (whatsappChannel && whatsappChannel.url) {
+    cards.push({
+      icon: "fab fa-whatsapp",
+      title: "WhatsApp Channel",
+      text: "Join our official channel for announcements, updates, and news.",
+      link: whatsappChannel.url,
+    });
+  }
 
   return (
     <section
@@ -74,7 +87,29 @@ export default function Contact() {
             ) : card.html ? (
               <p dangerouslySetInnerHTML={{ __html: card.html }} />
             ) : (
-              <p>{card.text}</p>
+              <>
+                <p>{card.text}</p>
+                {card.link && (
+                  <p style={{ marginTop: "12px" }}>
+                    <a
+                      href={card.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="contact-card-link"
+                      style={{
+                        color: "#4fc3ff",
+                        textDecoration: "none",
+                        fontWeight: "600",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px"
+                      }}
+                    >
+                      Join Channel <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.8em" }}></i>
+                    </a>
+                  </p>
+                )}
+              </>
             )}
           </div>
         ))}

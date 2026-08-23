@@ -19,6 +19,7 @@ export default function Settings() {
   const [twitterUrl, setTwitterUrl] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [whatsappUrl, setWhatsappUrl] = useState("");
+  const [whatsappChannelUrl, setWhatsappChannelUrl] = useState("");
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -70,6 +71,7 @@ export default function Settings() {
         const twitter = links.find((l) => l.platform?.toLowerCase() === "x (twitter)" || l.platform?.toLowerCase() === "twitter" || l.platform?.toLowerCase() === "x")?.url || "";
         const youtube = links.find((l) => l.platform?.toLowerCase() === "youtube")?.url || "";
         const whatsapp = links.find((l) => l.platform?.toLowerCase() === "whatsapp")?.url || "";
+        const whatsappChannel = links.find((l) => l.platform?.toLowerCase() === "whatsapp channel")?.url || "";
 
         setWebsiteUrl(website);
         setLinkedinUrl(linkedIn);
@@ -78,6 +80,7 @@ export default function Settings() {
         setTwitterUrl(twitter);
         setYoutubeUrl(youtube);
         setWhatsappUrl(whatsapp);
+        setWhatsappChannelUrl(whatsappChannel);
       } catch (err) {
         setError(err.message || "Failed to load settings");
       } finally {
@@ -108,6 +111,7 @@ export default function Settings() {
           { platform: "X (Twitter)", url: twitterUrl },
           { platform: "YouTube", url: youtubeUrl },
           { platform: "WhatsApp", url: whatsappUrl },
+          { platform: "WhatsApp Channel", url: whatsappChannelUrl },
         ].filter(link => link.url && link.url.trim() !== ""),
       };
 
@@ -284,7 +288,15 @@ export default function Settings() {
                   onChange={(e) => setWhatsappUrl(e.target.value)}
                 />
               </div>
-              <div></div>
+              <div>
+                <label>WhatsApp Channel URL</label>
+                <input
+                  type="url"
+                  placeholder="https://whatsapp.com/channel/..."
+                  value={whatsappChannelUrl}
+                  onChange={(e) => setWhatsappChannelUrl(e.target.value)}
+                />
+              </div>
               <div></div>
             </div>
 

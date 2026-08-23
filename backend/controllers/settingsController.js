@@ -23,6 +23,7 @@ export const getSettings = async (req, res, next) => {
           { platform: "X (Twitter)", url: "https://x.com/Althexus" },
           { platform: "YouTube", url: "https://youtube.com/@althexus?si=zNrxkR3BGHtVy6XT" },
           { platform: "WhatsApp", url: "https://api.whatsapp.com/message/SV64GDK3P6ZKP" },
+          { platform: "WhatsApp Channel", url: "https://whatsapp.com/channel/0029Vb8oq4N7T8bXJ5eo9W1a" },
         ],
       });
     } else if (settings.companyName === undefined) {
@@ -40,6 +41,7 @@ export const getSettings = async (req, res, next) => {
         { platform: "X (Twitter)", url: "https://x.com/Althexus" },
         { platform: "YouTube", url: "https://youtube.com/@althexus?si=zNrxkR3BGHtVy6XT" },
         { platform: "WhatsApp", url: "https://api.whatsapp.com/message/SV64GDK3P6ZKP" },
+        { platform: "WhatsApp Channel", url: "https://whatsapp.com/channel/0029Vb8oq4N7T8bXJ5eo9W1a" },
       ];
       await settings.save();
     }

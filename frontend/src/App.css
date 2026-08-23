@@ -2366,6 +2366,12 @@ grid-template-columns:1fr;
 
 }
 
+.contact-card:hover .contact-card-link{
+
+    color:white !important;
+
+}
+
 .contact-card h3{
 
     margin-bottom:15px;
