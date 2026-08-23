@@ -117,10 +117,10 @@ export default function Contact() {
 
 
 
-      {/* Social Links */}
-      {settings.socialLinks && settings.socialLinks.filter(social => social.url && social.url.trim() !== "").length > 0 && (
+      {/* Social Links (excluding WhatsApp Channel to avoid redundancy with the card above) */}
+      {settings.socialLinks && settings.socialLinks.filter(social => social.url && social.url.trim() !== "" && social.platform?.toLowerCase() !== "whatsapp channel").length > 0 && (
         <div className="socials">
-          {settings.socialLinks.filter(social => social.url && social.url.trim() !== "").map((social, i) => (
+          {settings.socialLinks.filter(social => social.url && social.url.trim() !== "" && social.platform?.toLowerCase() !== "whatsapp channel").map((social, i) => (
             <a
               key={i}
               href={social.url}
