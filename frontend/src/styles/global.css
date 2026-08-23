@@ -1293,8 +1293,8 @@ footer {
   #perks .wrap,
   .careers-page .roles .wrap,
   .careers-page .values .wrap {
-    padding-left: 28px;
-    padding-right: 28px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .careers-page .process .section-head {
@@ -1506,11 +1506,4 @@ footer {
     font-size: 14px;
   }
 }
-
-/* Align Careers sections on very small mobile screens to match footer padding */
-@media (max-width: 480px) {
-  .careers-page section {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
+
