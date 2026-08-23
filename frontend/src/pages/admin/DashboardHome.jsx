@@ -3,8 +3,6 @@ import "./DashboardHome.css";
 
 export default function DashboardHome({ setActivePage }) {
   const [stats, setStats] = useState({
-    totalProjects: 0,
-    totalServices: 0,
     totalServiceRequests: 0,
     totalJobOpenings: 0,
     totalJobApplications: 0,

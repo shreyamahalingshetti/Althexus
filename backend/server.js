@@ -13,8 +13,6 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import mongoSanitize from 'express-mongo-sanitize';
 import authRoutes from './routes/authRoutes.js';
-import projectRoutes from './routes/projectRoutes.js';
-import serviceRoutes from './routes/serviceRoutes.js';
 import serviceRequestRoutes from './routes/serviceRequestRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
@@ -49,8 +47,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/projects', projectRoutes);
-app.use('/api/services', serviceRoutes);
 app.use('/api/service-requests', serviceRequestRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
