@@ -112,7 +112,7 @@ export default function Inquiry() {
                 border: "1px solid rgba(255, 255, 255, 0.12)",
                 borderRadius: "12px",
                 padding: "14px 18px",
-                color: "#fff",
+                color: form.serviceRequired ? "#fff" : "rgba(255, 255, 255, 0.65)",
                 fontSize: "0.97rem",
                 outline: "none",
                 cursor: "pointer",

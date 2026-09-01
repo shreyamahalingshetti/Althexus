@@ -41,6 +41,7 @@ export default function Careers() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchOpenings();
   }, []);
 

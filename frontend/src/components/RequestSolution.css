@@ -145,7 +145,8 @@
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #718396;
+  color: rgba(255, 255, 255, 0.65);
+  opacity: 1;
 }
 
 .form-group input:focus,

@@ -13,6 +13,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 
+import ScrollToTop from "./components/ScrollToTop";
+
 /* ================================
    ADMIN PROTECTED ROUTE
 ================================ */
@@ -32,6 +34,7 @@ function AdminProtectedRoute() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <SettingsProvider>
         <Routes>
 

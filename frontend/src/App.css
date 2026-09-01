@@ -2938,7 +2938,8 @@ transform:translateY(0) scale(1);
 
 .cf-group input::placeholder,
 .cf-group textarea::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.65);
+  opacity: 1;
 }
 
 .cf-group input:focus,
