@@ -5,6 +5,11 @@
 // Email regex pattern matching standard RFC-style email format
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export function isValidEmail(email) {
+  if (!email || typeof email !== "string") return false;
+  return EMAIL_REGEX.test(email.trim());
+}
+
 /**
  * Validates international phone numbers.
  * - Allows optional leading + for country codes (+1, +44, +91, etc.)
@@ -12,11 +17,6 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * - Rejects letters and invalid characters
  * - Validates standard E.164 international length (7 to 15 digits)
  */
-export function isValidEmail(email) {
-  if (!email || typeof email !== "string") return false;
-  return EMAIL_REGEX.test(email.trim());
-}
-
 export function isValidPhone(phone) {
   if (!phone || typeof phone !== "string") return false;
   const trimmed = phone.trim();
@@ -31,12 +31,41 @@ export function isValidPhone(phone) {
   return digitsOnly.length >= 7 && digitsOnly.length <= 15;
 }
 
+/**
+ * Validates Full Name:
+ * - Allows letters (including international accents), spaces, hyphens, apostrophes, periods, and suffixes/numerals with numbers (e.g., "Prince XYZ IV").
+ * - Rejects empty values, values containing ONLY numbers, values containing ONLY symbols, and names exceeding 100 characters.
+ */
+export function isValidName(name) {
+  if (!name || typeof name !== "string") return false;
+  const trimmed = name.trim();
+
+  // Cap maximum length to 100 characters
+  if (trimmed.length < 2 || trimmed.length > 100) {
+    return false;
+  }
+
+  // Must contain at least one letter character
+  const hasLetter = /[a-zA-Z\u00C0-\u024F\u0400-\u04FF\u0600-\u06FF]/.test(trimmed);
+  if (!hasLetter) {
+    return false;
+  }
+
+  // Allowed character set for names: letters, digits, spaces, hyphens, apostrophes, periods, parentheses, commas
+  const validChars = /^[a-zA-Z0-9\u00C0-\u024F\u0400-\u04FF\u0600-\u06FF\s\-\'\.\,\(\)]+$/;
+  return validChars.test(trimmed);
+}
+
 export function validateInquiryForm(form) {
   const errors = {};
 
-  // Full Name: Required, non-empty, not just spaces
+  // Full Name Validation
   if (!form.name || !form.name.trim()) {
     errors.name = "Full name is required.";
+  } else if (form.name.trim().length > 100) {
+    errors.name = "Full name must be 100 characters or less.";
+  } else if (!isValidName(form.name)) {
+    errors.name = "Please enter a valid full name.";
   }
 
   // Email Address: Required, valid format
@@ -69,9 +98,13 @@ export function validateInquiryForm(form) {
 export function validateRequestSolutionForm(formData) {
   const errors = {};
 
-  // Full Name: Required
+  // Full Name Validation
   if (!formData.name || !formData.name.trim()) {
     errors.name = "Full name is required.";
+  } else if (formData.name.trim().length > 100) {
+    errors.name = "Full name must be 100 characters or less.";
+  } else if (!isValidName(formData.name)) {
+    errors.name = "Please enter a valid full name.";
   }
 
   // Email Address: Required, valid format
@@ -104,9 +137,13 @@ export function validateRequestSolutionForm(formData) {
 export function validateJobApplicationForm(form, resume) {
   const errors = {};
 
-  // Full Name: Required
+  // Full Name Validation
   if (!form.name || !form.name.trim()) {
     errors.name = "Full name is required.";
+  } else if (form.name.trim().length > 100) {
+    errors.name = "Full name must be 100 characters or less.";
+  } else if (!isValidName(form.name)) {
+    errors.name = "Please enter a valid full name.";
   }
 
   // Email Address: Required, valid format
