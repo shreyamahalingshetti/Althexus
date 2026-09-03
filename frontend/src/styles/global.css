@@ -29,6 +29,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+input,
+select,
+textarea,
+button {
+  font-family: 'Poppins', sans-serif !important;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;

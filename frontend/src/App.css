@@ -2933,7 +2933,7 @@ transform:translateY(0) scale(1);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-family: inherit;
+  font-family: 'Poppins', sans-serif !important;
   line-height: 1.2;
   display: block;
 }
@@ -2949,7 +2949,7 @@ transform:translateY(0) scale(1);
   padding: 11px 15px;
   color: #fff;
   font-size: 0.94rem;
-  font-family: inherit;
+  font-family: 'Poppins', sans-serif !important;
   transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
   outline: none;
   resize: vertical;
@@ -2979,12 +2979,14 @@ transform:translateY(0) scale(1);
   background-color: #0d2137;
   color: #ffffff;
   padding: 12px;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .cf-group input::placeholder,
 .cf-group textarea::placeholder {
   color: rgba(255, 255, 255, 0.7);
   opacity: 1;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .cf-group input:focus,
@@ -3004,6 +3006,7 @@ transform:translateY(0) scale(1);
   color: #fff;
   font-size: 0.96rem;
   font-weight: 600;
+  font-family: 'Poppins', sans-serif !important;
   cursor: pointer;
   display: flex;
   align-items: center;
