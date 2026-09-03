@@ -87,47 +87,38 @@ export default function Inquiry() {
               />
             </div>
             <div className="cf-group">
-              <label htmlFor="cf-companyName">Company / Organization</label>
-              <input
-                id="cf-companyName"
-                type="text"
-                name="companyName"
-                placeholder="Company Name"
-                value={form.companyName}
+              <label htmlFor="cf-serviceRequired">Service Required *</label>
+              <select
+                id="cf-serviceRequired"
+                name="serviceRequired"
+                value={form.serviceRequired}
                 onChange={handleChange}
-              />
+                required
+                className={form.serviceRequired ? "has-value" : "is-empty"}
+              >
+                <option value="">Select a service</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Application Development">Application Development</option>
+                <option value="SEO & Ranking">SEO & Ranking</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Design & Branding">Design & Branding</option>
+                <option value="CV & Career Services">CV & Career Services</option>
+                <option value="Maintenance & Support">Maintenance & Support</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
 
           <div className="cf-group">
-            <label htmlFor="cf-serviceRequired">Service Required *</label>
-            <select
-              id="cf-serviceRequired"
-              name="serviceRequired"
-              value={form.serviceRequired}
+            <label htmlFor="cf-companyName">Company / Organization</label>
+            <input
+              id="cf-companyName"
+              type="text"
+              name="companyName"
+              placeholder="Company Name"
+              value={form.companyName}
               onChange={handleChange}
-              required
-              style={{
-                background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                borderRadius: "12px",
-                padding: "14px 18px",
-                color: form.serviceRequired ? "#fff" : "rgba(255, 255, 255, 0.65)",
-                fontSize: "0.97rem",
-                outline: "none",
-                cursor: "pointer",
-              }}
-            >
-              <option value="" style={{ color: "#000" }}>Select a service</option>
-              <option value="Web Development" style={{ color: "#000" }}>Web Development</option>
-              <option value="Application Development" style={{ color: "#000" }}>Application Development</option>
-              <option value="SEO & Ranking" style={{ color: "#000" }}>SEO & Ranking</option>
-              <option value="Digital Marketing" style={{ color: "#000" }}>Digital Marketing</option>
-              <option value="Design & Branding" style={{ color: "#000" }}>Design & Branding</option>
-              <option value="CV & Career Services" style={{ color: "#000" }}>CV & Career Services</option>
-              <option value="Maintenance & Support" style={{ color: "#000" }}>Maintenance & Support</option>
-              <option value="Other" style={{ color: "#000" }}>Other</option>
-            </select>
+            />
           </div>
 
           <div className="cf-group">

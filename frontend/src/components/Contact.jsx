@@ -80,8 +80,27 @@ export default function Contact() {
             <h3>{card.title}</h3>
             {card.title === "Email" ? (
               <p>
-                <a href={`mailto:${card.text}`} style={{ color: "inherit", textDecoration: "none" }}>
+                <a
+                  href={`mailto:${card.text}`}
+                  className="contact-email-link"
+                  style={{
+                    color: "#38bdf8",
+                    textDecoration: "underline",
+                    fontWeight: "600",
+                    transition: "color 0.2s ease",
+                  }}
+                >
                   {card.text}
+                </a>
+              </p>
+            ) : card.title === "Support" && settings.phone ? (
+              <p>
+                Phone:{" "}
+                <a
+                  href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
+                  style={{ color: "#38bdf8", textDecoration: "underline", fontWeight: "600" }}
+                >
+                  {settings.phone}
                 </a>
               </p>
             ) : card.html ? (

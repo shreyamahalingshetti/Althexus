@@ -28,7 +28,20 @@ export default function Footer() {
 
         <div className="foot-col">
           <h4>Connect</h4>
-          <p>Email: {settings.email}</p>
+          <p>
+            Email:{" "}
+            <a
+              href={`mailto:${settings.email}`}
+              style={{
+                display: "inline",
+                color: "#38bdf8",
+                textDecoration: "underline",
+                transition: "color 0.2s ease",
+              }}
+            >
+              {settings.email}
+            </a>
+          </p>
           {addressLines.map((line, idx) => (
             <p key={idx}>{line}</p>
           ))}

@@ -970,12 +970,16 @@ footer {
   margin-bottom: 16px;
 }
 
-.foot-col a,
+.foot-col > a,
 .foot-col p {
   display: block;
   font-size: 14px;
   margin-bottom: 10px;
   color: var(--text-dim);
+}
+
+.foot-col p a {
+  display: inline;
 }
 
 .foot-col a:hover {
