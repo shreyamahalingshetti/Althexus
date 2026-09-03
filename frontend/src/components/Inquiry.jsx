@@ -126,7 +126,7 @@ export default function Inquiry() {
             <textarea
               id="cf-projectDescription"
               name="projectDescription"
-              rows="5"
+              rows="4"
               placeholder="Tell us about your project, goals, and requirements..."
               value={form.projectDescription}
               onChange={handleChange}
