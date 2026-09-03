@@ -1,9 +1,10 @@
 /* ===== Services Section ===== */
 .services-section {
   position: relative;
-  padding: 110px 7%;
+  padding: 65px 7% 80px;
   background: #071827;
   overflow: hidden;
+  scroll-margin-top: 80px;
 }
 
 .services-section::before {
@@ -41,26 +42,26 @@
 .services-header {
   text-align: center;
   max-width: 780px;
-  margin: 0 auto 70px;
+  margin: 0 auto 40px;
 }
 
 .section-tag {
   display: inline-block;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.24);
   color: #7dd3fc;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .services-header h2 {
-  font-size: clamp(2.4rem, 4vw, 4.4rem);
-  line-height: 1.1;
-  margin-bottom: 22px;
+  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  line-height: 1.15;
+  margin-bottom: 14px;
   color: #fff;
   font-weight: 800;
 }
@@ -73,8 +74,8 @@
 
 .services-header p {
   color: #cbd5e1;
-  font-size: 1.08rem;
-  line-height: 1.8;
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
 /* ===== Grid ===== */

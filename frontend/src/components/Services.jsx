@@ -207,43 +207,20 @@ export default function Services() {
     >
       <div className="services-container">
 
-        {/* ==========================================
-            EXISTING HEADER
-        ========================================== */}
-
+        {/* Unified Services Header */}
         <div className="services-header">
           <span className="section-tag">OUR SERVICES</span>
-
           <h2>
-            Technology Solutions <span>We Offer</span>
+            Seven Services. <span>One Digital Partner.</span>
           </h2>
-
+          <p>
+            Explore our seven core services designed to help businesses
+            build, grow, and maintain their digital presence.
+          </p>
         </div>
 
-        {/* ==========================================
-            EXISTING SERVICE GRID
-        ========================================== */}
-
-
-        {/* ==========================================
-            7 CORE SERVICES
-        ========================================== */}
-
+        {/* 7 Core Services Section */}
         <div className="core-services-section">
-
-          {/* Core Services Header */}
-
-          <div className="core-services-header">
-
-            <h2>
-              Seven Services. <span>One Digital Partner.</span>
-            </h2>
-
-            <p>
-              Explore our seven core services designed to help businesses
-              build, grow, and maintain their digital presence.
-            </p>
-          </div>
 
           {/* Core Services Grid */}
 

@@ -36,7 +36,7 @@ export default function Inquiry() {
       className={`cta reveal ${visible ? "in-view" : ""}`}
     >
       <h2>Have a Project in Mind?</h2>
-      <p>
+      <p className="inquiry-subtitle">
         Let's discuss your ideas and find the right technology solution
         for your business.
       </p>
@@ -44,8 +44,6 @@ export default function Inquiry() {
       {/* Contact Form */}
       <div className="contact-form-wrapper">
         <form className="contact-form" onSubmit={handleSubmit}>
-          <h3>Send Us a Message</h3>
-
           <div className="cf-row">
             <div className="cf-group">
               <label htmlFor="cf-name">Full Name *</label>
@@ -126,7 +124,7 @@ export default function Inquiry() {
             <textarea
               id="cf-projectDescription"
               name="projectDescription"
-              rows="4"
+              rows="3"
               placeholder="Tell us about your project, goals, and requirements..."
               value={form.projectDescription}
               onChange={handleChange}

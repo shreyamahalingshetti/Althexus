@@ -858,7 +858,7 @@ nav ul li a:hover{
 
 .flip-card {
   width: 100%;
-  height: 510px;
+  height: 370px;
 
   perspective: 1400px;
 
@@ -958,7 +958,7 @@ nav ul li a:hover{
 
   box-sizing: border-box;
 
-  padding: 32px;
+  padding: 24px 22px;
 
   border-radius: 24px;
 
@@ -1108,16 +1108,16 @@ nav ul li a:hover{
 .core-service-icon {
   position: relative;
 
-  width: 80px;
-  height: 80px;
+  width: 58px;
+  height: 58px;
 
-  margin-top: 8px;
+  margin-top: 4px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 20px;
+  border-radius: 16px;
 
   border: 1px solid rgba(50, 151, 218, 0.30);
 
@@ -1145,8 +1145,8 @@ nav ul li a:hover{
 ========================================================= */
 
 .core-service-icon svg {
-  width: 42px;
-  height: 42px;
+  width: 28px;
+  height: 28px;
 
   stroke-width: 1.65;
 
@@ -1216,13 +1216,13 @@ nav ul li a:hover{
 .flip-card-front h3 {
   position: relative;
 
-  margin: auto 0 13px;
+  margin: auto 0 10px;
 
   max-width: 94%;
 
-  font-size: 27px;
+  font-size: 21px;
 
-  line-height: 1.15;
+  line-height: 1.2;
 
   font-weight: 750;
 
@@ -1245,9 +1245,9 @@ nav ul li a:hover{
 
   max-width: 96%;
 
-  font-size: 16px;
+  font-size: 14.5px;
 
-  line-height: 1.65;
+  line-height: 1.55;
 
   color: #aebdcd;
 
@@ -1316,9 +1316,9 @@ nav ul li a:hover{
 .flip-card-back h3 {
   position: relative;
 
-  margin: 70px 0 16px;
+  margin: 36px 0 10px;
 
-  font-size: 25px;
+  font-size: 20px;
 
   line-height: 1.2;
 
@@ -1337,11 +1337,11 @@ nav ul li a:hover{
 .flip-card-back p {
   position: relative;
 
-  margin: 0 0 24px;
+  margin: 0 0 14px;
 
-  font-size: 15px;
+  font-size: 14px;
 
-  line-height: 1.65;
+  line-height: 1.5;
 
   color: #adbdce;
 
@@ -1531,17 +1531,17 @@ nav ul li a:hover{
 @media (min-width: 1400px) {
 
   .core-services-grid {
-    column-gap: 38px;
-    row-gap: 28px;
+    column-gap: 32px;
+    row-gap: 24px;
   }
 
   .flip-card {
-    height: 510px;
+    height: 380px;
   }
 
   .flip-card-front,
   .flip-card-back {
-    padding: 34px;
+    padding: 26px 24px;
   }
 
 }
@@ -2552,30 +2552,21 @@ grid-template-columns:1fr;
    CTA
 ==================================================*/
 
-.cta{
-
-    text-align:center;
-
-    background:linear-gradient(135deg,#0d6efd,#081827);
-
+.cta {
+  text-align: center;
+  background: linear-gradient(135deg, #0d6efd, #081827);
+  padding: 35px 7% 45px;
 }
 
-.cta h2{
-
-    font-size:48px;
-
-    margin-bottom:20px;
-
+.cta h2 {
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  margin-bottom: 6px;
 }
 
-.cta p{
-
-    max-width:700px;
-
-    margin:0 auto 35px;
-
-    color:#d7e0e8;
-
+.cta p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #d7e0e8;
 }
 
 
@@ -2880,29 +2871,38 @@ transform:translateY(0) scale(1);
    CONTACT FORM
 ================================================ */
 #inquiry {
-  scroll-margin-top: 100px;
+  scroll-margin-top: 80px;
+  padding: 30px 7% 40px;
+}
+
+.inquiry-subtitle {
+  max-width: 620px;
+  margin: 6px auto 0;
+  font-size: 0.95rem;
+  color: #dbeafe;
+  line-height: 1.5;
 }
 
 .contact-form-wrapper {
-  max-width: 660px;
-  margin: 30px auto 0;
+  max-width: 640px;
+  margin: 16px auto 0;
   padding: 0 16px;
 }
 
 .contact-form {
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 20px;
-  padding: 36px 36px;
+  padding: 24px 28px;
   backdrop-filter: blur(16px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 30px rgba(56, 189, 248, 0.04);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   overflow: visible;
 }
 
 .contact-form h3 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   color: #fff;
   text-align: center;
   letter-spacing: -0.01em;
@@ -2917,14 +2917,14 @@ transform:translateY(0) scale(1);
 .cf-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 }
 
 .cf-group label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: #94a3b8;
-  margin-bottom: 6px;
+  color: #dbeafe;
+  margin-bottom: 5px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -2934,12 +2934,12 @@ transform:translateY(0) scale(1);
 .cf-group textarea {
   width: 100%;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 10px;
-  padding: 12px 16px;
+  padding: 11px 15px;
   color: #fff;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-family: inherit;
   transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
   outline: none;
@@ -2950,16 +2950,16 @@ transform:translateY(0) scale(1);
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 16px;
-  padding-right: 40px;
+  background-position: right 14px center;
+  background-size: 15px;
+  padding-right: 36px;
   cursor: pointer;
 }
 
 .cf-group select.is-empty {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .cf-group select.has-value {
@@ -2967,47 +2967,47 @@ transform:translateY(0) scale(1);
 }
 
 .cf-group select option {
-  background-color: #0f172a;
+  background-color: #0d2137;
   color: #ffffff;
   padding: 12px;
 }
 
 .cf-group input::placeholder,
 .cf-group textarea::placeholder {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   opacity: 1;
 }
 
 .cf-group input:focus,
 .cf-group select:focus,
 .cf-group textarea:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .cf-submit {
   width: 100%;
-  padding: 14px 20px;
+  padding: 13px 18px;
   background: linear-gradient(90deg, #2563eb, #38bdf8);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   color: #fff;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-  margin-top: 10px;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  margin-top: 6px;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
 }
 
 .cf-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.5);
 }
 
 .cf-submit:disabled {
