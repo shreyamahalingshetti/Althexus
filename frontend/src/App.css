@@ -2913,12 +2913,17 @@ transform:translateY(0) scale(1);
   grid-template-columns: 1fr 1fr;
   column-gap: 16px;
   row-gap: 0;
+  margin-bottom: 16px;
+}
+
+.cf-row > .cf-group {
+  margin-bottom: 0;
 }
 
 .cf-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .cf-group label {
@@ -3067,12 +3072,16 @@ transform:translateY(0) scale(1);
 
 @media (max-width: 600px) {
   .cf-row {
-    grid-template-columns: 1fr;
-    row-gap: 0;
-    column-gap: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .cf-row > .cf-group {
+    margin-bottom: 0;
   }
   .cf-group {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
   .cf-group label {
     font-size: 0.78rem;
