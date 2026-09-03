@@ -2911,7 +2911,8 @@ transform:translateY(0) scale(1);
 .cf-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  column-gap: 16px;
+  row-gap: 0;
 }
 
 .cf-group {
@@ -2924,9 +2925,12 @@ transform:translateY(0) scale(1);
   font-size: 0.78rem;
   font-weight: 600;
   color: #dbeafe;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  font-family: inherit;
+  line-height: 1.2;
+  display: block;
 }
 
 .cf-group input,
@@ -3064,13 +3068,29 @@ transform:translateY(0) scale(1);
 @media (max-width: 600px) {
   .cf-row {
     grid-template-columns: 1fr;
+    row-gap: 0;
+    column-gap: 0;
+  }
+  .cf-group {
+    margin-bottom: 15px;
+  }
+  .cf-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #dbeafe;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: inherit;
+    line-height: 1.2;
+    display: block;
   }
   .contact-form-wrapper {
     padding: 0 10px;
-    margin-top: 30px;
+    margin-top: 16px;
   }
   .contact-form {
-    padding: 24px 16px;
+    padding: 20px 16px;
     border-radius: 16px;
   }
 }
