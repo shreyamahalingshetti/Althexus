@@ -47,7 +47,11 @@ export default function Navbar() {
     if (href.startsWith("#")) {
       if (isHomePage) {
         e.preventDefault();
-        if (href === "#home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+        window.history.pushState(null, "", href);
+        if (href === "#home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
         const target = document.querySelector(href);
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
