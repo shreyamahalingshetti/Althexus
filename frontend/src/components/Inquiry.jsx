@@ -1,19 +1,32 @@
 import { useState } from "react";
 import useReveal from "../hooks/useReveal";
+import { validateInquiryForm } from "../utils/validation";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 export default function Inquiry() {
   const [ref, visible] = useReveal();
   const [form, setForm] = useState({ name: "", email: "", phone: "", companyName: "", serviceRequired: "", projectDescription: "" });
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState(null); // "sending" | "success" | "error"
 
   function handleChange(e) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const validationErrors = validateInquiryForm(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({});
     setStatus("sending");
     try {
       const res = await fetch(`${API_BASE_URL}/service-requests`, {
@@ -43,9 +56,9 @@ export default function Inquiry() {
 
       {/* Contact Form */}
       <div className="contact-form-wrapper">
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
           <div className="cf-row">
-            <div className="cf-group">
+            <div className={`cf-group ${errors.name ? "has-error" : ""}`}>
               <label htmlFor="cf-name">Full Name *</label>
               <input
                 id="cf-name"
@@ -54,10 +67,10 @@ export default function Inquiry() {
                 placeholder="John Doe"
                 value={form.name}
                 onChange={handleChange}
-                required
               />
+              {errors.name && <span className="cf-field-error">{errors.name}</span>}
             </div>
-            <div className="cf-group">
+            <div className={`cf-group ${errors.email ? "has-error" : ""}`}>
               <label htmlFor="cf-email">Email Address *</label>
               <input
                 id="cf-email"
@@ -66,13 +79,13 @@ export default function Inquiry() {
                 placeholder="john@example.com"
                 value={form.email}
                 onChange={handleChange}
-                required
               />
+              {errors.email && <span className="cf-field-error">{errors.email}</span>}
             </div>
           </div>
 
           <div className="cf-row">
-            <div className="cf-group">
+            <div className={`cf-group ${errors.phone ? "has-error" : ""}`}>
               <label htmlFor="cf-phone">Phone Number *</label>
               <input
                 id="cf-phone"
@@ -81,17 +94,16 @@ export default function Inquiry() {
                 placeholder="+91 XXXXX XXXXX"
                 value={form.phone}
                 onChange={handleChange}
-                required
               />
+              {errors.phone && <span className="cf-field-error">{errors.phone}</span>}
             </div>
-            <div className="cf-group">
+            <div className={`cf-group ${errors.serviceRequired ? "has-error" : ""}`}>
               <label htmlFor="cf-serviceRequired">Service Required *</label>
               <select
                 id="cf-serviceRequired"
                 name="serviceRequired"
                 value={form.serviceRequired}
                 onChange={handleChange}
-                required
                 className={form.serviceRequired ? "has-value" : "is-empty"}
               >
                 <option value="">Select a service</option>
@@ -104,6 +116,7 @@ export default function Inquiry() {
                 <option value="Maintenance & Support">Maintenance & Support</option>
                 <option value="Other">Other</option>
               </select>
+              {errors.serviceRequired && <span className="cf-field-error">{errors.serviceRequired}</span>}
             </div>
           </div>
 
@@ -119,7 +132,7 @@ export default function Inquiry() {
             />
           </div>
 
-          <div className="cf-group">
+          <div className={`cf-group ${errors.projectDescription ? "has-error" : ""}`}>
             <label htmlFor="cf-projectDescription">Project Description *</label>
             <textarea
               id="cf-projectDescription"
@@ -128,8 +141,8 @@ export default function Inquiry() {
               placeholder="Tell us about your project, goals, and requirements..."
               value={form.projectDescription}
               onChange={handleChange}
-              required
             />
+            {errors.projectDescription && <span className="cf-field-error">{errors.projectDescription}</span>}
           </div>
 
           <button type="submit" className="cf-submit" disabled={status === "sending"}>

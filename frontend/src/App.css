@@ -3037,6 +3037,30 @@ transform:translateY(0) scale(1);
   color: #f87171;
 }
 
+/* ===== Form Field Validation Styling ===== */
+.cf-field-error,
+.field-error {
+  color: #f87171;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-top: 5px;
+  display: block;
+  text-align: left;
+}
+
+.cf-group.has-error input,
+.cf-group.has-error select,
+.cf-group.has-error textarea,
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea,
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.22) !important;
+}
+
 @media (max-width: 600px) {
   .cf-row {
     grid-template-columns: 1fr;

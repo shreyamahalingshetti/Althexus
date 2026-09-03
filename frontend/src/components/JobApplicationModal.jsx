@@ -1,5 +1,5 @@
-// src/components/JobApplicationModal.jsx
 import { useState, useEffect } from "react";
+import { validateJobApplicationForm } from "../utils/validation";
 
 export default function JobApplicationModal({ open, onClose, jobOpening }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -7,6 +7,7 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
@@ -18,6 +19,7 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
       setSubmitted(false);
       setLoading(false);
       setError(null);
+      setFieldErrors({});
     }
   }, [open, jobOpening?._id]);
 
@@ -41,13 +43,29 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
 
   if (!open || !jobOpening) return null;
 
+  const handleInputChange = (field, value) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
+
+  const handleResumeChange = (file) => {
+    setResume(file);
+    if (fieldErrors.resume) {
+      setFieldErrors((prev) => ({ ...prev, resume: "" }));
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!resume) {
-      setError("Please upload your resume.");
+    const valErrors = validateJobApplicationForm(form, resume);
+    if (Object.keys(valErrors).length > 0) {
+      setFieldErrors(valErrors);
       return;
     }
 
+    setFieldErrors({});
     setLoading(true);
     setError(null);
 
@@ -108,7 +126,7 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
               {error && (
                 <div style={{
                   background: "rgba(239, 68, 68, 0.1)",
@@ -124,53 +142,54 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
               )}
 
               <div className="modal-row">
-                <div className="field">
+                <div className={`field ${fieldErrors.name ? "has-error" : ""}`}>
                   <label htmlFor="app-name">Full name *</label>
                   <input
                     id="app-name"
                     type="text"
-                    required
                     value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
                     placeholder="Jane Smith"
                   />
+                  {fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}
                 </div>
 
-                <div className="field">
+                <div className={`field ${fieldErrors.email ? "has-error" : ""}`}>
                   <label htmlFor="app-email">Email address *</label>
                   <input
                     id="app-email"
                     type="email"
-                    required
                     value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
                     placeholder="jane@company.com"
                   />
+                  {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
                 </div>
               </div>
 
               <div className="modal-row">
-                <div className="field">
+                <div className={`field ${fieldErrors.phone ? "has-error" : ""}`}>
                   <label htmlFor="app-phone">Phone number</label>
                   <input
                     id="app-phone"
                     type="tel"
                     value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    placeholder="+1 (555) 000-0000"
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    placeholder="+91 XXXXX XXXXX"
                   />
+                  {fieldErrors.phone && <span className="field-error">{fieldErrors.phone}</span>}
                 </div>
 
-                <div className="field">
+                <div className={`field ${fieldErrors.resume ? "has-error" : ""}`}>
                   <label htmlFor="app-resume">Resume (PDF, DOC, DOCX) *</label>
                   <input
                     id="app-resume"
                     type="file"
-                    required
                     accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    onChange={(e) => setResume(e.target.files[0])}
+                    onChange={(e) => handleResumeChange(e.target.files[0])}
                     style={{ padding: "8px 0" }}
                   />
+                  {fieldErrors.resume && <span className="field-error">{fieldErrors.resume}</span>}
                 </div>
               </div>
 
@@ -180,7 +199,7 @@ export default function JobApplicationModal({ open, onClose, jobOpening }) {
                   id="app-message"
                   rows={3}
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) => handleInputChange("message", e.target.value)}
                   placeholder="Briefly explain your interest and fit for this position..."
                 />
               </div>

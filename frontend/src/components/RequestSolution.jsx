@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./RequestSolution.css";
+import { validateRequestSolutionForm } from "../utils/validation";
 
 const RequestSolution = () => {
   const [formData, setFormData] = useState({
@@ -12,17 +13,29 @@ const RequestSolution = () => {
     timeline: "",
     message: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const validationErrors = validateRequestSolutionForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({});
     console.log("Request submitted:", formData);
 
     alert("Thank you! Your request has been submitted.");
@@ -54,11 +67,11 @@ const RequestSolution = () => {
           </p>
         </div>
 
-        <form className="request-form" onSubmit={handleSubmit}>
+        <form className="request-form" onSubmit={handleSubmit} noValidate>
 
           <div className="form-row">
 
-            <div className="form-group">
+            <div className={`form-group ${errors.name ? "has-error" : ""}`}>
               <label>FULL NAME *</label>
 
               <input
@@ -67,11 +80,11 @@ const RequestSolution = () => {
                 placeholder="Your full name"
                 value={formData.name}
                 onChange={handleChange}
-                required
               />
+              {errors.name && <span className="field-error">{errors.name}</span>}
             </div>
 
-            <div className="form-group">
+            <div className={`form-group ${errors.email ? "has-error" : ""}`}>
               <label>EMAIL ADDRESS *</label>
 
               <input
@@ -80,8 +93,8 @@ const RequestSolution = () => {
                 placeholder="your@email.com"
                 value={formData.email}
                 onChange={handleChange}
-                required
               />
+              {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
 
           </div>
@@ -100,7 +113,7 @@ const RequestSolution = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className={`form-group ${errors.phone ? "has-error" : ""}`}>
               <label>PHONE NUMBER *</label>
 
               <input
@@ -109,22 +122,21 @@ const RequestSolution = () => {
                 placeholder="+91 XXXXX XXXXX"
                 value={formData.phone}
                 onChange={handleChange}
-                required
               />
+              {errors.phone && <span className="field-error">{errors.phone}</span>}
             </div>
 
           </div>
 
           <div className="form-row">
 
-            <div className="form-group">
+            <div className={`form-group ${errors.service ? "has-error" : ""}`}>
               <label>SERVICE REQUIRED *</label>
 
               <select
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                required
               >
                 <option value="">Select a service</option>
                 <option value="Web Development">Web Development</option>
@@ -136,6 +148,7 @@ const RequestSolution = () => {
                 <option value="Maintenance & Support">Maintenance & Support</option>
                 <option value="Other">Other</option>
               </select>
+              {errors.service && <span className="field-error">{errors.service}</span>}
             </div>
 
             <div className="form-group">
@@ -180,7 +193,7 @@ const RequestSolution = () => {
             </select>
           </div>
 
-          <div className="form-group">
+          <div className={`form-group ${errors.message ? "has-error" : ""}`}>
             <label>PROJECT DETAILS *</label>
 
             <textarea
@@ -188,8 +201,8 @@ const RequestSolution = () => {
               placeholder="Tell us about your project, requirements, expected features, goals, and any other details..."
               value={formData.message}
               onChange={handleChange}
-              required
             />
+            {errors.message && <span className="field-error">{errors.message}</span>}
           </div>
 
           <div className="request-footer">
