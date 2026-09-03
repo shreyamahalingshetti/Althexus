@@ -110,7 +110,7 @@ button {
 }
 
 .careers-page h1,
-.careers-page h2,
+.careers-page h2:not(.logo h2),
 .careers-page h3,
 .hero h1,
 .hero h2,

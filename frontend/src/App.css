@@ -100,19 +100,17 @@ nav {
 }
 
 .logo h2 {
-
-    font-size:22px;
-    letter-spacing:1px;
-    color: #ffffff;
-
+  font-size: 22px;
+  font-weight: 700 !important;
+  letter-spacing: 1px;
+  color: #ffffff;
 }
 
 .logo span {
-
-    display:block;
-    color:#59c9ff;
-    font-size:12px;
-
+  display: block;
+  color: #59c9ff;
+  font-size: 12px;
+  font-weight: 500 !important;
 }
 
 /* Menu */
